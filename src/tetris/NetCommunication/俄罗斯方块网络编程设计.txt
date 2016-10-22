@@ -1,0 +1,131 @@
+服务器端：
+{
+  //用户类，用来存放在线用户数据
+  User
+  {
+    String username;
+    String id;
+    int state;
+    String IP;
+    String token;
+    int livingtime;
+  }
+  //数据库：名字，分数和排名，内存中只有前10名的排名
+  class RankList{
+    String name;
+    long int Score;
+    int rank;
+    RankList next；
+  }
+  ArrayList<user> userlist;
+  RankList head；
+  void readRankList();//读取数据库信息并排名
+  void newUser(User user);//增加新用户——加入在线用户列表，若数据库不存在该名字的用户，则添加到数据库
+  void updateUserScore（String name，long int score);//更新数据库及内存排名
+  void setState(String username，int state);//设置在线用户状态
+  void handleLoginRequest(String username,String IP);//处理登录请求
+  void logout(String username);//用户下线
+  void handlePlayersListRequest(String IP);
+  //处理各种请求
+  class handleRequest extends Thread{
+
+  }
+  //检查用户状态，超时下线
+  class checkUserState extends Thread{
+
+  }
+}
+客户端
+{
+  //  方块类：包括形状，颜色，状态，位置
+  class toystate{
+    static int init_position;
+    static int type;
+    static int state;
+  }
+  class user{
+    String name;
+    String id;
+    int state;
+    String IP;
+  }
+  static user p1,p2;
+  static toystate toy1,toy2;
+  enum ClientState{leisure,game,offline}//客户端状态：空闲，游戏中，离线
+  enum ControlSignal{up,down,left,right}//  控制信号：上、下、左、右
+  char [][]gamestate_p1;
+  char [][]gamestate_p2;
+  Queue<toystate> toys;
+  Queue<ControlSignal> controlsignals;
+
+  NetService(向上层应用提供接口)
+  {
+    String Token;
+    void login();//get the token change the game state and start the sendGameState thread.
+    boolean logout();//break the connection.
+    void getPlayers(final ArrayList<user> players);//get the online players list
+    void finishcompetition(bool win,String p1,long int score,String p2,long int score);//report the game result and turn the game state to leisure
+    void getRank(final ArrayList<user> topplayers);//get the rank data from the server.
+    void sendChallenge(String name);//send challenge request to a player in the online players list
+    void sendChallengeResponse(boolean accept,String name);//response to the Challenge request
+    void sendControlSignal(ControlSignal signal=down)
+    void getToyState();//get ToyState from the queue
+    void getControlSignal();//get ControlSignal from the queue
+  }
+  class sendClientState extends Thread{
+    sendClientState(int timeout);
+  }
+  //send the toy state to another player
+  class sendToyState extends Thread{
+
+  }
+  //send the signal of the key player press to another player
+  class sendControlSignal extends Thread{
+
+  }
+  //监听挑战请求和toystate，ControlState接收处理等
+  class listener extends Thread{
+
+  }
+}
+客户端——服务器通信
+{
+  用户端请求：登陆，下线，心跳包{请求在线玩家名单，报告状态}，发送对战结束信号{包括，胜负，分数}
+  服务器：登陆成功，发送在线玩家名单，发送排名分数
+}
+客户端——客户端通信
+{
+  请求对战——响应请求
+  发送方块形状状态以及初始位置
+  发送控制信号（定时发，无论有没有按键都发，默认为下）
+  断开连接
+  若A出现网络异常（连接超时）暂停游戏并请求获取B游戏状态，B响应并发送游戏状态给A，然后A确认，游戏继续
+}
+具体过程
+{
+  登陆——响应登陆
+  定时发送心跳包报告状态——更新状态
+  定时获取在线玩家名单（名字及IP）
+  游戏过程：
+  {
+    1.p1先请求开始游戏，并发送自己的名字给p2，p2拒绝则回到游戏玩家列表，接受则开始游戏
+    2.每隔一段时间发送一个ToyState，表示更新下一个方块的形状以及位置，并且定时发送自己的controlsignal，p2把接受到的信号放进信号队列中，每隔一段时间取出一个并更新游戏状态
+      由于TCP的特性，信号顺序不会改变，若P1在取出信号的时候发现没有信号，则暂停游戏，获得信号后继续游戏。若长时间没有信号则或连接断开则游戏中断，并回到玩家列表。
+    3.游戏结束后，显示结束画面并发送结束信号给对方，在收到确认信号后断开连接，并向服务器发送结果，服务器加进数据库进行排名后发送游戏排名（前十名）给client。
+  }
+  返回玩家列表界面
+  下线请求
+
+
+  包类型及响应总结：
+  {
+    发起挑战：包括自己的名字
+    响应挑战：接受或不接受
+
+    ToyState包：在自己的ToyState更新的时候发送
+    响应：无
+
+    ControlSignal：在自己游戏状态更新的时候发送
+    响应：无
+  }
+}

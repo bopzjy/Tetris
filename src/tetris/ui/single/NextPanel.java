@@ -9,19 +9,23 @@ import javax.swing.border.EmptyBorder;
 import tetris.common.GlobalConstants;
 import tetris.ui.MainContainer;
 
-public class BlocksPanel extends JPanel {
+public class NextPanel extends JPanel{
 	
+	private final int ROWS = 4;
+	private final int COLUMN = 5;
 	private final int HGAP = 2;
 	private final int VGAP = 2;
-
+		
 	private double XRelative;
 	private double YRelative;
 	private double WidthOfWhole;
 	private double HeightOfWhole;
 	
+	private final Color INIT_COLOR = null;
+	
 	private JPanel[][] blocksRef;
 	
-	public BlocksPanel(double x, double y, double w, double h) {
+	public NextPanel(double x, double y, double w, double h) {
 		// TODO Auto-generated constructor stub
 		MainContainer mainContainer = MainContainer.getInstance();
 		
@@ -30,13 +34,14 @@ public class BlocksPanel extends JPanel {
 		WidthOfWhole = w;
 		HeightOfWhole = h;
 		
-		blocksRef = new JPanel[GlobalConstants.NUMBER_OF_ROWS][GlobalConstants.NUMBER_OF_COLUMNS];
+		blocksRef = new JPanel[ROWS][COLUMN];
 		
-		setLayout(new GridLayout(GlobalConstants.NUMBER_OF_ROWS, GlobalConstants.NUMBER_OF_COLUMNS, HGAP, VGAP));
-		for(int i = 0; i < GlobalConstants.NUMBER_OF_ROWS; i++){
-			for(int j = 0; j < GlobalConstants.NUMBER_OF_COLUMNS; j++){
+		setLayout(new GridLayout(ROWS, COLUMN, HGAP, VGAP));
+		for(int i = 0; i < ROWS; i++){
+			for(int j = 0; j < COLUMN; j++){
 				blocksRef[i][j] = new JPanel();
-				blocksRef[i][j].setBackground(GlobalConstants.BLOCKSPANEL_INIT_COLOR);
+				//blocksRef[i][j].setBackground(INIT_COLOR);
+				blocksRef[i][j].setOpaque(false);
 				
 				this.add(blocksRef[i][j]);
 			}
@@ -50,18 +55,14 @@ public class BlocksPanel extends JPanel {
 		this.setBorder(new EmptyBorder(-5, 0, -5, 0));
 		this.setOpaque(false);
 	}
-
+	
 	public void setBlockColorByCoordinates(int i, int j, Color color) {
 		// TODO Auto-generated method stub
-		blocksRef[i][j].setBackground(color);
-	}
-	
-	public void clearPanel(){
-		for(int i = 0; i < GlobalConstants.NUMBER_OF_ROWS; i++){
-			for(int j = 0; j < GlobalConstants.NUMBER_OF_COLUMNS; j++){
-				blocksRef[i][j].setBackground(GlobalConstants.BLOCKSPANEL_INIT_COLOR);
-			}
+		if(color==null)
+			this.blocksRef[i][j].setOpaque(false);
+		else{
+			this.blocksRef[i][j].setOpaque(true);
+			blocksRef[i][j].setBackground(color);
 		}
 	}
-	
 }

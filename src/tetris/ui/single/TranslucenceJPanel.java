@@ -23,7 +23,7 @@ import tetris.utils.ImageProcesser;
 
 public class TranslucenceJPanel extends JPanel {
 	
-	protected BufferedImage background;
+	//protected BufferedImage background;
 	
 	protected float transparency;
 	protected ImageIcon bgImage;
@@ -51,8 +51,8 @@ public class TranslucenceJPanel extends JPanel {
 		
 		Graphics2D graphics2d = (Graphics2D) g.create();
 		graphics2d.setComposite(AlphaComposite.SrcOver.derive(transparency));			
-      	graphics2d.drawImage(background, 0, 0, this);
-		//graphics2d.drawImage(bgImage.getImage(), 0, 0, this);
+      	//graphics2d.drawImage(background, 0, 0, this);
+		graphics2d.drawImage(bgImage.getImage(), 0, 0, this);
 		graphics2d.dispose();
 	}
 	

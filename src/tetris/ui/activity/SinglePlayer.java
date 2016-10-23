@@ -19,19 +19,29 @@ import tetris.ui.ActivityHolder;
 import tetris.ui.MainContainer;
 import tetris.ui.activity.RankLister.MAdapter;
 import tetris.ui.single.BlocksPanel;
+import tetris.ui.single.DataPanel;
+import tetris.ui.single.GameOverDialog;
+import tetris.ui.single.GetLevelScore;
 import tetris.ui.single.NameDialog;
+import tetris.ui.single.NextPanel;
 import tetris.ui.single.SetBlockColor;
+import tetris.ui.single.ShowLevelScore;
 import tetris.ui.single.TranslucenceJPanel;
 import tetris.ui.single.Translucent;
 import tetris.ui.single.TypeName;
 import tetris.utils.ImageProcesser;
 import tetris.utils.LoadFont;
 
-public class SinglePlayer extends Activity implements SetBlockColor,TypeName{
+public class SinglePlayer extends Activity implements SetBlockColor,TypeName,GetLevelScore,ShowLevelScore{
 	
 	private final int LAYOUT_BACKGROUND = 0;
 	private final int LAYOUT_BLOCKSPANEL = LAYOUT_BACKGROUND + 1;
-	private final int LAYOUT_NAMEDIALOG = LAYOUT_BLOCKSPANEL + 1;
+	private final int LAYOUT_SCOREPANEL = LAYOUT_BLOCKSPANEL + 1;
+	private final int LAYOUT_LEVELPANEL = LAYOUT_SCOREPANEL + 1;
+	private final int LAYOUT_NEXTPANEL = LAYOUT_LEVELPANEL + 1;
+	private final int LAYOUT_NAMEDIALOG = LAYOUT_NEXTPANEL + 1;
+	private final int LAYOUT_GAMEOVER = LAYOUT_NAMEDIALOG + 1;
+	
 	
 	private final double XRelative = 150.0/1229;
 	private final double YRelative = 330.0/1024;
@@ -42,6 +52,9 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName{
 	
 	private NameDialog nameDialog;
 	private JTextField nameTextField;
+	private DataPanel scorePanel, levelPanel;
+	private NextPanel nextPanel;
+	private GameOverDialog gameOverDialog;
 	//private  
 	
 	public SinglePlayer() {
@@ -76,7 +89,42 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName{
 				GlobalConstants.SINGLE_NAMEDIALOG_TF_XRelative, GlobalConstants.SINGLE_NAMEDIALOG_TF_YRelative,
 				GlobalConstants.SINGLE_NAMEDIALOG_TF_WidthOfWhole, GlobalConstants.SINGLE_NAMEDIALOG_TF_HeightOfWhole);
 		jLayeredPane.add(nameDialog, new Integer(LAYOUT_NAMEDIALOG));
-		showNameDialog();	
+		//showNameDialog();	
+		
+		scorePanel = new DataPanel(GlobalConstants.SINGLE_SCORE_XRelative, 
+				GlobalConstants.SINGLE_SCORE_YRelative, 
+				GlobalConstants.SINGLE_SCORE_WidthOfWhole, 
+				GlobalConstants.SINGLE_SCORE_HeightOfWhole);
+		jLayeredPane.add(scorePanel, new Integer(LAYOUT_SCOREPANEL));
+		System.out.println(scorePanel.getGameData());
+		
+		levelPanel = new DataPanel(GlobalConstants.SINGLE_LEVEL_XRelative, 
+				GlobalConstants.SINGLE_LEVEL_YRelative, 
+				GlobalConstants.SINGLE_LEVEL_WidthOfWhole, 
+				GlobalConstants.SINGLE_LEVEL_HeightOfWhole);
+		jLayeredPane.add(levelPanel, new Integer(LAYOUT_LEVELPANEL));
+		System.out.println(levelPanel.getGameData());
+		
+		nextPanel = new NextPanel(GlobalConstants.SINGLE_NEXT_XRelative, 
+				GlobalConstants.SINGLE_NEXT_YRelative, 
+				GlobalConstants.SINGLE_NEXT_WidthOfWhole, 
+				GlobalConstants.SINGLE_NEXT_HeightOfWhole);
+		jLayeredPane.add(nextPanel, new Integer(LAYOUT_NEXTPANEL));
+		// Demo: print blocks
+		nextPanel.setBlockColorByCoordinates(1, 2, Color.green);
+		nextPanel.setBlockColorByCoordinates(2, 2, Color.green);
+		nextPanel.setBlockColorByCoordinates(3, 2, Color.green);
+		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);
+		//nextPanel.setBlockColorByCoordinates(3, 3, Color.green);
+		
+		
+		gameOverDialog = new GameOverDialog(GlobalConstants.SINGLE_GAMEOVER_XRelative, GlobalConstants.SINGLE_GAMEOVER_YRelative,
+				GlobalConstants.SINGLE_GAMEOVER_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_HeightOfWhole,
+				GlobalConstants.SINGLE_GAMEOVER_LEVEL_XRelative, GlobalConstants.SINGLE_GAMEOVER_LEVEL_YRelative,
+				GlobalConstants.SINGLE_GAMEOVER_LEVEL_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_LEVEL_HeightOfWhole,
+				GlobalConstants.SINGLE_GAMEOVER_SCORE_XRelative);
+		jLayeredPane.add(gameOverDialog, new Integer(LAYOUT_GAMEOVER));
+		this.showGameOverDialog();
 		
 		keyAdapter = new MAdapter();
 		mainContainer.setKeyBoardAdapter(keyAdapter);
@@ -131,7 +179,9 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName{
 				getNameText();
 				break;
 				
-			//case KeyEvent.VK_ENTER:
+			case KeyEvent.VK_ENTER:
+				getNameText();
+				break;
 				
 			default:
 				break;
@@ -157,5 +207,41 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName{
 		System.out.println(nameDialog.getTextFieldValue());
 		return nameDialog.getTextFieldValue();
 		//return null;
+	}
+
+	@Override
+	public int getLevel() {
+		// TODO Auto-generated method stub
+		return levelPanel.getGameData();
+	}
+
+	@Override
+	public int getScore() {
+		// TODO Auto-generated method stub
+		return scorePanel.getGameData();
+	}
+
+	@Override
+	public void hideNameDialog() {
+		// TODO Auto-generated method stub
+		nameDialog.setVisible(true);
+	}
+
+	@Override
+	public void setNextBlockColor(int i, int j, Color color) {
+		// TODO Auto-generated method stub
+		nextPanel.setBlockColorByCoordinates(i, j, color);
+	}
+
+	@Override
+	public void showGameOverDialog() {
+		// TODO Auto-generated method stub
+		gameOverDialog.setVisible(true);
+	}
+
+	@Override
+	public void hideGameOverDialog() {
+		// TODO Auto-generated method stub
+		gameOverDialog.setVisible(false);
 	}
 }

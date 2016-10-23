@@ -48,7 +48,7 @@ public class NameDialog extends TranslucenceJPanel{//extends JPanel{
 				(int)(mainContainer.getInterHeight() * HeightOfWhole));
 		
 		transparency = TRANSPARENCY;
-		background = ImageProcesser.toBufferedImage(bgImage.getImage());
+		//background = ImageProcesser.toBufferedImage(bgImage.getImage());
 		
 		//Translucent bg =  new Translucent();
 		//bg.setBGTranslucent(bgImage, TRANSPARENCY);
@@ -78,7 +78,7 @@ public class NameDialog extends TranslucenceJPanel{//extends JPanel{
 	}
 	
 	public String getTextFieldValue(){
-		return nameTextField.getText();
+		return nameTextField.getText().trim();
 	}
 	
 }

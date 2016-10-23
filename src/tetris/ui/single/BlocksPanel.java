@@ -13,19 +13,24 @@ public class BlocksPanel extends JPanel implements SetBlockColor{
 	
 	private final int HGAP = 2;
 	private final int VGAP = 2;
-	//private final double XRelative = 152.8/1229;
-	private final double XRelative = 0.144;
-	//private final double YRelative = 52.9/1024;
-	private final double YRelative = 0.080;
-	private final double WidthOfWhole = (652.1-152.8)/1229;
-	private final double HeightOfWhole = (942.0 - 79)/1024;
+
 	private final Color INIT_COLOR = Color.white;
+	
+	private double XRelative = 0.144;
+	private double YRelative = 0.080;
+	private double WidthOfWhole = (652.1-152.8)/1229;
+	private double HeightOfWhole = (942.0 - 79)/1024;
 	
 	private JPanel[][] blocksRef;
 	
-	public BlocksPanel() {
+	public BlocksPanel(double x, double y, double w, double h) {
 		// TODO Auto-generated constructor stub
 		MainContainer mainContainer = MainContainer.getInstance();
+		
+		XRelative = x;
+		YRelative = y;
+		WidthOfWhole = w;
+		HeightOfWhole = h;
 		
 		blocksRef = new JPanel[GlobalConstants.NUMBER_OF_ROWS][GlobalConstants.NUMBER_OF_COLUMNS];
 		
@@ -61,4 +66,9 @@ public class BlocksPanel extends JPanel implements SetBlockColor{
 			}
 		}
 	}
+	
+	public void setScale(){
+		
+	}
+
 }

@@ -88,5 +88,7 @@ public class RankLister extends Activity{
 		}
 	}
 	
-
+	public static void main(String[] args) {
+		new RankLister();
+	}
 }

@@ -1,10 +1,18 @@
 package tetris.net;
 
-public class User {
+import java.io.Serializable;
+
+enum status{offline,online,battling};
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -369278961792783423L;
 	public String username=null;
 	public String url=null;
-	public String score=null;
+	public int score=0;
 	public int rank=0;
-	enum status{offline,online,battling};
+	public int timeleft=10;
 	public status state=status.offline;
 }

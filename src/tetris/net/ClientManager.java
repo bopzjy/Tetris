@@ -8,8 +8,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import tetris.common.GlobalConstants;
+
 public class ClientManager {
-	public String url="rmi://localhost:1111/ClientImpl";
+	public int port=GlobalConstants.CLIENT_PORT;
+	public String url="rmi://localhost:"+GlobalConstants.CLIENT_PORT+"/ClientImpl";
 	Registry registry;
 	public ClientManager(){
 		
@@ -18,10 +21,11 @@ public class ClientManager {
 			throws MalformedURLException, RemoteException, NotBoundException{
 		return (ClientInterface)Naming.lookup(url);
 	}
+	
 	public void buildVM(){
 		try {
 			ClientImpl client=new ClientImpl();
-			registry=LocateRegistry.createRegistry(1111);
+			registry=LocateRegistry.createRegistry(port);
 			Naming.rebind(url, client);
 			
 		} catch (RemoteException e) {
@@ -32,6 +36,7 @@ public class ClientManager {
 			e.printStackTrace();
 		}
 	}
+	
 	public void closeVM(){
 		try {
 			Naming.unbind(url);

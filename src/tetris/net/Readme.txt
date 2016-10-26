@@ -1,0 +1,2 @@
+在ClientInterface中写客户端接口，在ClientImpl中写客户端接口的实现
+调试过程参考：先运行Server_test建立服务器，在运行Client_test建立客户端1，再运行Client_test2运行客户端2，注意只能用客户端2连接客户端，连接后在客户端2中通过clientinterface来调用客户端1的方法

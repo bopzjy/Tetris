@@ -20,4 +20,10 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String test(String str) throws RemoteException {
+		// TODO Auto-generated method stub
+		return "send from"+str;
+	}
+
 }

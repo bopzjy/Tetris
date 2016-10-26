@@ -8,12 +8,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class DatabaseManager {
 	ArrayList<User> data;
+	
 	DatabaseManager(){
 		load();
 	}
+	
 	void save(){
 		try {
 			FileOutputStream fos=new FileOutputStream("data");
@@ -29,6 +32,7 @@ public class DatabaseManager {
 		}
 		
 	}
+
 	void load(){
 		data=new ArrayList<User>();
 		try {
@@ -58,11 +62,33 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 	}
-	void getTopPlayers(final ArrayList<User> players){
-		
+
+	void setTopPlayers(final ArrayList<User> players){
+		players.clear();
+		Comparator<User> comparator=new Comparator<User>(){
+			@Override
+			public int compare(User o1, User o2) {
+				// TODO Auto-generated method stub
+				return o2.score-o1.score;
+			}			
+		};
+		data.sort(comparator);
+		for(int i=0;i<10;i++){
+			players.add(data.get(i));
+		}
 	}
-	void quicksort(){
-		
+
+	void addUser(User user){
+		boolean nothave=true;
+		for(int i=0;i<data.size();i++){
+			if(user.username.equals(data.get(i).username)){
+				nothave=false;
+				break;
+			}
+		}
+		if(nothave)
+			data.add(user);
 	}
+	
 	
 }

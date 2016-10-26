@@ -9,20 +9,22 @@ public class FallingEntry {
 	int patternNum;
 	int colorNum;
 	int speedRank;
+	int directNum;
+	Spot headSpot = null;
+	Spot secSpot = null;
+	Spot thirdSpot = null;
+	Spot fourthSpot = null;
 
-	public FallingEntry() {
-		patternNum = 0;
-		colorNum = 0;
-		speedRank = 0;
-	}
-
-	public FallingEntry(int patternNum, int colorNum, int speedRank) {
+	public FallingEntry(int patternNum, int colorNum, int speedRank, Spot headSpot,int directNum) {
 		this.patternNum = patternNum;
 		this.colorNum = colorNum;
 		this.speedRank = speedRank;
-	}
-
-	public void NextPattern() {
+		this.directNum = directNum;
+		this.headSpot = headSpot;
+		SpotCal();
+	} 
+	
+	public void SpotCal() {
 		switch (patternNum) {
 		case 0:
 			patternNum++;
@@ -61,6 +63,13 @@ public class FallingEntry {
 			break;
 		}
 	}
+	
+	public FallingEntry() {
+		patternNum = 0;
+		colorNum = 0;
+		speedRank = 0;
+	}
+
 
 	public void printFallingEntry() {
 		System.out.println(patternNum + " " + colorNum + " " + speedRank);

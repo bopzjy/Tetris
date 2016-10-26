@@ -18,21 +18,167 @@ public class FEPipelineProducer implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		Random ra = new Random();
+		Random ra1 = new Random();
+		Random ra2 = new Random();
+		Random ra3 = new Random();
 		while (true) {
 			int lineSize = line.getFEPipelineSize();
 			// System.out.println("Producer:" + lineSize);
 			if (lineSize < GameConstants.LENGTH_OF_FEPIPELINE) {
-				int patternNum = ra.nextInt(10);
-				int colorNum = GameConstants.PATTERN_COLOR[patternNum];
+				int patternNum = ra1.nextInt(GameConstants.NUMBER_OF_PATTERN);
+				int colorNum = ra2.nextInt(GameConstants.NUMBER_OF_COLOR);
+				int direct = GameConstants.PATTERN_DIRECT[patternNum];
+				int directNum = ra3.nextInt(direct);
 				int speedRank = getRank();
-				line.FEOffer(patternNum, colorNum, speedRank);
+				Spot spotTemp = getInitialSpot(patternNum, directNum);
+				System.out.println(patternNum + " " + colorNum + " " + speedRank);
+				line.FEOffer(patternNum, colorNum, speedRank,spotTemp,directNum);
 			} else {
 
 			}
 		}
 	}
+	
+	public Spot getInitialSpot(int patternNum, int directNum){
+		Spot temp = null;
+		switch (patternNum) {
+		case 0:
+			temp = patternZeroInitial(directNum);
+			break;
+		case 1:
+			temp = patternOneInitial(directNum);
+			break;
 
+		case 2:
+			temp = patternTwoInitial( directNum);
+			break;
+		case 3:
+			temp = patternThreeInitial(directNum);
+			break;
+		case 4:
+			temp = patternFourInitial(directNum);
+			break;
+		case 5:
+			temp = patternFiveInitial(directNum);
+
+		case 6:
+			temp = patternSixInitial( directNum);
+			break;
+		
+		default:
+			temp = new Spot(-1,-1);
+			break;
+		}
+		return temp;
+	}
+	
+	public Spot patternZeroInitial(int directNum) {
+		Spot temp = null;
+		switch (directNum) {
+		case 0:
+			temp = new Spot(-1,5);
+			break;
+		case 1:
+			temp = new Spot(-1,4);
+			break;
+		default:
+			temp = new Spot(-2,-2);
+			break;
+		}
+		return temp;
+	}
+	
+	public Spot patternOneInitial(int directNum) {
+		Spot temp = null;
+		switch (directNum) {
+		case 0:
+			temp = new Spot(-1,5);
+		case 1:
+			temp = new Spot(-2,5);
+		case 2:
+			temp = new Spot(-2,5);
+		case 3:
+			temp = new Spot(-2,6);
+		default:
+			temp = new Spot(-2,-2);
+			break;
+		}
+		return temp;
+	}
+	
+	public Spot patternTwoInitial(int directNum) {
+		Spot temp = null;
+		switch (directNum) {
+		case 0:
+			temp = new Spot(-1,5);
+			break;
+		case 1:
+			temp = new Spot(-2,5);
+			break;
+		default:
+			temp = new Spot(-2,-2);
+			break;
+		}
+		return temp;
+	}
+
+	public Spot patternThreeInitial(int directNum) {
+		Spot temp = null;
+		switch (directNum) {
+		case 0:
+			temp = new Spot(-1,5);
+			break;
+		case 1:
+			temp = new Spot(-2,5);
+			break;
+		default:
+			temp = new Spot(-2,-2);
+			break;
+		}
+		return temp;
+	}
+	
+	public Spot patternFourInitial(int directNum) {		
+		
+		return new Spot(-2,5);
+	}
+	
+	public Spot patternFiveInitial(int directNum) {
+		Spot temp = null;
+		switch (directNum) {
+		case 0:
+			temp = new Spot(-2,5);
+		case 1:
+			temp = new Spot(-2,5);
+		case 2:
+			temp = new Spot(-2,6);
+		case 3:
+			temp = new Spot(-1,5);
+		default:
+			temp = new Spot(-2,-2);
+			break;
+		}
+		return temp;
+	}
+	
+	public Spot patternSixInitial(int directNum) {
+		Spot temp = null;
+		switch (directNum) {
+		case 0:
+			temp = new Spot(-2,6);
+		case 1:
+			temp = new Spot(-2,5);
+		case 2:
+			temp = new Spot(-2,5);
+		case 3:
+			temp = new Spot(-2,5);
+		default:
+			temp = new Spot(-2,-2);
+			break;
+		}
+		return temp;
+	}
+	
 	public int getRank() {
 		for (int i = 0; i < GameConstants.NUMBER_OF_SPEED_RANK; i++) {
 			if (line.getScore() < GameConstants.SCORE_RANK[i]) {

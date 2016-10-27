@@ -18,9 +18,9 @@ public class FEPipelineProducer implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		Random ra1 = new Random();
-		Random ra2 = new Random();
-		Random ra3 = new Random();
+		Random ra1 = new Random(37);
+		Random ra2 = new Random(37);
+		Random ra3 = new Random(37);
 		while (true) {
 			int lineSize = line.getFEPipelineSize();
 			// System.out.println("Producer:" + lineSize);

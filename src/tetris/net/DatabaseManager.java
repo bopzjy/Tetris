@@ -90,5 +90,23 @@ public class DatabaseManager {
 			data.add(user);
 	}
 	
-	
+	public int updateScore(String name,int score){
+		boolean nothave=true;
+		for(int i=0;i<data.size();i++){
+			if(data.get(i).equals(name)){
+				nothave=false;
+				if(data.get(i).score<score)
+					data.get(i).score=score;
+				break;
+			}
+		}
+		if(nothave){
+			User user=new User();
+			user.username=name;
+			user.score=score;
+			data.add(user);
+		}
+		save();
+		return 0;
+	}
 }

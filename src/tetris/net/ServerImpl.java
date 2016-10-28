@@ -121,4 +121,11 @@ public class ServerImpl extends UnicastRemoteObject implements ServerInterface{
 		// TODO Auto-generated method stub
 		return onlineuser;
 	}
+
+
+	@Override
+	public int updateScore(String name, int score) throws RemoteException {
+		// TODO Auto-generated method stub
+		return manager.updateScore(name, score);
+	}
 }

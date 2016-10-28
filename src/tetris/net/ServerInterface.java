@@ -18,4 +18,6 @@ public interface ServerInterface extends Remote{
 	public boolean logout(String name) throws RemoteException;
 	
 	public ArrayList<User> getOnlinePlayers() throws RemoteException;
+	
+	public int updateScore(String name,int score) throws RemoteException;
 }

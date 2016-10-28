@@ -47,4 +47,8 @@ public class ClientManager {
 		}
 	}
 
+	public void set_RMI_URL(int port){
+		url="rmi://localhost:"+port+"/ClientImpl";
+		this.port=port;
+	}
 }

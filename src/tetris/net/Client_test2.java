@@ -17,9 +17,10 @@ public class Client_test2 {
 		try {
 			servermanager.login("daming");
 			playerlist=servermanager.getOnlinePlayers();
-			//clientmanager.buildVM();
+			clientmanager.set_RMI_URL(2222);
+			clientmanager.buildVM();
 			clientinterface=clientmanager.connect(playerlist[0].url);
-			clientinterface.test("daming");
+			System.out.println(clientinterface.test("daming"));
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

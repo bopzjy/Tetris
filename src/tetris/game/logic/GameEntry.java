@@ -2,13 +2,14 @@ package tetris.game.logic;
 
 import tetris.common.GlobalConstants;
 import tetris.ui.Activity;
+import tetris.ui.activity.SinglePlayer;
 
 public class GameEntry {
 
 	// 战场逻辑矩阵
 	int[][] GameArray = null;
 	// 游戏对应的界面对象
-	Activity GameActivity = null;
+	SinglePlayer GameActivity = null;
 	FallingEntryPipeline FEPLine = null ;
 	// 分数记录
 	int score;
@@ -17,7 +18,7 @@ public class GameEntry {
 		init();
 	}
 
-	public GameEntry(Activity GameActivity) {
+	public GameEntry(SinglePlayer GameActivity) {
 		this.GameActivity = GameActivity;
 		init();
 	}
@@ -48,6 +49,10 @@ public class GameEntry {
 
 	public int getScore() {
 		return score;
+	}
+	
+	public void upScore (int temp) {
+		score = score + temp;
 	}
 
 	public static void main(String args[]) {

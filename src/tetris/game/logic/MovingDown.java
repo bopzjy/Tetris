@@ -1,6 +1,9 @@
 package tetris.game.logic;
 
+import java.awt.Color;
 import java.util.Random;
+
+import tetris.common.GlobalConstants;
 
 public class MovingDown implements Runnable {
 
@@ -30,33 +33,169 @@ public class MovingDown implements Runnable {
 			FallingEntryProduce();
 		}
 		
+		
+
 		while (true) {
-			Spot hSpot = new Spot(fEntry.headSpot.x+1,fEntry.headSpot.y);
-			Spot sSpot = new Spot(fEntry.secSpot.x+1,fEntry.secSpot.y); 
-			Spot tSpot = new Spot(fEntry.thirdSpot.x+1,fEntry.thirdSpot.y); 
-			Spot fSpot = new Spot(fEntry.fourthSpot.x+1,fEntry.fourthSpot.y);
+			FallingEntry falltemp = new FallingEntry(fEntry);
+			falltemp.moveDown();
 			boolean conflictFlag = false;
-			
-			
+			conflictFlag = IsEntryConflict(falltemp);
+			if (!conflictFlag) {
+				paintFEntryInArray(fEntry, true);
+				paintFEntryInArray(falltemp, false);
+				paintFallingEntry(fEntry, Color.white);
+				paintFallingEntry(falltemp, falltemp.color);
+			} else {
+				checkFullRow(fEntry);
+			}
+
 		}
 
 	}
-	
-	public boolean checkInArray(Spot sp) {
-		return (sp.x>=0 && sp.y>=0);
+
+	public void checkFullRow(FallingEntry fEntry) {
+		int fullcount = 0;
+		int[] rowIndex = { fEntry.headSpot.x, fEntry.secSpot.x, fEntry.thirdSpot.x, fEntry.fourthSpot.x };
+		boolean[] rowTag = { false, false, false, false };
+		if (checkFullRowhandler(fEntry.headSpot)) {
+			fullcount++;
+			rowTag[0] = true;
+		}
+		if (checkFullRowhandler(fEntry.secSpot)) {
+			fullcount++;
+			rowTag[1] = true;
+		}
+		if (checkFullRowhandler(fEntry.thirdSpot)) {
+			fullcount++;
+			rowTag[2] = true;
+		}
+		if (checkFullRowhandler(fEntry.fourthSpot)) {
+			fullcount++;
+			rowTag[3] = true;
+		}
+
+		if (fullcount != 0) {
+			gEntry.upScore(fullcount * 10);
+			repaintArray(rowIndex, rowTag);
+			repaintActivity(fEntry.lowestRow());
+		}
+
 	}
-	
-	public boolean checkEntryConflict(Spot hSpot,Spot sSpot,Spot tSpot, Spot fSpot) {
-		if (checheckInArray(hSpot)&&gEntry.GameArray[hSpot.x][hSpot.y] != 0) {
-			return false;
-		} else if (checkInArray(sSpot)&&gEntry.GameArray[sSpot.x][sSpot.y] != 0){
-			return false;
-		} else if (checkInArray(tSpot)&&gEntry.GameArray[tSpot.x][tSpot.y] != 0) {
-			return false;
-		} else if (checkInArray(fSpot)&&gEntry.GameArray[fSpot.x][fSpot.y] != 0) {
-			return false;
-		} else {
+
+	public void repaintArray(int[] rowIndex, boolean[] rowTag) {
+		for (int i = 0; i < GameConstants.NUMBER_OF_SPOT - 1; i++) {
+			int temp = i;
+			for (int j = i + 1; j < GameConstants.NUMBER_OF_SPOT; j++) {
+				if (rowIndex[j] > rowIndex[temp]) {
+					temp = j;
+				}
+			}
+			if (temp != i) {
+				int indexTemp = rowIndex[i];
+				rowIndex[i] = rowIndex[temp];
+				rowIndex[temp] = indexTemp;
+				boolean tagTemp = rowTag[i];
+				rowTag[i] = rowTag[temp];
+				rowTag[temp] = tagTemp;
+			}
+		}
+		int count=0;
+		for(int i=0;i<GameConstants.NUMBER_OF_SPOT;i++) {
+			if(i==0 || (i!=0 && rowIndex[i]!=rowIndex[i-1])) {
+				if (rowTag[i]) {
+					count ++;
+				}
+			}
+		}
+		
+		int rowNum = rowIndex[GameConstants.NUMBER_OF_SPOT-1]-rowIndex[0] +1;
+		int rowWrite = rowNum - count;
+		int bas = rowIndex[0];
+		for(int i=0;i<rowWrite;i++) {
+			int j=0;
+			for(;j<GameConstants.NUMBER_OF_SPOT;j++) {
+				if(j==0 || (j!=0 && rowIndex[j]!=rowIndex[j-1])) {
+					if (!rowTag[j]) {
+						for(int k=0;k<GlobalConstants.NUMBER_OF_COLUMNS;k++) {
+							gEntry.GameArray[bas+i][k] = gEntry.GameArray[rowIndex[j]][k];
+						}
+					}
+				}
+			}
+		}
+		
+		for (int i=rowIndex[GameConstants.NUMBER_OF_SPOT-1];i>=0;i--) {
+			for(int j=0;j<GlobalConstants.NUMBER_OF_COLUMNS;j++) {
+				gEntry.GameArray[i+count][j] = gEntry.GameArray[i][j];
+			}
+		}
+        
+	}
+
+	public void repaintActivity(int lowestx) {
+           for(int i=lowestx;i>=0;i--) {
+        	   for (int j=0;j<GlobalConstants.NUMBER_OF_COLUMNS;j++) {
+        		   Color color = GameConstants.COLOR_SET[gEntry.GameArray[i][j]];
+        		   gEntry.GameActivity.setBlockColorByCoordinates(i, j, color);
+        	   }
+           }
+	}
+
+	public boolean checkFullRowhandler(Spot s) {
+		int x = s.x;
+		boolean fullFlag = true;
+		for (int y = 0; y < GlobalConstants.NUMBER_OF_COLUMNS; y++) {
+			if (gEntry.GameArray[x][y] == 0) {
+				fullFlag = false;
+				break;
+			}
+		}
+		if (fullFlag) {
+			for (int y = 0; y < GlobalConstants.NUMBER_OF_COLUMNS; y++) {
+				gEntry.GameArray[x][y] = 0;
+				gEntry.GameActivity.setBlockColorByCoordinates(x, y, Color.white);
+			}
 			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void paintFEntryInArray(FallingEntry fEntry, boolean nullFlag) {
+		if (!nullFlag) {
+			int colorNum = GameConstants.COLOR_INDEX.get(fEntry.color).intValue();
+			gEntry.GameArray[fEntry.headSpot.x][fEntry.headSpot.y] = colorNum;
+			gEntry.GameArray[fEntry.secSpot.x][fEntry.secSpot.y] = colorNum;
+			gEntry.GameArray[fEntry.thirdSpot.x][fEntry.thirdSpot.y] = colorNum;
+			gEntry.GameArray[fEntry.fourthSpot.x][fEntry.fourthSpot.y] = colorNum;
+		} else {
+			gEntry.GameArray[fEntry.headSpot.x][fEntry.headSpot.y] = 0;
+			gEntry.GameArray[fEntry.secSpot.x][fEntry.secSpot.y] = 0;
+			gEntry.GameArray[fEntry.thirdSpot.x][fEntry.thirdSpot.y] = 0;
+			gEntry.GameArray[fEntry.fourthSpot.x][fEntry.fourthSpot.y] = 0;
+		}
+	}
+
+	public void paintFallingEntry(FallingEntry fEntry, Color color) {
+		gEntry.GameActivity.setBlockColorByCoordinates(fEntry.headSpot.x, fEntry.headSpot.y, color);
+		gEntry.GameActivity.setBlockColorByCoordinates(fEntry.secSpot.x, fEntry.secSpot.y, color);
+		gEntry.GameActivity.setBlockColorByCoordinates(fEntry.thirdSpot.x, fEntry.thirdSpot.y, color);
+		gEntry.GameActivity.setBlockColorByCoordinates(fEntry.fourthSpot.x, fEntry.fourthSpot.y, color);
+	}
+
+	public boolean IsEntryConflict(FallingEntry falltemp) {
+		if (falltemp.headSpot.IsInArray() && gEntry.GameArray[falltemp.headSpot.x][falltemp.headSpot.y] != 0) {
+			return true;
+		} else if (falltemp.secSpot.IsInArray() && gEntry.GameArray[falltemp.secSpot.x][falltemp.secSpot.y] != 0) {
+			return true;
+		} else if (falltemp.thirdSpot.IsInArray()
+				&& gEntry.GameArray[falltemp.thirdSpot.x][falltemp.thirdSpot.y] != 0) {
+			return true;
+		} else if (falltemp.fourthSpot.IsInArray()
+				&& gEntry.GameArray[falltemp.fourthSpot.x][falltemp.fourthSpot.y] != 0) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -68,13 +207,14 @@ public class MovingDown implements Runnable {
 		if (lineSize < GameConstants.LENGTH_OF_FEPIPELINE) {
 			int patternNum = ra1.nextInt(GameConstants.NUMBER_OF_PATTERN);
 			int colorNum = ra2.nextInt(GameConstants.NUMBER_OF_COLOR);
+			Color color = GameConstants.COLOR_SET[colorNum];
 			int direct = GameConstants.PATTERN_DIRECT[patternNum];
 			int directNum = ra3.nextInt(direct);
 			int speedRank = getRank();
 			Spot spotTemp = getInitialSpot(patternNum, directNum);
 			// System.out.println(patternNum + " " + colorNum + " " +
 			// speedRank);
-			gEntry.FEPLine.FEOffer(patternNum, colorNum, speedRank, spotTemp, directNum);
+			gEntry.FEPLine.FEOffer(patternNum, color, speedRank, spotTemp, directNum);
 		} else {
 			System.out.println("Produce Fail");
 		}

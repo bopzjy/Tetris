@@ -19,7 +19,7 @@ public class FEPipelineConsumer implements Runnable{
 		while (true) {
 			FallingEntry temp = line.FEPoll();
 			if (temp != null) {
-				System.out.println("Poll success" + temp.colorNum);
+				System.out.println("Poll success" );
 			} else {
 				System.out.println("Poll fail");
 			}

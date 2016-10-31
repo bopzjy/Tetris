@@ -1,5 +1,6 @@
 package tetris.game.logic;
 
+import java.awt.Color;
 import java.util.Random;
 
 public class FEPipelineProducer implements Runnable {
@@ -27,12 +28,13 @@ public class FEPipelineProducer implements Runnable {
 			if (lineSize < GameConstants.LENGTH_OF_FEPIPELINE) {
 				int patternNum = ra1.nextInt(GameConstants.NUMBER_OF_PATTERN);
 				int colorNum = ra2.nextInt(GameConstants.NUMBER_OF_COLOR);
+				Color color = GameConstants.COLOR_SET[colorNum];
 				int direct = GameConstants.PATTERN_DIRECT[patternNum];
 				int directNum = ra3.nextInt(direct);
 				int speedRank = getRank();
 				Spot spotTemp = getInitialSpot(patternNum, directNum);
 				System.out.println(patternNum + " " + colorNum + " " + speedRank);
-				line.FEOffer(patternNum, colorNum, speedRank,spotTemp,directNum);
+				line.FEOffer(patternNum, color, speedRank,spotTemp,directNum);
 			} else {
 
 			}

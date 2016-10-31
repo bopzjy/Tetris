@@ -1,27 +1,54 @@
 package tetris.game.logic;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import tetris.common.GlobalConstants;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 
 public class FallingEntry {
 	int patternNum;
-	int colorNum;
+	Color color;
 	int speedRank;
 	int directNum;
+	boolean inArray;
 	Spot headSpot = null;
 	Spot secSpot = null;
 	Spot thirdSpot = null;
 	Spot fourthSpot = null;
 
-	public FallingEntry(int patternNum, int colorNum, int speedRank, Spot headSpot, int directNum) {
+	public FallingEntry(int patternNum, Color color, int speedRank, Spot headSpot, int directNum) {
 		this.patternNum = patternNum;
-		this.colorNum = colorNum;
+		this.color = color;
 		this.speedRank = speedRank;
 		this.directNum = directNum;
 		this.headSpot = headSpot;
 		SpotCal();
+		this.inArray = false;
+	}
+
+	public FallingEntry(int patternNum, Color color, int speedRank, Spot headSpot, int directNum, boolean inArray) {
+		this.patternNum = patternNum;
+		this.color = color;
+		this.speedRank = speedRank;
+		this.directNum = directNum;
+		this.headSpot = headSpot;
+		SpotCal();
+		this.inArray = inArray;
+	}
+	
+	public FallingEntry(FallingEntry fEntry) {
+		patternNum = fEntry.patternNum;
+		color = fEntry.color;
+		speedRank = fEntry.speedRank;
+		directNum = fEntry.directNum;
+		inArray = fEntry.inArray;
+		headSpot = new Spot(fEntry.headSpot);
+		secSpot = new Spot(fEntry.secSpot);
+		thirdSpot = new Spot(fEntry.thirdSpot);
+		fourthSpot = new Spot(fEntry.fourthSpot);
+		
 	}
 
 	public void SpotCal() {
@@ -466,11 +493,62 @@ public class FallingEntry {
 
 	public FallingEntry() {
 		patternNum = 0;
-		colorNum = 0;
 		speedRank = 0;
 	}
 
-	public void printFallingEntry() {
-		System.out.println(patternNum + " " + colorNum + " " + speedRank);
+	public void checkInArray() {
+		headSpot.checkSpotInArray();
+		secSpot.checkSpotInArray();
+		thirdSpot.checkSpotInArray();
+		fourthSpot.checkSpotInArray();
+		if (!headSpot.IsInArray()) {
+			inArray = false;
+			return;
+		} else if (!secSpot.IsInArray()) {
+			inArray = false;
+			return;
+		} else if (!thirdSpot.IsInArray()) {
+			inArray = false;
+			return;
+		} else if (!fourthSpot.IsInArray()) {
+			inArray = false;
+			return;
+		} else {
+			inArray = true;
+			return;
+		}
 	}
+
+	public boolean IsInArray() {
+		return inArray;
+	}
+	
+	public void moveDown() {
+		headSpot.x ++;
+		secSpot.x ++;
+		thirdSpot.x ++;
+		fourthSpot.x ++;		
+	}
+
+	public void printFallingEntry() {
+		System.out.println(patternNum + " " + color + " " + speedRank);
+	}
+	
+	public int lowestRow() {
+		int lowestx = -10;
+		if(headSpot.x>lowestx) {
+			lowestx = headSpot.x;
+		}
+		if(secSpot.x>lowestx) {
+			lowestx = secSpot.x;
+		}
+		if(thirdSpot.x>lowestx) {
+			lowestx = thirdSpot.x;
+		}
+		if(fourthSpot.x>lowestx) {
+			lowestx = fourthSpot.x;
+		}
+		return lowestx;
+	}
+	
 }

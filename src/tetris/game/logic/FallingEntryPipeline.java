@@ -1,5 +1,6 @@
 package tetris.game.logic;
 
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -25,8 +26,8 @@ public class FallingEntryPipeline {
 		return gEntry.getScore();
 	}
 
-	public boolean FEOffer(int patternNum, int colorNum, int speedRank, Spot headspot,int directNum) {
-		return FEPipeline.offer(new FallingEntry(patternNum, colorNum, speedRank,headspot,directNum));
+	public boolean FEOffer(int patternNum, Color color, int speedRank, Spot headspot,int directNum) {
+		return FEPipeline.offer(new FallingEntry(patternNum, color, speedRank,headspot,directNum));
 	}
 
 	public boolean FEOffer(FallingEntry fe) {

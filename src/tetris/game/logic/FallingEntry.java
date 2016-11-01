@@ -37,7 +37,7 @@ public class FallingEntry {
 		SpotCal();
 		this.inArray = inArray;
 	}
-	
+
 	public FallingEntry(FallingEntry fEntry) {
 		patternNum = fEntry.patternNum;
 		color = fEntry.color;
@@ -48,7 +48,7 @@ public class FallingEntry {
 		secSpot = new Spot(fEntry.secSpot);
 		thirdSpot = new Spot(fEntry.thirdSpot);
 		fourthSpot = new Spot(fEntry.fourthSpot);
-		
+
 	}
 
 	public void SpotCal() {
@@ -497,6 +497,9 @@ public class FallingEntry {
 	}
 
 	public void checkInArray() {
+		if (inArray) {
+			return;
+		}
 		headSpot.checkSpotInArray();
 		secSpot.checkSpotInArray();
 		thirdSpot.checkSpotInArray();
@@ -522,33 +525,137 @@ public class FallingEntry {
 	public boolean IsInArray() {
 		return inArray;
 	}
-	
-	public void moveDown() {
-		headSpot.x ++;
-		secSpot.x ++;
-		thirdSpot.x ++;
-		fourthSpot.x ++;		
+
+	public boolean moveDown() {
+		int htemp = headSpot.x + 1;
+		if (htemp >= GlobalConstants.NUMBER_OF_ROWS) {
+			return false;
+		}
+		int stemp = headSpot.x + 1;
+		if (stemp >= GlobalConstants.NUMBER_OF_ROWS) {
+			return false;
+		}
+		int ttemp = headSpot.x + 1;
+		if (ttemp >= GlobalConstants.NUMBER_OF_ROWS) {
+			return false;
+		}
+		int ftemp = headSpot.x + 1;
+		if (ftemp >= GlobalConstants.NUMBER_OF_ROWS) {
+			return false;
+		}
+
+		headSpot.x++;
+		secSpot.x++;
+		thirdSpot.x++;
+		fourthSpot.x++;
+		checkInArray();
+		return true;
+	}
+
+	public boolean moveRightOrLeft(int RLFlag) {
+		//RLFlag为0时表示向左移动，为1是表示向右移动
+		if (RLFlag == 0) {
+			int htemp = headSpot.y - 1;
+			if (htemp < 0) {
+				return false;
+			}
+			int stemp = headSpot.y - 1;
+			if (stemp < 0) {
+				return false;
+			}
+			int ttemp = headSpot.y - 1;
+			if (ttemp < 0) {
+				return false;
+			}
+			int ftemp = headSpot.y - 1;
+			if (ftemp < 0) {
+				return false;
+			}
+		} else if (RLFlag == 1) {
+			int htemp = headSpot.y + 1;
+			if (htemp >= GlobalConstants.NUMBER_OF_COLUMNS) {
+				return false;
+			}
+			int stemp = headSpot.y + 1;
+			if (stemp >= GlobalConstants.NUMBER_OF_COLUMNS) {
+				return false;
+			}
+			int ttemp = headSpot.y + 1;
+			if (ttemp >= GlobalConstants.NUMBER_OF_COLUMNS) {
+				return false;
+			}
+			int ftemp = headSpot.y + 1;
+			if (ftemp >= GlobalConstants.NUMBER_OF_COLUMNS) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+		// RLFlag为0时表示向左移动，为1时表示向右移动
+		if (RLFlag == 0) {
+			headSpot.y--;
+			secSpot.y--;
+			thirdSpot.y--;
+			fourthSpot.y--;
+		} else if (RLFlag == 1) {
+			headSpot.y++;
+			secSpot.y++;
+			thirdSpot.y++;
+			fourthSpot.y++;
+		}
+		checkInArray();
+		return true;
+	}
+
+	public boolean rotate() {
+		int modtemp = GameConstants.PATTERN_DIRECT[patternNum];
+		directNum = (directNum + 1) % modtemp;
+		int index = GameConstants.NEXT_HEADSPOTS_INDEX.get(patternNum * 10 + directNum).intValue();
+		Spot translate = GameConstants.HEADSPOT_ROTATE[index];
+		headSpot.x = headSpot.x + translate.x;
+		headSpot.y = headSpot.y + translate.y;
+		SpotCal();
+		if (!checkInRange(headSpot)) {
+			return false;
+		} else if (!checkInRange(secSpot)) {
+			return false;
+		} else if (!checkInRange(thirdSpot)) {
+			return false;
+		} else if (!checkInRange(fourthSpot)) {
+			return false;
+		} else {
+			checkInArray();
+			return true;
+		}
+	}
+
+	public boolean checkInRange(Spot s) {
+		if (s.x < GlobalConstants.NUMBER_OF_ROWS && s.y >= 0 && s.y < GlobalConstants.NUMBER_OF_COLUMNS) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public void printFallingEntry() {
 		System.out.println(patternNum + " " + color + " " + speedRank);
 	}
-	
+
 	public int lowestRow() {
 		int lowestx = -10;
-		if(headSpot.x>lowestx) {
+		if (headSpot.x > lowestx) {
 			lowestx = headSpot.x;
 		}
-		if(secSpot.x>lowestx) {
+		if (secSpot.x > lowestx) {
 			lowestx = secSpot.x;
 		}
-		if(thirdSpot.x>lowestx) {
+		if (thirdSpot.x > lowestx) {
 			lowestx = thirdSpot.x;
 		}
-		if(fourthSpot.x>lowestx) {
+		if (fourthSpot.x > lowestx) {
 			lowestx = fourthSpot.x;
 		}
 		return lowestx;
 	}
-	
+
 }

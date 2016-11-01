@@ -11,6 +11,7 @@ public class GameEntry {
 	// 游戏对应的界面对象
 	SinglePlayer GameActivity = null;
 	FallingEntryPipeline FEPLine = null ;
+	MovingDown mdThread = null;
 	// 分数记录
 	int score;
 
@@ -25,6 +26,7 @@ public class GameEntry {
 
 	public void init() {
 		// TODO Auto-generated method stub
+		mdThread = new MovingDown(this);
 		FEPLine = new FallingEntryPipeline(this);
 		GameArray = new int[GlobalConstants.NUMBER_OF_ROWS][GlobalConstants.NUMBER_OF_COLUMNS];
 		score = 0;

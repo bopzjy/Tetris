@@ -497,9 +497,9 @@ public class FallingEntry {
 	}
 
 	public void checkInArray() {
-		if (inArray) {
-			return;
-		}
+		// if (inArray) {
+		// return;
+		// }
 		headSpot.checkSpotInArray();
 		secSpot.checkSpotInArray();
 		thirdSpot.checkSpotInArray();
@@ -519,6 +519,42 @@ public class FallingEntry {
 		} else {
 			inArray = true;
 			return;
+		}
+	}
+
+	public boolean checkUpArray() {
+		headSpot.checkSpotUpArray();
+		secSpot.checkSpotUpArray();
+		thirdSpot.checkSpotUpArray();
+		fourthSpot.checkSpotUpArray();
+		if (headSpot.IsUpArray()) {
+			return true;
+		} else if (secSpot.IsUpArray()) {
+			return true;
+		} else if (thirdSpot.IsUpArray()) {
+			return true;
+		} else if (fourthSpot.IsUpArray()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean checkDownArray() {
+		headSpot.checkSpotdownArray();
+		secSpot.checkSpotdownArray();
+		thirdSpot.checkSpotdownArray();
+		fourthSpot.checkSpotdownArray();
+		if (headSpot.IsDownArray()) {
+			return true;
+		} else if (secSpot.IsDownArray()) {
+			return true;
+		} else if (thirdSpot.IsDownArray()) {
+			return true;
+		} else if (fourthSpot.IsDownArray()) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -553,7 +589,7 @@ public class FallingEntry {
 	}
 
 	public boolean moveRightOrLeft(int RLFlag) {
-		//RLFlag为0时表示向左移动，为1是表示向右移动
+		// RLFlag为0时表示向左移动，为1是表示向右移动
 		if (RLFlag == 0) {
 			int htemp = headSpot.y - 1;
 			if (htemp < 0) {

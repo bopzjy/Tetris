@@ -18,6 +18,8 @@ public class GameConstants {
 	public static final int LENGTH_OF_FEPIPELINE = 20;
 	// 下落快和顔色的固定映射
 	public static final int[] PATTERN_COLOR = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	// 下落快和顔色的固定映射
+	public static final int[] SPEED_RANK = { 500, 400, 300, 200, 100, 50, 50, 50, 50, 50 };
 	// 速度等级对应的分数梯度
 	public static final int[] SCORE_RANK = { 300, 600, 1500, 3000, 5000, 3000, 5000, 7000, 9000, 12000, 15000, 18000 };
 

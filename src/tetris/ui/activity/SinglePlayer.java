@@ -14,6 +14,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import tetris.common.GlobalConstants;
+import tetris.game.logic.GameAdapter;
+import tetris.game.logic.GameEntry;
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.MainContainer;
@@ -57,8 +59,12 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName,Get
 	private GameOverDialog gameOverDialog;
 	//private  
 	
+	public GameEntry gEntry =null;
+	
+	
 	public SinglePlayer() {
 		// TODO Auto-generated constructor stub
+		//gEntry = new GameEntry(this);
 		init();
 	}
 	
@@ -124,8 +130,9 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName,Get
 				GlobalConstants.SINGLE_GAMEOVER_LEVEL_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_LEVEL_HeightOfWhole,
 				GlobalConstants.SINGLE_GAMEOVER_SCORE_XRelative);
 		jLayeredPane.add(gameOverDialog, new Integer(LAYOUT_GAMEOVER));
-		this.showGameOverDialog();
+		//this.showGameOverDialog();
 		
+//		keyAdapter = new GameAdapter(gEntry);
 		keyAdapter = new MAdapter();
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		

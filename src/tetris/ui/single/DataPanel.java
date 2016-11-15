@@ -48,4 +48,9 @@ public class DataPanel extends JPanel{
 	public int getGameData(){
 		return Integer.parseInt(data.getText().trim());
 	}
+	
+	public void setGameData(String text){
+		data.setText("12345");
+	
+	}
 }

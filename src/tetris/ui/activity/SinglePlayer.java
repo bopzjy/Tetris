@@ -124,7 +124,7 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName,Get
 				GlobalConstants.SINGLE_GAMEOVER_LEVEL_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_LEVEL_HeightOfWhole,
 				GlobalConstants.SINGLE_GAMEOVER_SCORE_XRelative);
 		jLayeredPane.add(gameOverDialog, new Integer(LAYOUT_GAMEOVER));
-		this.showGameOverDialog();
+		//this.showGameOverDialog();
 		
 		keyAdapter = new MAdapter();
 		mainContainer.setKeyBoardAdapter(keyAdapter);

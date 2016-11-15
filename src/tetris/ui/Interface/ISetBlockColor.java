@@ -1,8 +1,8 @@
-package tetris.ui.single;
+package tetris.ui.Interface;
 
 import java.awt.Color;
 
-public interface SetBlockColor {
+public interface ISetBlockColor {
 	public void setBlockColorByCoordinates(int i, int j, Color color);
 	
 	/*

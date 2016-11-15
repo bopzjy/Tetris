@@ -1,6 +1,6 @@
-package tetris.ui.single;
+package tetris.ui.Interface;
 
-public interface TypeName {
+public interface ITypeName {
 	public void showNameDialog();
 	public void hideNameDialog();
 	public String getNameText();

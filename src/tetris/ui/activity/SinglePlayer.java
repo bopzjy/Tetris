@@ -19,22 +19,22 @@ import tetris.game.logic.GameEntry;
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.MainContainer;
+import tetris.ui.Interface.ILevelScore;
+import tetris.ui.Interface.ISetBlockColor;
+import tetris.ui.Interface.IShowLevelScore;
+import tetris.ui.Interface.ITypeName;
 import tetris.ui.activity.RankLister.MAdapter;
 import tetris.ui.single.BlocksPanel;
 import tetris.ui.single.DataPanel;
 import tetris.ui.single.GameOverDialog;
-import tetris.ui.single.GetLevelScore;
 import tetris.ui.single.NameDialog;
 import tetris.ui.single.NextPanel;
-import tetris.ui.single.SetBlockColor;
-import tetris.ui.single.ShowLevelScore;
 import tetris.ui.single.TranslucenceJPanel;
 import tetris.ui.single.Translucent;
-import tetris.ui.single.TypeName;
 import tetris.utils.ImageProcesser;
 import tetris.utils.LoadFont;
 
-public class SinglePlayer extends Activity implements SetBlockColor,TypeName,GetLevelScore,ShowLevelScore{
+public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,ILevelScore,IShowLevelScore{
 	
 	private final int LAYOUT_BACKGROUND = 0;
 	private final int LAYOUT_BLOCKSPANEL = LAYOUT_BACKGROUND + 1;
@@ -102,6 +102,8 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName,Get
 				GlobalConstants.SINGLE_SCORE_WidthOfWhole, 
 				GlobalConstants.SINGLE_SCORE_HeightOfWhole);
 		jLayeredPane.add(scorePanel, new Integer(LAYOUT_SCOREPANEL));
+		//test demo
+		setScore("12345");
 		System.out.println(scorePanel.getGameData());
 		
 		levelPanel = new DataPanel(GlobalConstants.SINGLE_LEVEL_XRelative, 
@@ -109,6 +111,8 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName,Get
 				GlobalConstants.SINGLE_LEVEL_WidthOfWhole, 
 				GlobalConstants.SINGLE_LEVEL_HeightOfWhole);
 		jLayeredPane.add(levelPanel, new Integer(LAYOUT_LEVELPANEL));
+		//test demo
+		setLevel("12345");
 		System.out.println(levelPanel.getGameData());
 		
 		nextPanel = new NextPanel(GlobalConstants.SINGLE_NEXT_XRelative, 
@@ -250,5 +254,17 @@ public class SinglePlayer extends Activity implements SetBlockColor,TypeName,Get
 	public void hideGameOverDialog() {
 		// TODO Auto-generated method stub
 		gameOverDialog.setVisible(false);
+	}
+
+	@Override
+	public void setLevel(String text) {
+		// TODO Auto-generated method stub
+		levelPanel.setGameData(text);
+	}
+
+	@Override
+	public void setScore(String text) {
+		// TODO Auto-generated method stub
+		scorePanel.setGameData(text);
 	}
 }

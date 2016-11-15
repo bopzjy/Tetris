@@ -1,6 +1,6 @@
-package tetris.ui.single;
+package tetris.ui.Interface;
 
-public interface ShowLevelScore {
+public interface IShowLevelScore {
 	public void showGameOverDialog();
 	public void hideGameOverDialog();
 }

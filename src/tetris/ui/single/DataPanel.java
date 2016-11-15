@@ -37,12 +37,12 @@ public class DataPanel extends JPanel{
 		this.setBackground(Color.blue);
 		data = new JLabel();
 		this.add(data);
-		data.setText("12345");
 		data.setFont(LoadFont.loadFont("resources\\font\\font.ttf", GlobalConstants.FONT_SIZE));
 		data.setHorizontalAlignment(JLabel.CENTER);
 		
 		//this.setVisible(false);
-		
+		//test
+		//setGameData("12345");
 	}
 	
 	public int getGameData(){
@@ -50,7 +50,6 @@ public class DataPanel extends JPanel{
 	}
 	
 	public void setGameData(String text){
-		data.setText("12345");
-	
+		data.setText(text);
 	}
 }

@@ -7,6 +7,10 @@ public class GlobalConstants {
 	public static final int NUMBER_OF_ROWS = 21;
 	public static final int NUMBER_OF_COLUMNS = 12;
 	public static final int FONT_SIZE = 42;
+	//NetConfiguration
+	public static final int CLIENT_PORT=1111;
+	public static final int SERVER_PORT=9999;
+	public static final String SERVER_HOST="127.0.0.1";
 	//public static Font F 
 	
 	// BlocksPanel

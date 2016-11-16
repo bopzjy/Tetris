@@ -42,7 +42,7 @@ public class DataPanel extends JPanel{
 		
 		//this.setVisible(false);
 		//test
-		//setGameData("12345");
+		//setGameData("12345");	
 	}
 	
 	public int getGameData(){

@@ -1,11 +1,16 @@
 package tetris.ui.single;
 
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import tetris.common.GlobalConstants;
+import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
 import tetris.utils.ImageProcesser;
@@ -27,8 +32,16 @@ public class GameOverDialog extends TranslucenceJPanel{//extends JPanel{
 	private double SCORE_YRelative;
 	private double SCORE_WidthOfWhole;
 	private double SCORE_HeightOfWhole;
-			
 	
+	private final double arrow_widthOfBG = 0.050;//4.72/120;
+	private final double arrow_heightOfBG = 0.0563;
+	private final double arrow_xRelative[] = {0.14, 0.45};
+	private final double arrow_yRelative = 0.748; 
+	private JPanel arrow;
+	private int arrow_state;// = 0;
+	private final int CHOOSE_1 = 0;
+	private final int CHOOSE_2 = 1;
+			
 	private JLabel level, score;
 	
 	private final static float TRANSPARENCY = 0.9f;
@@ -91,14 +104,88 @@ public class GameOverDialog extends TranslucenceJPanel{//extends JPanel{
 				(int)(this.getHeight() * LEVEL_HeightOfWhole));
 		scoreJPanel.add(score);
 		
+		ImageIcon arrowIcon = new ImageIcon("resources\\image\\arrow.png");
+		arrowIcon = ImageProcesser.imageScale(arrowIcon, 
+				(int)(mainContainer.getInterWidth() * arrow_widthOfBG), 
+				(int)(mainContainer.getInterHeight() * arrow_heightOfBG));		
+		arrow = new JPanel();
+		arrow.add(new JLabel(arrowIcon));
+		arrow.setOpaque(false);
+		arrow.setBorder(new EmptyBorder(-5, 0, -5, 0));
+		arrow.setBounds((int)(this.getWidth() * arrow_xRelative[arrow_state]), 
+				(int)(this.getHeight() * arrow_yRelative), 
+				arrowIcon.getIconWidth(), arrowIcon.getIconHeight());
+		
+		
 		this.add(levelJPanel);
 		this.add(scoreJPanel);
+		
+		this.add(arrow);
+		this.setFocusable(true);
+		this.addKeyListener(new MAdapter());
+		
 		this.setVisible(false);
 	}
 	
 	public void setLevelValue(String text){
 		level.setText(text);
-		
 	}
 	
+	public void setScoreValue(String text){
+		score.setText(text);
+	}
+	
+	private void arrowLeft(){
+		if(arrow_state>CHOOSE_1){
+			arrow_state--;
+			arrow.setLocation((int)(this.getWidth() * arrow_xRelative[arrow_state]),
+					(int)(this.getHeight() * arrow_yRelative));		
+		}
+	}
+	
+	private void arrowRight(){
+		if(arrow_state<CHOOSE_2){
+			arrow_state++;	
+			arrow.setLocation((int)(this.getWidth() * arrow_xRelative[arrow_state]),
+					(int)(this.getHeight() * arrow_yRelative));		
+		}
+	}
+	
+	class MAdapter extends KeyAdapter{
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			ActivityHolder activityHolder = ActivityHolder.getInstance();
+			super.keyPressed(e);
+			switch (e.getKeyCode()) {	
+			case KeyEvent.VK_ENTER:
+				System.out.println("enter");
+				switch (arrow_state) {
+				case CHOOSE_1:
+					
+					break;
+				case CHOOSE_2:
+					break;
+
+				default:
+					break;
+				}
+				break;
+				
+			case KeyEvent.VK_LEFT:
+				System.out.println("left");
+				arrowLeft();
+				
+				break;
+
+			case KeyEvent.VK_RIGHT:
+				System.out.println("right");
+				arrowRight();
+				break;
+				
+			default:
+				break;
+			}
+		}
+	}
 }

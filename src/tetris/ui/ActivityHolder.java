@@ -28,6 +28,10 @@ public class ActivityHolder {
 		return instance;
 	}
 	
+	public Activity getActivityByIndex(int index){
+		return resActivity[index];
+	}
+	
 	public Activity turnToLastActivity(){
 		if (!stack.isEmpty()) {
 			Activity activity = stack.pop();

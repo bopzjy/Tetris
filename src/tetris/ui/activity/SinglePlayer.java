@@ -21,7 +21,7 @@ import tetris.ui.ActivityHolder;
 import tetris.ui.MainContainer;
 import tetris.ui.Interface.ILevelScore;
 import tetris.ui.Interface.ISetBlockColor;
-import tetris.ui.Interface.IShowLevelScore;
+import tetris.ui.Interface.IGameOverDialog;
 import tetris.ui.Interface.ITypeName;
 import tetris.ui.activity.RankLister.MAdapter;
 import tetris.ui.single.BlocksPanel;
@@ -34,7 +34,7 @@ import tetris.ui.single.Translucent;
 import tetris.utils.ImageProcesser;
 import tetris.utils.LoadFont;
 
-public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,ILevelScore,IShowLevelScore{
+public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,ILevelScore,IGameOverDialog{
 	
 	private final int LAYOUT_BACKGROUND = 0;
 	private final int LAYOUT_BLOCKSPANEL = LAYOUT_BACKGROUND + 1;
@@ -44,20 +44,12 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 	private final int LAYOUT_NAMEDIALOG = LAYOUT_NEXTPANEL + 1;
 	private final int LAYOUT_GAMEOVER = LAYOUT_NAMEDIALOG + 1;
 	
-	
-	private final double XRelative = 150.0/1229;
-	private final double YRelative = 330.0/1024;
-	private final double WidthOfWhole = (1075.0 - 150)/1229;
-	private final double HeightOfWhole = (635.0 - 330)/1024;
-	
 	private BlocksPanel blocksPanel;
 	
 	private NameDialog nameDialog;
-	private JTextField nameTextField;
 	private DataPanel scorePanel, levelPanel;
 	private NextPanel nextPanel;
 	private GameOverDialog gameOverDialog;
-	//private  
 	
 	public GameEntry gEntry =null;
 	
@@ -142,6 +134,12 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 		
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.validate();
+		
+		
+		//showGameOverDialog();
+		//hideGameOverDialog();
+
+		
 	}
 	
 	public static void main(String[] args) {
@@ -187,11 +185,40 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 				
 			case KeyEvent.VK_Q:
 				//showNameDialog();
-				getNameText();
+				System.out.println("hoho");
+				//getNameText();
 				break;
 				
 			case KeyEvent.VK_ENTER:
 				getNameText();
+				hideNameDialog();
+				break;
+				
+			default:
+				break;
+			}
+		}
+	}
+	
+	class testAdapter extends KeyAdapter{
+		public void keyPressed(KeyEvent e) { 
+			// TODO Auto-generated method stub
+			ActivityHolder activityHolder = ActivityHolder.getInstance();
+			super.keyPressed(e);
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_ESCAPE:
+				System.out.println("esc");
+				activityHolder.turnToLastActivity();			
+				break;
+				
+			case KeyEvent.VK_Q:
+				//showNameDialog();
+				System.out.println("heheda");
+				//getNameText();
+				break;
+				
+			case KeyEvent.VK_ENTER:
+				//getNameText();
 				break;
 				
 			default:
@@ -235,7 +262,7 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 	@Override
 	public void hideNameDialog() {
 		// TODO Auto-generated method stub
-		nameDialog.setVisible(true);
+		nameDialog.setVisible(false);
 	}
 
 	@Override
@@ -248,6 +275,7 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 	public void showGameOverDialog() {
 		// TODO Auto-generated method stub
 		gameOverDialog.setVisible(true);
+		gameOverDialog.requestFocusInWindow();
 	}
 
 	@Override
@@ -266,5 +294,17 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 	public void setScore(String text) {
 		// TODO Auto-generated method stub
 		scorePanel.setGameData(text);
+	}
+
+	@Override
+	public void setLevelInDialog(String text) {
+		// TODO Auto-generated method stub
+		gameOverDialog.setLevelValue(text);
+	}
+
+	@Override
+	public void setScoreInDialog(String text) {
+		// TODO Auto-generated method stub
+		gameOverDialog.setScoreValue(text);
 	}
 }

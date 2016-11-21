@@ -20,6 +20,9 @@ public class ActivityHolder {
 		
 	}
 	
+	public void test(){
+		ActivityHolder.getInstance().getActivityByIndex(INDEX_SINGLE_PLAYER);
+	}
 	
 	public static ActivityHolder getInstance() {
 		if(instance==null){

@@ -51,13 +51,14 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 	private NextPanel nextPanel;
 	private GameOverDialog gameOverDialog;
 	
-	public GameEntry gEntry =null;
+	//public GameEntry gEntry =null;
+	private GameEntity gameEntity;
 	
 	
 	public SinglePlayer() {
 		// TODO Auto-generated constructor stub
 		init();
-		gEntry = new GameEntry(this);
+		gameEntity.start();
 	}
 	
 	@Override
@@ -135,6 +136,7 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.validate();
 		
+		GameEntity gameEntity = new GameEntity();
 		
 		//showGameOverDialog();
 		//hideGameOverDialog();

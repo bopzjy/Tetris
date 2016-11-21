@@ -56,8 +56,8 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 	
 	public SinglePlayer() {
 		// TODO Auto-generated constructor stub
-		//gEntry = new GameEntry(this);
 		init();
+		gEntry = new GameEntry(this);
 	}
 	
 	@Override

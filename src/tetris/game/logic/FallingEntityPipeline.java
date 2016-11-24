@@ -4,22 +4,22 @@ import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class FallingEntryPipeline {
+public class FallingEntityPipeline {
 
 	// 产生下落物的队列
-	Queue<FallingEntry> FEPipeline = null;
+	Queue<FallingEntity> FEPipeline = null;
 
 	// 队列对应的游戏实例
-	GameEntry gEntry = null;
+	GameEntity gEntry = null;
 
-	public FallingEntryPipeline(GameEntry gEntry) {
-		FEPipeline = new LinkedList<FallingEntry>();
+	public FallingEntityPipeline(GameEntity gEntry) {
+		FEPipeline = new LinkedList<FallingEntity>();
 		this.gEntry = gEntry;
 	}
 
-	public FallingEntryPipeline() {
-		FEPipeline = new LinkedList<FallingEntry>();
-		gEntry = new GameEntry();
+	public FallingEntityPipeline() {
+		FEPipeline = new LinkedList<FallingEntity>();
+		gEntry = new GameEntity();
 	}
 
 	public int getScore() {
@@ -27,14 +27,14 @@ public class FallingEntryPipeline {
 	}
 
 	public boolean FEOffer(int patternNum, Color color, int speedRank, Spot headspot,int directNum) {
-		return FEPipeline.offer(new FallingEntry(patternNum, color, speedRank,headspot,directNum));
+		return FEPipeline.offer(new FallingEntity(patternNum, color, speedRank,headspot,directNum));
 	}
 
-	public boolean FEOffer(FallingEntry fe) {
+	public boolean FEOffer(FallingEntity fe) {
 		return FEPipeline.offer(fe);
 	}
 
-	public FallingEntry FEPoll() {
+	public FallingEntity FEPoll() {
 		return FEPipeline.poll();
 	}
 
@@ -43,8 +43,8 @@ public class FallingEntryPipeline {
 	}
 
 	public void printFallingEntryPipeline() {
-		Queue<FallingEntry> FEPTemp = new LinkedList<FallingEntry>();
-		FallingEntry FETemp = FEPoll();
+		Queue<FallingEntity> FEPTemp = new LinkedList<FallingEntity>();
+		FallingEntity FETemp = FEPoll();
 		while (FETemp != null) {
 			FETemp.printFallingEntry();
 			FEPTemp.offer(FETemp);

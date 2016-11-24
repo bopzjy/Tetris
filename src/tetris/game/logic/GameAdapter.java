@@ -6,10 +6,10 @@ import java.awt.event.KeyEvent;
 import tetris.ui.ActivityHolder;
 
 public class GameAdapter extends KeyAdapter{
-	public GameEntry gEntry = null;
-	public GameAdapter(GameEntry gEntry) {
+	public GameEntity gEntry = null;
+	public GameAdapter() {
 		// TODO Auto-generated constructor stub
-		this.gEntry = gEntry;
+		this.gEntry = GameEntity.getInstance();
 	}
 	@Override
 	public void keyPressed(KeyEvent e) { 

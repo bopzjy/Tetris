@@ -2,14 +2,14 @@ package tetris.game.logic;
 
 public class FEPipelineConsumer implements Runnable{
 	
-	FallingEntryPipeline line = null;
+	FallingEntityPipeline line = null;
 	
 	public FEPipelineConsumer() {
 		// TODO Auto-generated constructor stub
-	    line = new FallingEntryPipeline();
+	    line = new FallingEntityPipeline();
 	}
 	
-	public FEPipelineConsumer(FallingEntryPipeline line) {
+	public FEPipelineConsumer(FallingEntityPipeline line) {
 		this.line = line;
 	}
 
@@ -17,7 +17,7 @@ public class FEPipelineConsumer implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		while (true) {
-			FallingEntry temp = line.FEPoll();
+			FallingEntity temp = line.FEPoll();
 			if (temp != null) {
 				System.out.println("Poll success" );
 			} else {

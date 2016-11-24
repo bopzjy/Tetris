@@ -7,7 +7,7 @@ import tetris.common.GlobalConstants;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 
-public class FallingEntry {
+public class FallingEntity {
 	int patternNum;
 	Color color;
 	int speedRank;
@@ -18,7 +18,7 @@ public class FallingEntry {
 	Spot thirdSpot = null;
 	Spot fourthSpot = null;
 
-	public FallingEntry(int patternNum, Color color, int speedRank, Spot headSpot, int directNum) {
+	public FallingEntity(int patternNum, Color color, int speedRank, Spot headSpot, int directNum) {
 		this.patternNum = patternNum;
 		this.color = color;
 		this.speedRank = speedRank;
@@ -28,7 +28,7 @@ public class FallingEntry {
 		this.inArray = false;
 	}
 
-	public FallingEntry(int patternNum, Color color, int speedRank, Spot headSpot, int directNum, boolean inArray) {
+	public FallingEntity(int patternNum, Color color, int speedRank, Spot headSpot, int directNum, boolean inArray) {
 		this.patternNum = patternNum;
 		this.color = color;
 		this.speedRank = speedRank;
@@ -38,7 +38,7 @@ public class FallingEntry {
 		this.inArray = inArray;
 	}
 
-	public FallingEntry(FallingEntry fEntry) {
+	public FallingEntity(FallingEntity fEntry) {
 		patternNum = fEntry.patternNum;
 		color = fEntry.color;
 		speedRank = fEntry.speedRank;
@@ -491,7 +491,7 @@ public class FallingEntry {
 		}
 	}
 
-	public FallingEntry() {
+	public FallingEntity() {
 		patternNum = 0;
 		speedRank = 0;
 	}

@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import tetris.common.GlobalConstants;
 import tetris.game.logic.GameAdapter;
-import tetris.game.logic.GameEntry;
+import tetris.game.logic.GameEntity;
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.MainContainer;
@@ -51,14 +51,13 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 	private NextPanel nextPanel;
 	private GameOverDialog gameOverDialog;
 	
-	//public GameEntry gEntry =null;
-	private GameEntity gameEntity;
+	//private GameEntity gameEntity;
 	
 	
 	public SinglePlayer() {
 		// TODO Auto-generated constructor stub
 		init();
-		gameEntity.start();
+		//gameEntity.start();
 	}
 	
 	@Override
@@ -129,14 +128,13 @@ public class SinglePlayer extends Activity implements ISetBlockColor,ITypeName,I
 		jLayeredPane.add(gameOverDialog, new Integer(LAYOUT_GAMEOVER));
 		//this.showGameOverDialog();
 		
-//		keyAdapter = new GameAdapter(gEntry);
 		keyAdapter = new MAdapter();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
+		mainContainer.setKeyBoardAdapter(GameEntity.getInstance().getAdapter());
 		
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.validate();
 		
-		GameEntity gameEntity = new GameEntity();
+		//GameEntity gameEntity = new GameEntity();
 		
 		//showGameOverDialog();
 		//hideGameOverDialog();

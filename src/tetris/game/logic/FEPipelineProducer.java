@@ -5,14 +5,14 @@ import java.util.Random;
 
 public class FEPipelineProducer implements Runnable {
 
-	FallingEntryPipeline line = null;
+	FallingEntityPipeline line = null;
 
 	public FEPipelineProducer() {
 		// TODO Auto-generated constructor stub
-		line = new FallingEntryPipeline();
+		line = new FallingEntityPipeline();
 	}
 
-	public FEPipelineProducer(FallingEntryPipeline FEPipeline) {
+	public FEPipelineProducer(FallingEntityPipeline FEPipeline) {
 		this.line = FEPipeline;
 	}
 

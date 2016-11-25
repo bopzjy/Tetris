@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 
 
 import tetris.common.GlobalConstants;
+import tetris.game.logic.GameAdapter;
+import tetris.game.logic.GameEntity;
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.MainContainer;
@@ -39,8 +41,7 @@ public class SinglePlayer extends Activity{
 			//{0.48, 0.66}	
 	};
 	
-	//public GameEntry gEntry =null;
-	private GameEntity gameEntity;
+	//private GameEntity gameEntity;
 	
 	
 	public SinglePlayer() {
@@ -48,7 +49,7 @@ public class SinglePlayer extends Activity{
 		super("resources\\image\\single_bg.jpg");
 		//gEntry = new GameEntry(this);
 		init();
-		gameEntity.start();
+		//gameEntity.start();
 	}
 	
 	@Override
@@ -92,12 +93,12 @@ public class SinglePlayer extends Activity{
 		jLayeredPane.add(gameOverArrow, new Integer(LAYOUT_GAMEOVER_ARROW));
 	
 		keyAdapter = new MAdapter();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
+		mainContainer.setKeyBoardAdapter(GameEntity.getInstance().getAdapter());
 		
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.validate();
 		
-		GameEntity gameEntity = new GameEntity();
+		//GameEntity gameEntity = new GameEntity();
 		
 		//showGameOverDialog();
 		//hideGameOverDialog();

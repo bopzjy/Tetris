@@ -7,11 +7,9 @@ import java.awt.event.KeyEvent;
 
 import tetris.common.GlobalConstants;
 import tetris.game.logic.GameAdapter;
-<<<<<<< HEAD
+
 import tetris.game.logic.GameEntity;
-=======
-import tetris.game.logic.GameEntity;
->>>>>>> f65d10e5d84ddb573a2a2c3f9093cc89a9cc8e73
+
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.MainContainer;
@@ -49,15 +47,12 @@ public class SinglePlayer extends Activity{
 	
 	
 	public SinglePlayer() {
-<<<<<<< HEAD
-		// TODO Auto-generated constructor stub
-=======
 		// TODO Auto-generated constructor stub
 		super("resources\\image\\single_bg.jpg");
 		//gEntry = new GameEntry(this);
->>>>>>> f65d10e5d84ddb573a2a2c3f9093cc89a9cc8e73
 		init();
 		//gameEntity.start();
+		GameEntity.getInstance();
 	}
 	
 	@Override
@@ -92,19 +87,6 @@ public class SinglePlayer extends Activity{
 		nextPanel.setBlockColorByCoordinates(2, 2, Color.green);
 		nextPanel.setBlockColorByCoordinates(3, 2, Color.green);
 		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);
-		//nextPanel.setBlockColorByCoordinates(3, 3, Color.green);
-<<<<<<< HEAD
-		
-		
-		gameOverDialog = new GameOverDialog(GlobalConstants.SINGLE_GAMEOVER_XRelative, GlobalConstants.SINGLE_GAMEOVER_YRelative,
-				GlobalConstants.SINGLE_GAMEOVER_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_HeightOfWhole,
-				GlobalConstants.SINGLE_GAMEOVER_LEVEL_XRelative, GlobalConstants.SINGLE_GAMEOVER_LEVEL_YRelative,
-				GlobalConstants.SINGLE_GAMEOVER_LEVEL_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_LEVEL_HeightOfWhole,
-				GlobalConstants.SINGLE_GAMEOVER_SCORE_XRelative);
-		jLayeredPane.add(gameOverDialog, new Integer(LAYOUT_GAMEOVER));
-		//this.showGameOverDialog();
-		
-=======
 			
 		gameOverArrow = new ArrowJpanel(arrow_shape);
 		gameOverDialog = new GameOverDialog(GlobalConstants.SINGLE_GAMEOVER_SHAPE, gameOverArrow);
@@ -112,14 +94,11 @@ public class SinglePlayer extends Activity{
 		jLayeredPane.add(gameOverDialog, new Integer(LAYOUT_GAMEOVER));
 		jLayeredPane.add(gameOverArrow, new Integer(LAYOUT_GAMEOVER_ARROW));
 	
->>>>>>> f65d10e5d84ddb573a2a2c3f9093cc89a9cc8e73
 		keyAdapter = new MAdapter();
 		mainContainer.setKeyBoardAdapter(GameEntity.getInstance().getAdapter());
 		
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.validate();
-		
-		//GameEntity gameEntity = new GameEntity();
 		
 		//showGameOverDialog();
 		//hideGameOverDialog();

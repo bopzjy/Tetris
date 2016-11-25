@@ -30,10 +30,10 @@ public class GameEntity {
 	public void init() {
 		// TODO Auto-generated method stub
 		GameActivity = (SinglePlayer) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_SINGLE_PLAYER);
-		mdThread = new MovingDown();
+		mdThread = new MovingDown(this);
 		GameArray = new int[GlobalConstants.NUMBER_OF_ROWS][GlobalConstants.NUMBER_OF_COLUMNS];
 		score = 0;
-		gAdapter = new GameAdapter();
+		gAdapter = new GameAdapter(this);
 
 	}
 
@@ -67,7 +67,7 @@ public class GameEntity {
 	public void emptyGameNextArray() {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 5; j++) {
-				GameActivity.setNextBlockColor(i, j, Color.white);
+				GameActivity.setNextBlockColor(i, j, null);
 			}
 		}
 	}
@@ -120,8 +120,9 @@ public class GameEntity {
 	}
 	
 	public static void main(String args[]) {
-		GameEntity gg = new GameEntity();
-		gg.printGameArray();
+		ActivityHolder ac  = ActivityHolder.getInstance();
+		SinglePlayer sp = (SinglePlayer) ac.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
+		GameEntity.getInstance().start();
 	}
 	
 }

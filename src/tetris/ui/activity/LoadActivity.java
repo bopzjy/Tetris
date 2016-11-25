@@ -15,10 +15,9 @@ import tetris.utils.ImageProcesser;
 
 public class LoadActivity extends Activity{
 	
-	private final int LAYOUT_BACKGROUND = 0;
-	
 	public LoadActivity() {
 		// TODO Auto-generated constructor stub
+		super("resources\\image\\load_bg.jpg");
 		init();
 	}
 
@@ -26,18 +25,6 @@ public class LoadActivity extends Activity{
 	public void init() {
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
-		
-		ImageIcon bgImage = ImageProcesser.imageScale(new ImageIcon("resources\\image\\load_bg.jpg"),//, 1101,918);
-				mainContainer.getInterWidth(),
-				mainContainer.getInterHeight());
-		
-		jLayeredPane = new JLayeredPane();
-		JPanel bgPanel = new JPanel();
-		
-		bgPanel.setBounds(0, 0, mainContainer.getInterWidth(), mainContainer.getInterHeight());
-		bgPanel.add(new JLabel(bgImage));
-		bgPanel.setBorder(new EmptyBorder(-5, 0, -5, 0));
-		jLayeredPane.add(bgPanel, new Integer(LAYOUT_BACKGROUND));	
 		
 		mainContainer.getContentPane().add(jLayeredPane);		
 		mainContainer.validate();

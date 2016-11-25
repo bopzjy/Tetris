@@ -10,9 +10,9 @@ public class MovingDown implements Runnable {
 	FallingEntityPipeline FEPLine = null;
 	FallingEntity currentFEntry = null;
 
-	public MovingDown() {
+	public MovingDown(GameEntity gEntity) {
 		// TODO Auto-generated constructor stub
-		this.gEntity = GameEntity.getInstance();
+		this.gEntity = gEntity;
 		FEPLine = new FallingEntityPipeline(this.gEntity);
 		for (int i = 0; i < GameConstants.LENGTH_OF_FEPIPELINE; i++) {
 			FallingEntityProduce();
@@ -95,7 +95,7 @@ public class MovingDown implements Runnable {
 		// TODO Auto-generated method stub
 		for(int i=0;i<4;i++) {
 			for (int j=0;j<5;j++) {
-				gEntity.GameActivity.setNextBlockColor(i, j, Color.white);
+				gEntity.GameActivity.setNextBlockColor(i, j, null);
 			}
 		}
 	}

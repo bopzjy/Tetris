@@ -6,18 +6,18 @@ import java.awt.event.KeyEvent;
 import tetris.ui.ActivityHolder;
 
 public class GameAdapter extends KeyAdapter{
-	public GameEntity gEntry = null;
-	public GameAdapter() {
+	public GameEntity gEntity = null;
+	public GameAdapter(GameEntity gEntity) {
 		// TODO Auto-generated constructor stub
-		this.gEntry = GameEntity.getInstance();
+		this.gEntity = gEntity;
 	}
 	@Override
 	public void keyPressed(KeyEvent e) { 
 		// TODO Auto-generated method stub
 		ActivityHolder activityHolder = ActivityHolder.getInstance();
 		super.keyPressed(e);
-		MovingRightOrLeft moveLF = new MovingRightOrLeft(gEntry);
-		Rotating rot = new Rotating(gEntry); 
+		MovingRightOrLeft moveLF = new MovingRightOrLeft(gEntity);
+		Rotating rot = new Rotating(gEntity); 
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
 			System.out.println("esc");
@@ -26,11 +26,11 @@ public class GameAdapter extends KeyAdapter{
 			
 		case KeyEvent.VK_Q:
 			//showNameDialog();
-			gEntry.GameActivity.getNameText();
+			gEntity.GameActivity.getNameText();
 			break;
 			
 		case KeyEvent.VK_ENTER:
-			gEntry.GameActivity.getNameText();
+			gEntity.GameActivity.getNameText();
 			break;
 			
 		case KeyEvent.VK_LEFT:			

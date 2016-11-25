@@ -7,46 +7,33 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import tetris.common.GlobalConstants;
-import tetris.ui.MainContainer;
 
-public class BlocksPanel extends JPanel {
+public class BlocksPanel extends MWidget {
 	
 	private final int HGAP = 2;
 	private final int VGAP = 2;
-
-	private double XRelative;
-	private double YRelative;
-	private double WidthOfWhole;
-	private double HeightOfWhole;
 	
 	private JPanel[][] blocksRef;
+	private Color initColor = null;
 	
-	public BlocksPanel(double x, double y, double w, double h) {
+	public BlocksPanel(double[][] shape, Color initColor, int rows, int columns) {
 		// TODO Auto-generated constructor stub
-		MainContainer mainContainer = MainContainer.getInstance();
+		super(shape);
+		this.initColor = initColor;
+		blocksRef = new JPanel[rows][columns];
 		
-		XRelative = x;
-		YRelative = y;
-		WidthOfWhole = w;
-		HeightOfWhole = h;
-		
-		blocksRef = new JPanel[GlobalConstants.NUMBER_OF_ROWS][GlobalConstants.NUMBER_OF_COLUMNS];
-		
-		setLayout(new GridLayout(GlobalConstants.NUMBER_OF_ROWS, GlobalConstants.NUMBER_OF_COLUMNS, HGAP, VGAP));
-		for(int i = 0; i < GlobalConstants.NUMBER_OF_ROWS; i++){
-			for(int j = 0; j < GlobalConstants.NUMBER_OF_COLUMNS; j++){
+		setLayout(new GridLayout(rows, columns, HGAP, VGAP));
+		for(int i = 0; i < rows; i++){
+			for(int j = 0; j < columns; j++){
 				blocksRef[i][j] = new JPanel();
-				blocksRef[i][j].setBackground(GlobalConstants.BLOCKSPANEL_INIT_COLOR);
+				//blocksRef[i][j].setBackground(initColor);
+				setBlockColorByCoordinates(i,j,initColor);
 				
 				this.add(blocksRef[i][j]);
 			}
 		}
 		
-		this.setBounds((int)(mainContainer.getInterWidth() * XRelative), 
-				(int)(mainContainer.getInterHeight() * YRelative), 
-				(int)(mainContainer.getInterWidth() * WidthOfWhole), 
-				(int)(mainContainer.getInterHeight() * HeightOfWhole));
-		
+		//clearPanel();
 		this.setBorder(new EmptyBorder(-5, 0, -5, 0));
 		this.setOpaque(false);
 	}
@@ -54,12 +41,19 @@ public class BlocksPanel extends JPanel {
 	public void setBlockColorByCoordinates(int i, int j, Color color) {
 		// TODO Auto-generated method stub
 		blocksRef[i][j].setBackground(color);
+		if(color==null)
+			blocksRef[i][j].setOpaque(false);
+		else{
+			blocksRef[i][j].setOpaque(true);
+			blocksRef[i][j].setBackground(color);
+		}
 	}
 	
 	public void clearPanel(){
 		for(int i = 0; i < GlobalConstants.NUMBER_OF_ROWS; i++){
 			for(int j = 0; j < GlobalConstants.NUMBER_OF_COLUMNS; j++){
-				blocksRef[i][j].setBackground(GlobalConstants.BLOCKSPANEL_INIT_COLOR);
+				//blocksRef[i][j].setBackground(initColor);
+				setBlockColorByCoordinates(i,j,initColor);
 			}
 		}
 	}

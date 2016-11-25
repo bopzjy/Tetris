@@ -1,33 +1,45 @@
 package tetris.ui.activity;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import tetris.common.GlobalConstants;
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
+import tetris.ui.activity.PlayerChooser.MAdapter;
 import tetris.utils.ImageProcesser;
+import tetris.ui.component.ArrowJpanel;
+import tetris.ui.component.RegisterDialog;
 
 public class LoginActivity extends Activity{
 	
-	private final int LAYOUT_BACKGROUND = 0;
+	private final int LAYOUT_ARROW = LAYOUT_BACKGROUND + 1;
+	private final int LAYOUT_REGISTERDIALOG = LAYOUT_ARROW + 1;
 
-	private final double arrow_widthOfBG = 0.050;//4.72/120;
-	private final double arrow_heightOfBG = 0.0563;
-	private final double arrow_xRelative[] = {0.14, 0.45};
-	private final double arrow_yRelative = 0.748;
+	private final double arrow_shape[][] = {
+			{0.05, 0.0563},
+			{0.24, 0.66},
+			{0.48, 0.66}	
+	};
 	
-	private JPanel arrow;
+	private ArrowJpanel arrow;
 	private int arrow_state;// = 0;
 	private final int CHOOSE_1 = 0;
 	private final int CHOOSE_2 = 1;
 	
+	private RegisterDialog registerDialog;
+	
 	public LoginActivity() {
 		// TODO Auto-generated constructor stub
+		super("resources\\image\\login_bg.jpg");
 		init();
 	}
 
@@ -36,22 +48,24 @@ public class LoginActivity extends Activity{
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
 		
-		ImageIcon bgImage = ImageProcesser.imageScale(new ImageIcon("resources\\image\\login_bg.jpg"),//, 1101,918);
-				mainContainer.getInterWidth(),
-				mainContainer.getInterHeight());
+		arrow = new ArrowJpanel(arrow_shape);
+		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 		
-		jLayeredPane = new JLayeredPane();
-		JPanel bgPanel = new JPanel();
+		/*registerDialog = new RegisterDialog(GlobalConstants.SINGLE_GAMEOVER_XRelative, GlobalConstants.SINGLE_GAMEOVER_YRelative,
+				GlobalConstants.SINGLE_GAMEOVER_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_HeightOfWhole,
+				GlobalConstants.SINGLE_GAMEOVER_LEVEL_XRelative, GlobalConstants.SINGLE_GAMEOVER_LEVEL_YRelative,
+				GlobalConstants.SINGLE_GAMEOVER_LEVEL_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_LEVEL_HeightOfWhole,
+				GlobalConstants.SINGLE_GAMEOVER_SCORE_XRelative);*/
+		registerDialog = new RegisterDialog(GlobalConstants.REGISTER_SHAPE);
+		jLayeredPane.add(registerDialog, new Integer(LAYOUT_REGISTERDIALOG));
+		registerDialog.setVisible(true);
 		
-		bgPanel.setBounds(0, 0, mainContainer.getInterWidth(), mainContainer.getInterHeight());
-		bgPanel.add(new JLabel(bgImage));
-		bgPanel.setBorder(new EmptyBorder(-5, 0, -5, 0));
-		jLayeredPane.add(bgPanel, new Integer(LAYOUT_BACKGROUND));	
+		keyAdapter = new MAdapter();
+		mainContainer.setKeyBoardAdapter(keyAdapter);
 		
 		mainContainer.getContentPane().add(jLayeredPane);		
 		mainContainer.validate();
 		
-		ActivityHolder.getInstance().turnToNextActivity(Constants.INDEX_BEGIN_ACTIVITY);
 	}
 
 
@@ -61,19 +75,63 @@ public class LoginActivity extends Activity{
 	}
 	
 	public static void main(String[] args){
-		//System.out.println("nimei");
-		new LoadActivity();
+		new LoginActivity();
 		
 	}
 
 	@Override
 	public void RestoreUI() {
 		// TODO Auto-generated method stub
+		MainContainer mainContainer = MainContainer.getInstance();
+		
+		mainContainer.setKeyBoardAdapter(keyAdapter);
+		mainContainer.setLayeredPane(jLayeredPane);
+		mainContainer.repaint();
 	}
 
 	@Override
 	public void InitUI() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	class MAdapter extends KeyAdapter{
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			ActivityHolder activityHolder = ActivityHolder.getInstance();
+			super.keyPressed(e);
+			switch (e.getKeyCode()) {
+			/*case KeyEvent.VK_ESCAPE:
+				System.out.println("esc");
+				activityHolder.turnToLastActivity();			
+				break;
+			
+			case KeyEvent.VK_ENTER:
+				System.out.println("enter");
+				activityHolder = ActivityHolder.getInstance();
+				activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
+				switch (arrow_state) {
+				case CHOOSE_1:
+					activityHolder.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
+					break;
+
+				default:
+					break;
+				}*/
+				
+			case KeyEvent.VK_LEFT:
+				arrow.lastState();
+				
+				break;
+
+			case KeyEvent.VK_RIGHT:
+				arrow.nextState();
+				break;
+				
+			default:
+				break;
+			}
+		}
 	}
 }

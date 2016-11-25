@@ -10,7 +10,7 @@ import tetris.common.GlobalConstants;
 import tetris.ui.MainContainer;
 import tetris.utils.LoadFont;
 
-public class DataPanel extends JPanel{
+public class DataPanel extends MWidget{
 	private JLabel data;
 	
 	private double XRelative;
@@ -18,19 +18,11 @@ public class DataPanel extends JPanel{
 	private double WidthOfWhole;
 	private double HeightOfWhole;
 	
-	public DataPanel(double x, double y, double w, double h) {
+	public DataPanel(double[][] shape) {
 		// TODO Auto-generated constructor stub
+		super(shape);
 		MainContainer mainContainer = MainContainer.getInstance();
 		
-		XRelative = x;
-		YRelative = y;
-		WidthOfWhole = w;
-		HeightOfWhole = h;
-		//this.setLayout(mgr);
-		this.setBounds((int)(mainContainer.getInterWidth() * XRelative), 
-				(int)(mainContainer.getInterHeight() * YRelative), 
-				(int)(mainContainer.getInterWidth() * WidthOfWhole), 
-				(int)(mainContainer.getInterHeight() * HeightOfWhole));
 		this.setBorder(new EmptyBorder(-5, 0, -5, 0));
 		this.setOpaque(false);
 		

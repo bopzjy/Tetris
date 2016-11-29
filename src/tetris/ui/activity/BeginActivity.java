@@ -55,7 +55,7 @@ public class BeginActivity extends Activity implements ChangeUI{
 		//MainContainer.getInstance().j
 		MainContainer mainContainer = MainContainer.getInstance();
 		
-		arrow = new ArrowJpanel(arrow_shape);
+		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 
 		keyAdapter = new MAdapter();

@@ -13,20 +13,14 @@ import tetris.utils.LoadFont;
 public class DataPanel extends MWidget{
 	private JLabel data;
 	
-	private double XRelative;
-	private double YRelative;
-	private double WidthOfWhole;
-	private double HeightOfWhole;
-	
 	public DataPanel(double[][] shape) {
 		// TODO Auto-generated constructor stub
 		super(shape);
-		MainContainer mainContainer = MainContainer.getInstance();
 		
 		this.setBorder(new EmptyBorder(-5, 0, -5, 0));
 		this.setOpaque(false);
 		
-		this.setBackground(Color.blue);
+		//this.setBackground(Color.blue);
 		data = new JLabel();
 		this.add(data);
 		data.setFont(LoadFont.loadFont("resources\\font\\font.ttf", GlobalConstants.FONT_SIZE));

@@ -41,7 +41,7 @@ public class PlayerChooser extends Activity{
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
 		
-		arrow = new ArrowJpanel(arrow_shape);
+		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 
 		keyAdapter = new MAdapter();

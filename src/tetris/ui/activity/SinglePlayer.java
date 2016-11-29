@@ -65,6 +65,14 @@ public class SinglePlayer extends Activity{
 		jLayeredPane.add(blocksPanel, new Integer(LAYOUT_BLOCKSPANEL));
 		//setBlockColorByCoordinates(5, 5, Color.yellow);
 		
+		nextPanel = new BlocksPanel(GlobalConstants.SINGLE_NEXTPANEL_SHAPE, null, 4, 5);
+		jLayeredPane.add(nextPanel, new Integer(LAYOUT_NEXTPANEL));
+		// Demo: print blocks
+		nextPanel.setBlockColorByCoordinates(1, 2, Color.green);
+		nextPanel.setBlockColorByCoordinates(2, 2, Color.green);
+		nextPanel.setBlockColorByCoordinates(3, 2, Color.green);
+		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);
+		
 		nameDialog = new NameDialog(GlobalConstants.SINGLE_NAMEDIALOG_SHAPE);
 		jLayeredPane.add(nameDialog, new Integer(LAYOUT_NAMEDIALOG));
 		
@@ -79,16 +87,8 @@ public class SinglePlayer extends Activity{
 		//test demo
 		setLevel("12345");
 		//System.out.println(levelPanel.getGameData());
-		
-		nextPanel = new BlocksPanel(GlobalConstants.SINGLE_NEXTPANEL_SHAPE, null, 4, 5);
-		jLayeredPane.add(nextPanel, new Integer(LAYOUT_NEXTPANEL));
-		// Demo: print blocks
-		nextPanel.setBlockColorByCoordinates(1, 2, Color.green);
-		nextPanel.setBlockColorByCoordinates(2, 2, Color.green);
-		nextPanel.setBlockColorByCoordinates(3, 2, Color.green);
-		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);
 			
-		gameOverArrow = new ArrowJpanel(arrow_shape);
+		gameOverArrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
 		gameOverDialog = new GameOverDialog(GlobalConstants.SINGLE_GAMEOVER_SHAPE, gameOverArrow);
 		gameOverArrow.setVisible(false);
 		jLayeredPane.add(gameOverDialog, new Integer(LAYOUT_GAMEOVER));

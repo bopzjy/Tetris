@@ -17,9 +17,10 @@ public class ArrowJpanel extends JPanel{
 	 */
 	
 	private int state;
+	private int max_state;
 	private double location[][];
 	
-	public ArrowJpanel(double[][] shape){
+	public ArrowJpanel(double[][] shape, int max_state){
 		this.location = shape;
 		MainContainer mainContainer = MainContainer.getInstance();
 		ImageIcon arrowIcon = new ImageIcon("resources\\image\\arrow.png");
@@ -35,6 +36,7 @@ public class ArrowJpanel extends JPanel{
 				arrowIcon.getIconWidth(), arrowIcon.getIconHeight());
 		
 		state = 1;
+		this.max_state = max_state + 1;
 	}
 	
 	public void lastState(){
@@ -47,7 +49,7 @@ public class ArrowJpanel extends JPanel{
 	}
 	
 	public void nextState(){
-		if(state<location.length-1){
+		if(state<max_state){
 			MainContainer mainContainer = MainContainer.getInstance();
 			state++;
 			setLocation((int)(mainContainer.getInterWidth() * location[state][0]),
@@ -57,6 +59,10 @@ public class ArrowJpanel extends JPanel{
 	
 	public int getState(){
 		return state-1;
+	}
+	
+	public void setMaxState(int max){
+		this.max_state = max;
 	}
 	
 }

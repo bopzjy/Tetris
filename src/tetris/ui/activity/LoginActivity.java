@@ -48,14 +48,9 @@ public class LoginActivity extends Activity{
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
 		
-		arrow = new ArrowJpanel(arrow_shape);
+		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 		
-		/*registerDialog = new RegisterDialog(GlobalConstants.SINGLE_GAMEOVER_XRelative, GlobalConstants.SINGLE_GAMEOVER_YRelative,
-				GlobalConstants.SINGLE_GAMEOVER_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_HeightOfWhole,
-				GlobalConstants.SINGLE_GAMEOVER_LEVEL_XRelative, GlobalConstants.SINGLE_GAMEOVER_LEVEL_YRelative,
-				GlobalConstants.SINGLE_GAMEOVER_LEVEL_WidthOfWhole, GlobalConstants.SINGLE_GAMEOVER_LEVEL_HeightOfWhole,
-				GlobalConstants.SINGLE_GAMEOVER_SCORE_XRelative);*/
 		registerDialog = new RegisterDialog(GlobalConstants.REGISTER_SHAPE);
 		jLayeredPane.add(registerDialog, new Integer(LAYOUT_REGISTERDIALOG));
 		registerDialog.setVisible(true);
@@ -67,8 +62,8 @@ public class LoginActivity extends Activity{
 		mainContainer.validate();
 		
 	}
-
-
+	
+	
 	public void setKeyListener() {
 		// TODO Auto-generated method stub
 		

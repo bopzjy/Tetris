@@ -2,6 +2,8 @@ package tetris.ui.component;
 
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -68,7 +70,8 @@ public class RivalDialog extends TranslucenceJPanel{
 		
 		this.setLayout(null);
 		this.add(candidatesJPanel);
-		setVisible(true);
+		this.addKeyListener(new MKeyAdapter());
+		this.setVisible(true);
 	}
 	
 	void initCandidatesList(Player[] players){
@@ -76,6 +79,7 @@ public class RivalDialog extends TranslucenceJPanel{
 			return;
 		
 		arrowJpanel.setMaxState(players.length);
+		arrowJpanel.restoreArrow();
 		candidatesJPanel.removeAll();
 		candidates = new Rival4Dialog[players.length];
 		for(int i = 0; i<players.length; i++){
@@ -85,4 +89,20 @@ public class RivalDialog extends TranslucenceJPanel{
 		
 	}
 	
+	class MKeyAdapter extends KeyAdapter{
+		public void keyPressed(KeyEvent e) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_UP:
+				arrowJpanel.lastState();
+				break;
+				
+			case KeyEvent.VK_DOWN:
+				arrowJpanel.nextState();
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
 }

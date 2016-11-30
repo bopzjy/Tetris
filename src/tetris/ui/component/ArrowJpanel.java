@@ -65,4 +65,11 @@ public class ArrowJpanel extends JPanel{
 		this.max_state = max;
 	}
 	
+	public void restoreArrow(){
+		state = 1;
+		MainContainer mainContainer = MainContainer.getInstance();
+		setLocation((int)(mainContainer.getInterWidth() * location[1][0]),
+				(int)(mainContainer.getInterHeight() * location[1][1]));		
+	
+	}
 }

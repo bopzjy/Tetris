@@ -71,7 +71,7 @@ public class RivalDialog extends TranslucenceJPanel{
 		this.setLayout(null);
 		this.add(candidatesJPanel);
 		this.addKeyListener(new MKeyAdapter());
-		this.setVisible(true);
+		this.setVisible(false);
 	}
 	
 	void initCandidatesList(Player[] players){

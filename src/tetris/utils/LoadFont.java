@@ -28,9 +28,14 @@ public class LoadFont{
 		}
 	}
 	
+	public static Font loadFont(float fontSize){
+		return loadFont("resources\\font\\font.ttf", fontSize);
+	}
+	
 	public static Font loadDefaultFont(){
 		if(defaultFont==null)
 			defaultFont = loadFont("resources\\font\\font.ttf", GlobalConstants.FONT_SIZE);
 		return defaultFont;
 	}
+
 }

@@ -10,19 +10,25 @@ import tetris.common.GlobalConstants;
 
 public class BlocksPanel extends MWidget {
 	
-	private final int HGAP = 2;
-	private final int VGAP = 2;
+	/*private int HGAP = 2;
+	private int VGAP = 2;*/
 	
 	private JPanel[][] blocksRef;
 	private Color initColor = null;
 	
-	public BlocksPanel(double[][] shape, Color initColor, int rows, int columns) {
+	/*public BlocksPanel(double[][] shape, Color initColor, int rows, int columns,int gap){
+		//super();
+		this.HGAP = this.VGAP = gap;
+		this(shape, initColor, rows, columns);
+	}*/
+	
+	public BlocksPanel(double[][] shape, Color initColor, int rows, int columns, int gap) {
 		// TODO Auto-generated constructor stub
 		super(shape);
 		this.initColor = initColor;
 		blocksRef = new JPanel[rows][columns];
 		
-		setLayout(new GridLayout(rows, columns, HGAP, VGAP));
+		setLayout(new GridLayout(rows, columns, gap, gap));
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
 				blocksRef[i][j] = new JPanel();

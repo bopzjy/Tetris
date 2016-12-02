@@ -38,16 +38,16 @@ public class FallingEntity {
 		this.inArray = inArray;
 	}
 
-	public FallingEntity(FallingEntity fEntry) {
-		patternNum = fEntry.patternNum;
-		color = fEntry.color;
-		speedRank = fEntry.speedRank;
-		directNum = fEntry.directNum;
-		inArray = fEntry.inArray;
-		headSpot = new Spot(fEntry.headSpot);
-		secSpot = new Spot(fEntry.secSpot);
-		thirdSpot = new Spot(fEntry.thirdSpot);
-		fourthSpot = new Spot(fEntry.fourthSpot);
+	public FallingEntity(FallingEntity fEntity) {
+		patternNum = fEntity.patternNum;
+		color = fEntity.color;
+		speedRank = fEntity.speedRank;
+		directNum = fEntity.directNum;
+		inArray = fEntity.inArray;
+		headSpot = new Spot(fEntity.headSpot);
+		secSpot = new Spot(fEntity.secSpot);
+		thirdSpot = new Spot(fEntity.thirdSpot);
+		fourthSpot = new Spot(fEntity.fourthSpot);
 
 	}
 
@@ -567,15 +567,15 @@ public class FallingEntity {
 		if (htemp >= GlobalConstants.NUMBER_OF_ROWS) {
 			return false;
 		}
-		int stemp = headSpot.x + 1;
+		int stemp = secSpot.x + 1;
 		if (stemp >= GlobalConstants.NUMBER_OF_ROWS) {
 			return false;
 		}
-		int ttemp = headSpot.x + 1;
+		int ttemp = thirdSpot.x + 1;
 		if (ttemp >= GlobalConstants.NUMBER_OF_ROWS) {
 			return false;
 		}
-		int ftemp = headSpot.x + 1;
+		int ftemp = fourthSpot.x + 1;
 		if (ftemp >= GlobalConstants.NUMBER_OF_ROWS) {
 			return false;
 		}
@@ -595,15 +595,15 @@ public class FallingEntity {
 			if (htemp < 0) {
 				return false;
 			}
-			int stemp = headSpot.y - 1;
+			int stemp = secSpot.y - 1;
 			if (stemp < 0) {
 				return false;
 			}
-			int ttemp = headSpot.y - 1;
+			int ttemp = thirdSpot.y - 1;
 			if (ttemp < 0) {
 				return false;
 			}
-			int ftemp = headSpot.y - 1;
+			int ftemp = fourthSpot.y - 1;
 			if (ftemp < 0) {
 				return false;
 			}
@@ -612,15 +612,15 @@ public class FallingEntity {
 			if (htemp >= GlobalConstants.NUMBER_OF_COLUMNS) {
 				return false;
 			}
-			int stemp = headSpot.y + 1;
+			int stemp = secSpot.y + 1;
 			if (stemp >= GlobalConstants.NUMBER_OF_COLUMNS) {
 				return false;
 			}
-			int ttemp = headSpot.y + 1;
+			int ttemp = thirdSpot.y + 1;
 			if (ttemp >= GlobalConstants.NUMBER_OF_COLUMNS) {
 				return false;
 			}
-			int ftemp = headSpot.y + 1;
+			int ftemp = fourthSpot.y + 1;
 			if (ftemp >= GlobalConstants.NUMBER_OF_COLUMNS) {
 				return false;
 			}
@@ -673,7 +673,7 @@ public class FallingEntity {
 		}
 	}
 
-	public void printFallingEntry() {
+	public void printFallingEntity() {
 		System.out.println(patternNum + " " + color + " " + speedRank);
 	}
 

@@ -3,22 +3,22 @@ package tetris.game.logic;
 import java.awt.Color;
 
 public class Rotating {
-	GameEntity gEntry = null;
+	GameEntity gEntity = null;
 	MovingDown mdThread = null;
 
-	public Rotating(GameEntity gEntry) {
-		this.gEntry = gEntry;
-		this.mdThread = gEntry.mdThread;
+	public Rotating(GameEntity gEntity) {
+		this.gEntity = gEntity;
+		this.mdThread = gEntity.mdThread;
 	}
 
 	public void rotate() {
-		FallingEntity falltemp = new FallingEntity(mdThread.currentFEntry);
+		FallingEntity falltemp = new FallingEntity(mdThread.currentFEntity);
 		if (falltemp.rotate()) {
-			mdThread.paintFEntryInArray(mdThread.currentFEntry, true);
-			mdThread.paintFallingEntity(mdThread.currentFEntry, Color.white, 1);
-			mdThread.currentFEntry.rotate();
-			mdThread.paintFEntryInArray(mdThread.currentFEntry, false);
-			mdThread.paintFallingEntity(mdThread.currentFEntry, mdThread.currentFEntry.color, 1);
+			mdThread.paintFEntityInArray(mdThread.currentFEntity, true);
+			mdThread.paintFallingEntity(mdThread.currentFEntity, Color.white, 1);
+			mdThread.currentFEntity.rotate();
+			mdThread.paintFEntityInArray(mdThread.currentFEntity, false);
+			mdThread.paintFallingEntity(mdThread.currentFEntity, mdThread.currentFEntity.color, 1);
 		} else {
 			
 		}

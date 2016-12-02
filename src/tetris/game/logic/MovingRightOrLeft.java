@@ -3,25 +3,25 @@ package tetris.game.logic;
 import java.awt.Color;
 
 public class MovingRightOrLeft {
-	GameEntity gEntry = null;
+	GameEntity gEntity = null;
 	MovingDown mdThread = null;
 
-	public MovingRightOrLeft(GameEntity gEntry) {
-		this.gEntry = gEntry;
-		this.mdThread = gEntry.mdThread;
+	public MovingRightOrLeft(GameEntity gEntity) {
+		this.gEntity = gEntity;
+		this.mdThread = gEntity.mdThread;
 	}
 
 	public void MoveRightOrLeft(int RLFlag) {
-		FallingEntity falltemp = new FallingEntity(mdThread.currentFEntry);
+		FallingEntity falltemp = new FallingEntity(mdThread.currentFEntity);
 		if (falltemp.moveRightOrLeft(RLFlag)) {
 			boolean conflictFlag = false;
-			conflictFlag = mdThread.IsEntryConflict(falltemp);
+			conflictFlag = mdThread.IsEntityConflict(falltemp);
 			if (!conflictFlag) {
-				mdThread.paintFEntryInArray(mdThread.currentFEntry, true);
-				mdThread.paintFEntryInArray(falltemp, false);
-				mdThread.paintFallingEntity(mdThread.currentFEntry, Color.white, 1);
+				mdThread.paintFEntityInArray(mdThread.currentFEntity, true);
+				mdThread.paintFEntityInArray(falltemp, false);
+				mdThread.paintFallingEntity(mdThread.currentFEntity, Color.white, 1);
 				mdThread.paintFallingEntity(falltemp, falltemp.color, 1);
-				mdThread.currentFEntry.moveRightOrLeft(RLFlag);
+				mdThread.currentFEntity.moveRightOrLeft(RLFlag);
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {

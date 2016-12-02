@@ -26,13 +26,13 @@ public class RankLister extends Activity{
 	@Override
 	protected void init() {
 		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
+		//MainContainer mainContainer = MainContainer.getInstance();
 			
 		keyAdapter = new MAdapter();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
 		
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.validate();
+		
+		//mainContainer.setLayeredPane(jLayeredPane);
+		//mainContainer.validate();
 	}
 	
 	
@@ -50,12 +50,6 @@ public class RankLister extends Activity{
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.repaint();
-	}
-	
-	public void setKeyListener() {
-		if(keyAdapter==null)
-			keyAdapter = new MAdapter();
-		MainContainer.getInstance().setKeyBoardAdapter(keyAdapter);
 	}
 	
 	class MAdapter extends KeyAdapter{

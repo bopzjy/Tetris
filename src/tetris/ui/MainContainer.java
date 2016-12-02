@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 import tetris.utils.ImageProcesser;
 
 public class MainContainer extends JFrame{
-	private static MainContainer instance = null;
+	private static MainContainer instance = new MainContainer();
 	
 	private int width;
 	private int height;
@@ -35,9 +35,6 @@ public class MainContainer extends JFrame{
 	}
 	
 	public static MainContainer getInstance(){
-		if(instance == null){	
-			instance = new MainContainer();	
-		}
 		return instance;
 	}
 	

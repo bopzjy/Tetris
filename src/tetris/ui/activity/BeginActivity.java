@@ -53,16 +53,14 @@ public class BeginActivity extends Activity implements ChangeUI{
 	@Override
 	public void init() {
 		//MainContainer.getInstance().j
-		MainContainer mainContainer = MainContainer.getInstance();
+		//MainContainer mainContainer = MainContainer.getInstance();
 		
 		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 
 		keyAdapter = new MAdapter();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
+		//mainContainer.setKeyBoardAdapter(keyAdapter);
 		
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.validate();
 	}
 	
 	public static void main(String[] args) {
@@ -88,6 +86,15 @@ public class BeginActivity extends Activity implements ChangeUI{
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.repaint();*/
+		
+		MainContainer mainContainer = MainContainer.getInstance();
+		//mainContainer.setKeyBoardAdapter(keyAdapter);
+		mainContainer.setLayeredPane(jLayeredPane);	
+		System.out.println("heedada");
+		jLayeredPane.repaint();
+		mainContainer.repaint();
+		mainContainer.validate();
+		
 	}
 	
 	class MAdapter extends KeyAdapter{

@@ -101,8 +101,8 @@ public class MatchActivity extends Activity{
 		//keyAdapter = new MAdapter();
 		//mainContainer.setKeyBoardAdapter(keyAdapter);
 		
-		mainContainer.getContentPane().add(jLayeredPane);		
-		mainContainer.validate();
+		//mainContainer.getContentPane().add(jLayeredPane);		
+		//mainContainer.validate();
 		
 		//hideRivalDialog();
 		//showRivalDialog();
@@ -119,8 +119,10 @@ public class MatchActivity extends Activity{
 
 	@Override
 	public void InitUI() {
-		// TODO Auto-generated method stub
 		
+		MainContainer mainContainer = MainContainer.getInstance();
+		mainContainer.setLayeredPane(jLayeredPane);		
+		mainContainer.validate();
 	}
 	
 	public static void main(String[] args) {

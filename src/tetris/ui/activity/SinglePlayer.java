@@ -57,8 +57,8 @@ public class SinglePlayer extends Activity{
 	
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
+
+		//MainContainer mainContainer = MainContainer.getInstance();
 		
 		blocksPanel = new BlocksPanel(GlobalConstants.SINGLE_GAMEBLOCKS_SHAPE, GlobalConstants.BLOCKSPANEL_INIT_COLOR, 
 				GlobalConstants.NUMBER_OF_ROWS, GlobalConstants.NUMBER_OF_COLUMNS, 2);
@@ -97,10 +97,10 @@ public class SinglePlayer extends Activity{
 		jLayeredPane.add(gameOverArrow, new Integer(LAYOUT_GAMEOVER_ARROW));
 	
 		keyAdapter = new MAdapter();
-		mainContainer.setKeyBoardAdapter(GameEntity.getInstance().getAdapter());
+		//
 		
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.validate();
+		//mainContainer.setLayeredPane(jLayeredPane);
+		//mainContainer.validate();
 		
 		//showGameOverDialog();
 		//hideGameOverDialog();
@@ -129,12 +129,6 @@ public class SinglePlayer extends Activity{
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.repaint();
-	}
-	
-	public void setKeyListener() {
-		if(keyAdapter==null)
-			keyAdapter = new MAdapter();
-		MainContainer.getInstance().setKeyBoardAdapter(keyAdapter);
 	}
 	
 	class MAdapter extends KeyAdapter{

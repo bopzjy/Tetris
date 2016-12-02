@@ -48,10 +48,8 @@ public class IntroductionActivity extends Activity{
 		jLayeredPane.add(intro, new Integer(LAYOUT_LABEL));
 		
 		keyAdapter = new MAdapter();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
 		
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.validate();
+		
 	}
 	
 	public static void main(String[] args) {
@@ -71,6 +69,7 @@ public class IntroductionActivity extends Activity{
 		
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
+		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.repaint();
 	}
 	

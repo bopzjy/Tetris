@@ -41,7 +41,7 @@ public class CompeteActivity extends Activity{
 		jLayeredPane.add(myBlocks, new Integer(LAYOUT_WIDGET));
 		
 		rivalBlocks = new BlocksPanel(new double[][]{{0.63303498779495524816924328722539, 0.409},{0.2479, 0.5138}}, GlobalConstants.BLOCKSPANEL_INIT_COLOR, 
-				GlobalConstants.NUMBER_OF_ROWS, GlobalConstants.NUMBER_OF_COLUMNS, 2);
+				GlobalConstants.NUMBER_OF_ROWS, GlobalConstants.NUMBER_OF_COLUMNS, 1);
 		jLayeredPane.add(rivalBlocks, new Integer(LAYOUT_WIDGET));
 		
 		nextPanel = new BlocksPanel(new double[][]{{0.735, 0.248}, {0.125, 0.125}}, null, 4, 5, 2);
@@ -53,9 +53,6 @@ public class CompeteActivity extends Activity{
 		nextPanel.setBlockColorByCoordinates(3, 2, Color.green);
 		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);
 		
-		
-		mainContainer.getContentPane().add(jLayeredPane);		
-		mainContainer.validate();
 	}
 	
 	@Override
@@ -67,7 +64,9 @@ public class CompeteActivity extends Activity{
 	@Override
 	public void InitUI() {
 		// TODO Auto-generated method stub
-		
+		MainContainer mainContainer = MainContainer.getInstance();
+		mainContainer.setLayeredPane(jLayeredPane);		
+		mainContainer.validate();
 	}
 	
 	public void setHead(Player[] players){

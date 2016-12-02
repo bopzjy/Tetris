@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import tetris.ui.Activity;
+import tetris.ui.ActivityFactory;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
@@ -29,12 +30,7 @@ public class LoadActivity extends Activity{
 		mainContainer.getContentPane().add(jLayeredPane);		
 		mainContainer.validate();
 		
-		/*try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		ActivityFactory.produceAllActivity();
 		
 		ActivityHolder.getInstance().turnToNextActivity(Constants.INDEX_BEGIN_ACTIVITY);
 	}

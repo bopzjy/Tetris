@@ -8,7 +8,7 @@ import tetris.ui.activity.RankLister;
 import tetris.ui.activity.SinglePlayer;
 
 public class ActivityFactory {
-	public static Activity produceActivity(int index){
+	private static Activity produceActivity(int index){
 		switch (index) {
 		case Constants.INDEX_BEGIN_ACTIVITY:
 			return new BeginActivity();
@@ -32,5 +32,12 @@ public class ActivityFactory {
 			return null;
 		}
 
+	}
+	
+	public static void produceAllActivity(){
+		for(int i = Constants.INDEX_BEGIN_ACTIVITY; i<Constants.TOTAL_ACTIVITY; i++){
+			Activity activity = produceActivity(i);
+			ActivityHolder.getInstance().reserveActivity(activity, i);
+		}
 	}
 }

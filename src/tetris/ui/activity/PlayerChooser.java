@@ -39,16 +39,16 @@ public class PlayerChooser extends Activity{
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
+		//MainContainer mainContainer = MainContainer.getInstance();
 		
 		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 
 		keyAdapter = new MAdapter();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
+		//
 		
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.validate();
+		//mainContainer.setLayeredPane(jLayeredPane);
+		//mainContainer.validate();
 	}
 	
 	public static void main(String[] args) {

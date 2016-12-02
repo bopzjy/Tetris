@@ -9,5 +9,5 @@ public class Constants {
 	public static final int INDEX_SINGLE_PLAYER = INDEX_INTRODUCTION_ACTIVITY + 1;
 	public static final int INDEX_MATCH_ACTIVITY = INDEX_SINGLE_PLAYER + 1;
 		
-	public static final int TOTAL_ACTIVITY = INDEX_SINGLE_PLAYER + 1; 
+	public static final int TOTAL_ACTIVITY = INDEX_MATCH_ACTIVITY + 1; 
 }

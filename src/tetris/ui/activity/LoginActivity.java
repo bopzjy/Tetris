@@ -46,7 +46,7 @@ public class LoginActivity extends Activity{
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
+		//MainContainer mainContainer = MainContainer.getInstance();
 		
 		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
@@ -56,10 +56,10 @@ public class LoginActivity extends Activity{
 		registerDialog.setVisible(true);
 		
 		keyAdapter = new MAdapter();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
+		//
 		
-		mainContainer.getContentPane().add(jLayeredPane);		
-		mainContainer.validate();
+		//mainContainer.getContentPane().add(jLayeredPane);		
+		//mainContainer.validate();
 		
 	}
 	
@@ -87,7 +87,10 @@ public class LoginActivity extends Activity{
 	@Override
 	public void InitUI() {
 		// TODO Auto-generated method stub
-
+		MainContainer mainContainer = MainContainer.getInstance();
+		mainContainer.setKeyBoardAdapter(keyAdapter);
+		mainContainer.setLayeredPane(jLayeredPane);		
+		mainContainer.validate();
 	}
 	
 	class MAdapter extends KeyAdapter{

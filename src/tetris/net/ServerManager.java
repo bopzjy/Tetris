@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import tetris.common.GlobalConstants;
 
 public class ServerManager {
+	private static ServerManager instance = null;
 	String username="";
 	status state=status.offline;
 	String url="rmi://"+GlobalConstants.SERVER_HOST+":"+String.valueOf(GlobalConstants.SERVER_PORT)+"/ServerImpl";
@@ -25,7 +26,7 @@ public class ServerManager {
 		}
 	}
 	
-	void login(String username) throws RemoteException{
+	public void login(String username) throws RemoteException{
 		server.login(username, clientrmi);
 		this.username=username;
 		state=status.online;
@@ -52,6 +53,13 @@ public class ServerManager {
 		for(int i=0;i<userarray.size();i++)
 			users[i]=userarray.get(i);
 		return users;
+	}
+	
+	public static ServerManager getInstance() {
+		if (instance == null) {
+			instance = new ServerManager();
+		}
+		return instance;
 	}
 	
 	class sendState extends Thread{

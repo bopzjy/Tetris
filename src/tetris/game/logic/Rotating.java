@@ -14,11 +14,16 @@ public class Rotating {
 	public void rotate() {
 		FallingEntity falltemp = new FallingEntity(mdThread.currentFEntity);
 		if (falltemp.rotate()) {
-			mdThread.paintFEntityInArray(mdThread.currentFEntity, true);
-			mdThread.paintFallingEntity(mdThread.currentFEntity, Color.white, 1);
-			mdThread.currentFEntity.rotate();
-			mdThread.paintFEntityInArray(mdThread.currentFEntity, false);
-			mdThread.paintFallingEntity(mdThread.currentFEntity, mdThread.currentFEntity.color, 1);
+			boolean conflictFlag = false;
+			conflictFlag = mdThread.IsEntityConflict(mdThread.currentFEntity,falltemp);
+			if(!conflictFlag) {
+				mdThread.paintFEntityInArray(mdThread.currentFEntity, true);
+				mdThread.paintFallingEntity(mdThread.currentFEntity, Color.white, 1);
+				mdThread.currentFEntity.rotate();
+				mdThread.paintFEntityInArray(mdThread.currentFEntity, false);
+				mdThread.paintFallingEntity(mdThread.currentFEntity, mdThread.currentFEntity.color, 1);
+			}
+			
 		} else {
 			
 		}

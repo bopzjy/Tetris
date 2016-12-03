@@ -15,7 +15,7 @@ public class MovingRightOrLeft {
 		FallingEntity falltemp = new FallingEntity(mdThread.currentFEntity);
 		if (falltemp.moveRightOrLeft(RLFlag)) {
 			boolean conflictFlag = false;
-			conflictFlag = mdThread.IsEntityConflict(falltemp);
+			conflictFlag = mdThread.IsEntityConflict(mdThread.currentFEntity,falltemp);
 			if (!conflictFlag) {
 				mdThread.paintFEntityInArray(mdThread.currentFEntity, true);
 				mdThread.paintFEntityInArray(falltemp, false);

@@ -1,5 +1,11 @@
 package tetris.game.logic;
 
+import java.awt.Color;
+
+import tetris.ui.ActivityHolder;
+import tetris.ui.Constants;
+import tetris.ui.activity.SinglePlayer;
+
 class Test1 {
 	public static int X = 100;
 	public final static int Y = 200;
@@ -34,11 +40,9 @@ class test2  {
 			//Test1  t = new Test1();
 			//Class.forName("Test");
 			//Class.forName("Test");
-			test2 td = new test2();
-			int [] aa = new int [] {1,2,3,4};
-			td.tmethod(aa);
-			System.out.println(aa[0]);
-
+			ActivityHolder ac  = ActivityHolder.getInstance();
+			SinglePlayer sp = (SinglePlayer) ac.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
+			sp.setBlockColorByCoordinates(0, 0, new Color(0x1D4020));
 		}
 
 

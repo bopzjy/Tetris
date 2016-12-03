@@ -6,17 +6,28 @@ import tetris.common.GlobalConstants;
 import tetris.common.Player;
 import tetris.ui.Activity;
 import tetris.ui.MainContainer;
+import tetris.ui.component.InvitedDialog;
 import tetris.ui.component.PlayerIcon;
 import tetris.ui.single.BlocksPanel;
+import tetris.ui.single.GameOverDialog;
 
 public class CompeteActivity extends Activity{
 	
 	private int LAYOUT_WIDGET = LAYOUT_BACKGROUND + 1;
 	
-	private PlayerIcon myHead, rivalHead;
+	private static double[][] arrow_shape = {
+			{0.05, 0.0563},		
+			{0.27, 0.43},
+			{0.27, 0.515},
+			{0.27, 0.6},
+			{0.27, 0.685},
+			{0.27, 0.77}	
+	};
 	
+	private PlayerIcon myHead, rivalHead;
 	private BlocksPanel myBlocks, rivalBlocks; 
 	private BlocksPanel nextPanel;
+	
 	
 	public CompeteActivity() {
 		super("resources\\image\\compete_bg.jpg");
@@ -47,11 +58,11 @@ public class CompeteActivity extends Activity{
 		nextPanel = new BlocksPanel(new double[][]{{0.735, 0.248}, {0.125, 0.125}}, null, 4, 5, 2);
 		jLayeredPane.add(nextPanel, new Integer(LAYOUT_WIDGET));
 		// Demo: print blocks
-		
 		nextPanel.setBlockColorByCoordinates(1, 2, Color.green);
 		nextPanel.setBlockColorByCoordinates(2, 2, Color.green);
 		nextPanel.setBlockColorByCoordinates(3, 2, Color.green);
 		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);
+		
 		
 	}
 	
@@ -75,7 +86,8 @@ public class CompeteActivity extends Activity{
 	}
 	
 	public static void main(String[] args) {
-		new CompeteActivity();
+		new CompeteActivity().InitUI();
+		
 	}
 	
 	

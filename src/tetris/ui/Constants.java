@@ -8,6 +8,7 @@ public class Constants {
 	public static final int INDEX_INTRODUCTION_ACTIVITY = INDEX_RANK_LISTER + 1;
 	public static final int INDEX_SINGLE_PLAYER = INDEX_INTRODUCTION_ACTIVITY + 1;
 	public static final int INDEX_MATCH_ACTIVITY = INDEX_SINGLE_PLAYER + 1;
+	public static final int INDEX_LOGIN_ACTIVITY = INDEX_MATCH_ACTIVITY + 1;
 		
-	public static final int TOTAL_ACTIVITY = INDEX_MATCH_ACTIVITY + 1; 
+	public static final int TOTAL_ACTIVITY = INDEX_LOGIN_ACTIVITY + 1; 
 }

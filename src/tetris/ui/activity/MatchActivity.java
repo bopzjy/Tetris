@@ -15,6 +15,7 @@ import tetris.ui.MainContainer;
 import tetris.ui.activity.LoginActivity.MAdapter;
 import tetris.ui.component.ArrowJpanel;
 import tetris.ui.component.HeadPortrait;
+import tetris.ui.component.InvitedDialog;
 import tetris.ui.component.PlayerIcon;
 import tetris.ui.component.RegisterDialog;
 import tetris.ui.component.RivalDialog;
@@ -24,9 +25,10 @@ import tetris.utils.LoadFont;
 public class MatchActivity extends Activity{
 	
 	private final int LAYOUT_ADDUSER = LAYOUT_BACKGROUND + 1;
-	private final int LAYOUT_RIVALDIALOG = LAYOUT_ADDUSER + 1;
-	private final int LAYOUT_WIDGET = LAYOUT_RIVALDIALOG + 1;
-	private final int LAYOUT_DIALOGARROW = LAYOUT_WIDGET + 1;
+	
+	private final int LAYOUT_WIDGET = LAYOUT_ADDUSER + 1;
+	private final int LAYOUT_RIVALDIALOG = LAYOUT_WIDGET + 1;
+	private final int LAYOUT_DIALOGARROW = LAYOUT_RIVALDIALOG + 1;
 	//private final int LAYOUT_BIG_HEAD = LAYOUT_DIALOGARROW + 1;
 	//private final int LAYOUT_SMALL_HEAD = LAYOUT_BIG_HEAD + 1;
 	
@@ -37,6 +39,8 @@ public class MatchActivity extends Activity{
 	//private JLabel meLabel, rivalLabel;
 	private PlayerIcon bigMe, rival;
 	private PlayerIcon smallMe;
+	
+	private InvitedDialog invitedDialog; 
 	
 	private static double[][] arrow_shape = {
 			{0.05, 0.0563},		
@@ -88,7 +92,7 @@ public class MatchActivity extends Activity{
 		
 		rival = new PlayerIcon(new double[][]{{0.15, 0.15}, {0.575, 0.49}}, new double[][]{{0.505, 0.55}, {0.3, 0.3}}, mainContainer);
 		rival.addedToContainer(jLayeredPane, LAYOUT_WIDGET);
-		showRival(new Player("rival", 100));
+		//showRival(new Player("rival", 100));
 		
 		dialogArrow = new ArrowJpanel(arrow_shape, 5);
 		rivalDialog = new RivalDialog(new double[][]{
@@ -105,7 +109,7 @@ public class MatchActivity extends Activity{
 		//mainContainer.validate();
 		
 		//hideRivalDialog();
-		//showRivalDialog();
+		//
 		//hideRival();
 		//showRival(new Player("abdsff", 100));
 		
@@ -123,16 +127,18 @@ public class MatchActivity extends Activity{
 		MainContainer mainContainer = MainContainer.getInstance();
 		mainContainer.setLayeredPane(jLayeredPane);		
 		mainContainer.validate();
+		//showRivalDialog();
 	}
 	
 	public static void main(String[] args) {
-		new MatchActivity();
+		new MatchActivity().InitUI();
 	}
 	
 	public void showRivalDialog(){
+		dialogArrow.setVisible(true);
 		rivalDialog.setVisible(true);
 		rivalDialog.requestFocusInWindow();
-		dialogArrow.setVisible(true);
+		rivalDialog.requestFocus();
 	}
 	
 	public void hideRivalDialog(){

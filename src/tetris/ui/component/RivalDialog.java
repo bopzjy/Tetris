@@ -62,7 +62,6 @@ public class RivalDialog extends TranslucenceJPanel{
 		candidatesJPanel.setLayout(layout);
 		candidatesJPanel.setOpaque(false);
 		
-		
 		//jPanel.add(candidates[0]);
 		for (int i = 0; i < candidates.length; i++) {
 			candidatesJPanel.add(candidates[i]);
@@ -93,6 +92,7 @@ public class RivalDialog extends TranslucenceJPanel{
 		public void keyPressed(KeyEvent e) {
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
+				System.out.println("hehedada");
 				arrowJpanel.lastState();
 				break;
 				

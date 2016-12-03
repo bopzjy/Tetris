@@ -33,6 +33,7 @@ public class LoadActivity extends Activity{
 		ActivityFactory.produceAllActivity();
 		
 		ActivityHolder.getInstance().turnToNextActivity(Constants.INDEX_BEGIN_ACTIVITY);
+		//ActivityHolder.getInstance().turnToNextActivity(Constants.INDEX_BEGIN_ACTIVITY);
 	}
 
 

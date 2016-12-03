@@ -13,7 +13,7 @@ public class GameConstants {
 	// 下落速度等级数
 	public static final int NUMBER_OF_SPEED_RANK = 10;
 	// 颜色总数
-	public static final int NUMBER_OF_COLOR = 20;
+	public static final int NUMBER_OF_COLOR = 21;
 	// 下落物预生成数
 	public static final int LENGTH_OF_FEPIPELINE = 20;
 	// 下落快和顔色的固定映射
@@ -30,7 +30,7 @@ public class GameConstants {
 			new Spot(0, 0), new Spot(0, 0), new Spot(0, 0), new Spot(0, 0), new Spot(0, 0), new Spot(0, 0),
 			new Spot(0, 0), new Spot(0, 0), new Spot(0, 0) };
 
-	public static final Color[] COLOR_SET = { new Color(0xFBE601), new Color(0xE9BC01), new Color(0xDC9600),
+	public static final Color[] COLOR_SET = { new Color(0xFFFFFF),new Color(0xFBE601), new Color(0xE9BC01), new Color(0xDC9600),
 			new Color(0xCB6018), new Color(0xC44031), new Color(0xBF0311), new Color(0xA01027), new Color(0x5B40013),
 			new Color(0x3C2C13), new Color(0x000040), new Color(0x011A5A), new Color(0x0121381), new Color(0x065CA5),
 			new Color(0x76AADA), new Color(0x609E75), new Color(0x70A847), new Color(0x4C7B35), new Color(0x75A453),

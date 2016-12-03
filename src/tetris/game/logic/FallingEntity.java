@@ -71,6 +71,7 @@ public class FallingEntity {
 			break;
 		case 5:
 			SpotCalhandlerFive();
+			break;
 		case 6:
 			SpotCalhandlerSix();
 			break;
@@ -563,22 +564,22 @@ public class FallingEntity {
 	}
 
 	public boolean moveDown() {
-		int htemp = headSpot.x + 1;
-		if (htemp >= GlobalConstants.NUMBER_OF_ROWS) {
-			return false;
-		}
-		int stemp = secSpot.x + 1;
-		if (stemp >= GlobalConstants.NUMBER_OF_ROWS) {
-			return false;
-		}
-		int ttemp = thirdSpot.x + 1;
-		if (ttemp >= GlobalConstants.NUMBER_OF_ROWS) {
-			return false;
-		}
-		int ftemp = fourthSpot.x + 1;
-		if (ftemp >= GlobalConstants.NUMBER_OF_ROWS) {
-			return false;
-		}
+//		int htemp = headSpot.x + 1;
+//		if (htemp >= GlobalConstants.NUMBER_OF_ROWS) {
+//			return false;
+//		}
+//		int stemp = secSpot.x + 1;
+//		if (stemp >= GlobalConstants.NUMBER_OF_ROWS) {
+//			return false;
+//		}
+//		int ttemp = thirdSpot.x + 1;
+//		if (ttemp >= GlobalConstants.NUMBER_OF_ROWS) {
+//			return false;
+//		}
+//		int ftemp = fourthSpot.x + 1;
+//		if (ftemp >= GlobalConstants.NUMBER_OF_ROWS) {
+//			return false;
+//		}
 
 		headSpot.x++;
 		secSpot.x++;
@@ -694,4 +695,31 @@ public class FallingEntity {
 		return lowestx;
 	}
 
+	public int getMaxX(){
+		int maxX = headSpot.x;
+		if(maxX < secSpot.x) {
+			maxX = secSpot.x;
+		}
+		if(maxX < thirdSpot.x) {
+			maxX = thirdSpot.x;
+		}
+		if(maxX < fourthSpot.x) {
+			maxX = fourthSpot.x;
+		}
+		return maxX;
+	}
+	
+	public int getMinX(){
+		int minx = headSpot.x;
+		if(minx > secSpot.x) {
+			minx = secSpot.x;
+		}
+		if(minx > thirdSpot.x) {
+			minx = thirdSpot.x;
+		}
+		if(minx > fourthSpot.x) {
+			minx = fourthSpot.x;
+		}
+		return minx;
+	}
 }

@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -57,6 +59,12 @@ public class MainContainer extends JFrame{
 	    this.setLocation(screenSize.width/2 - this.getWidth()/2, screenSize.height/2 - this.getHeight()/2);
 	    
 	    keyAdapter = null;
+	    
+	    this.addMouseListener(new MouseAdapter() {
+	    	public void mouseClicked(MouseEvent e) {
+				MainContainer.getInstance().requestFocusInWindow();
+			}
+	    });
 	    
 	    //缩放图片
 	    /*ImageIcon image = new ImageIcon("resources\\image\\begin_bg.jpg");

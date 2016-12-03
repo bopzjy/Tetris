@@ -47,11 +47,8 @@ public class LoginActivity extends Activity{
 	public ArrowJpanel arrow;
 	private JTextField nameTextField;
 	private JPasswordField password;
-	private int arrow_state;// = 0;
-	private final int CHOOSE_1 = 0;
-	private final int CHOOSE_2 = 1;
 	
-	private RegisterDialog registerDialog;
+	public RegisterDialog registerDialog;
 	
 	public LoginActivity() {
 		// TODO Auto-generated constructor stub
@@ -65,7 +62,8 @@ public class LoginActivity extends Activity{
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
 		
-		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
+		arrow = new ArrowJpanel(arrow_shape, 2);
+		
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 		
 		registerDialog = new RegisterDialog(GlobalConstants.REGISTER_SHAPE);
@@ -175,5 +173,14 @@ public class LoginActivity extends Activity{
 	
 	public String getPasswdVale(){
 		return password.getPassword().toString();		
+	}
+	
+	public void showRegisterDialog(){
+		registerDialog.requestFocusInWindow();
+		registerDialog.setVisible(true);
+	}
+	
+	public void hideRegisterDialog(){
+		registerDialog.setVisible(false);
 	}
 }

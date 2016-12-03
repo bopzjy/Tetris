@@ -36,7 +36,7 @@ public class ArrowJpanel extends JPanel{
 				arrowIcon.getIconWidth(), arrowIcon.getIconHeight());
 		
 		state = 1;
-		this.max_state = max_state + 1;
+		this.max_state = max_state;
 	}
 	
 	public void lastState(){
@@ -58,7 +58,7 @@ public class ArrowJpanel extends JPanel{
 	}
 	
 	public int getState(){
-		return state-1;
+		return state;
 	}
 	
 	public void setMaxState(int max){

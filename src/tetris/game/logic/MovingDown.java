@@ -8,7 +8,7 @@ import tetris.common.GlobalConstants;
 public class MovingDown implements Runnable {
 	GameEntity gEntity;
 	FallingEntityPipeline FEPLine = null;
-	FallingEntity currentFEntry = null;
+	FallingEntity currentFEntity = null;
 
 	public MovingDown(GameEntity gEntity) {
 		// TODO Auto-generated constructor stub
@@ -29,69 +29,71 @@ public class MovingDown implements Runnable {
 		// TODO Auto-generated method stub
 		while (true) {
 			boolean nullflag = true;
-			FallingEntity fEntry = null;
+			FallingEntity fEntity = null;
 			int lineSize = FEPLine.getFEPipelineSize();
 			if (lineSize != 0) {
-				fEntry = FEPLine.FEPoll();
+				fEntity = FEPLine.FEPoll();
 				lineSize--;
 				nullflag = false;
 			}
 
 			if (nullflag) {
 				FallingEntityProduce();
-				fEntry = FEPLine.FEPoll();
+				fEntity = FEPLine.FEPoll();
 			} else {
 				FallingEntityProduce();
 			}
-			currentFEntry = fEntry;
-			FallingEntity fEntryTemp = new FallingEntity(fEntry);
+			currentFEntity = fEntity;
+			FallingEntity fEntityTemp = new FallingEntity(fEntity);
 
-			int index = GameConstants.NEXT_HEADSPOTS_INDEX.get(fEntryTemp.patternNum * 10 + fEntryTemp.directNum)
+			int index = GameConstants.NEXT_HEADSPOTS_INDEX.get(fEntityTemp.patternNum * 10 + fEntityTemp.directNum)
 					.intValue();
-			fEntryTemp.headSpot = GameConstants.NEXT_HEADSPOTS[index];
-			fEntryTemp.SpotCal();
+			fEntityTemp.headSpot = GameConstants.NEXT_HEADSPOTS[index];
+			fEntityTemp.SpotCal();
 
-			paintBeforeNextEntry();
-			paintFallingEntity(fEntryTemp, fEntryTemp.color, 0);
+			paintBeforeNextEntity();
+			paintFallingEntity(fEntityTemp, fEntityTemp.color, 0);
 			
-			fEntry.speedRank = getRank();
+			fEntity.speedRank = getRank();
 			while (true) {
-				FallingEntity falltemp = new FallingEntity(fEntry);
+				System.out.println("+++++++++++++++++++++");
+				FallingEntity falltemp = new FallingEntity(fEntity);
 				if (falltemp.moveDown()) {
 					boolean conflictFlag = false;
-					conflictFlag = IsEntryConflict(falltemp);
+					conflictFlag = IsEntityConflict(falltemp);
 					boolean downArrayFlag = falltemp.checkDownArray();
 					if (!conflictFlag && !downArrayFlag) {
-						paintFEntryInArray(fEntry, true);
-						paintFEntryInArray(falltemp, false);
-						paintFallingEntity(fEntry, Color.white, 1);
+						System.out.println("==============================");
+						paintFEntityInArray(fEntity, true);
+						paintFEntityInArray(falltemp, false);
+						paintFallingEntity(fEntity, Color.white, 1);
 						paintFallingEntity(falltemp, falltemp.color, 1);
-						fEntry.moveDown();
+						fEntity.moveDown();
 						try {
-							Thread.sleep(GameConstants.SPEED_RANK[fEntry.speedRank]);
+							//Thread.sleep(GameConstants.SPEED_RANK[fEntity.speedRank]);
+							Thread.sleep(1);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else if (fEntry.checkUpArray()) {
+					} else if (fEntity.checkUpArray()) {
 						GameOver();
 						return;
 					} else {
-						checkFullRow(fEntry);
-						paintFallingEntity(fEntryTemp, Color.white, 0);
+						checkFullRow(fEntity);
+						paintFallingEntity(fEntityTemp, Color.white, 0);
 						break;
 					}
 				} else {
 					System.out.println("moveDown Error");
 					return;
 				}
-
 			}
 		}
 
 	}
 
-	private void paintBeforeNextEntry() {
+	private void paintBeforeNextEntity() {
 		// TODO Auto-generated method stub
 		for(int i=0;i<4;i++) {
 			for (int j=0;j<5;j++) {
@@ -104,23 +106,23 @@ public class MovingDown implements Runnable {
 		gEntity.GameActivity.showNameDialog();    
 	}
 
-	public void checkFullRow(FallingEntity fEntry) {
+	public void checkFullRow(FallingEntity fEntity) {
 		int fullcount = 0;
-		int[] rowIndex = { fEntry.headSpot.x, fEntry.secSpot.x, fEntry.thirdSpot.x, fEntry.fourthSpot.x };
+		int[] rowIndex = { fEntity.headSpot.x, fEntity.secSpot.x, fEntity.thirdSpot.x, fEntity.fourthSpot.x };
 		boolean[] rowTag = { false, false, false, false };
-		if (checkFullRowhandler(fEntry.headSpot)) {
+		if (checkFullRowhandler(fEntity.headSpot)) {
 			fullcount++;
 			rowTag[0] = true;
 		}
-		if (checkFullRowhandler(fEntry.secSpot)) {
+		if (checkFullRowhandler(fEntity.secSpot)) {
 			fullcount++;
 			rowTag[1] = true;
 		}
-		if (checkFullRowhandler(fEntry.thirdSpot)) {
+		if (checkFullRowhandler(fEntity.thirdSpot)) {
 			fullcount++;
 			rowTag[2] = true;
 		}
-		if (checkFullRowhandler(fEntry.fourthSpot)) {
+		if (checkFullRowhandler(fEntity.fourthSpot)) {
 			fullcount++;
 			rowTag[3] = true;
 		}
@@ -129,7 +131,7 @@ public class MovingDown implements Runnable {
 			gEntity.upScore(fullcount * 10);
 			gEntity.checkLevel();
 			repaintArray(rowIndex, rowTag);
-			repaintActivity(fEntry.lowestRow());
+			repaintActivity(fEntity.lowestRow());
 			gEntity.GameActivity.setScore(Integer.toString(gEntity.getScore()));
 			gEntity.GameActivity.setLevel(Integer.toString(gEntity.getLevel()));
 		}
@@ -215,65 +217,65 @@ public class MovingDown implements Runnable {
 		}
 	}
 
-	public void paintFEntryInArray(FallingEntity fEntry, boolean nullFlag) {
+	public void paintFEntityInArray(FallingEntity fEntity, boolean nullFlag) {
 		// nullFlag为true时，表示置为白色，false表示写上颜色
 		if (!nullFlag) {
-			int colorNum = GameConstants.COLOR_INDEX.get(fEntry.color).intValue();
-			if (fEntry.headSpot.IsInArray()) {
-				gEntity.GameArray[fEntry.headSpot.x][fEntry.headSpot.y] = colorNum;
+			int colorNum = GameConstants.COLOR_INDEX.get(fEntity.color).intValue();
+			if (fEntity.headSpot.IsInArray()) {
+				gEntity.GameArray[fEntity.headSpot.x][fEntity.headSpot.y] = colorNum;
 			}
-			if (fEntry.secSpot.IsInArray()) {
-				gEntity.GameArray[fEntry.secSpot.x][fEntry.secSpot.y] = colorNum;
+			if (fEntity.secSpot.IsInArray()) {
+				gEntity.GameArray[fEntity.secSpot.x][fEntity.secSpot.y] = colorNum;
 			}
-			if (fEntry.thirdSpot.IsInArray()) {
-				gEntity.GameArray[fEntry.thirdSpot.x][fEntry.thirdSpot.y] = colorNum;
+			if (fEntity.thirdSpot.IsInArray()) {
+				gEntity.GameArray[fEntity.thirdSpot.x][fEntity.thirdSpot.y] = colorNum;
 			}
-			if (fEntry.fourthSpot.IsInArray()) {
-				gEntity.GameArray[fEntry.fourthSpot.x][fEntry.fourthSpot.y] = colorNum;
+			if (fEntity.fourthSpot.IsInArray()) {
+				gEntity.GameArray[fEntity.fourthSpot.x][fEntity.fourthSpot.y] = colorNum;
 			}
 
 		} else {
-			if (fEntry.headSpot.IsInArray()) {
-				gEntity.GameArray[fEntry.headSpot.x][fEntry.headSpot.y] = 0;
+			if (fEntity.headSpot.IsInArray()) {
+				gEntity.GameArray[fEntity.headSpot.x][fEntity.headSpot.y] = 0;
 			}
-			if (fEntry.secSpot.IsInArray()) {
-				gEntity.GameArray[fEntry.secSpot.x][fEntry.secSpot.y] = 0;
+			if (fEntity.secSpot.IsInArray()) {
+				gEntity.GameArray[fEntity.secSpot.x][fEntity.secSpot.y] = 0;
 			}
-			if (fEntry.thirdSpot.IsInArray()) {
-				gEntity.GameArray[fEntry.thirdSpot.x][fEntry.thirdSpot.y] = 0;
+			if (fEntity.thirdSpot.IsInArray()) {
+				gEntity.GameArray[fEntity.thirdSpot.x][fEntity.thirdSpot.y] = 0;
 			}
-			if (fEntry.fourthSpot.IsInArray()) {
-				gEntity.GameArray[fEntry.fourthSpot.x][fEntry.fourthSpot.y] = 0;
+			if (fEntity.fourthSpot.IsInArray()) {
+				gEntity.GameArray[fEntity.fourthSpot.x][fEntity.fourthSpot.y] = 0;
 			}
 		}
 	}
 
-	public void paintFallingEntity(FallingEntity fEntry, Color color, int flag) {
+	public void paintFallingEntity(FallingEntity fEntity, Color color, int flag) {
 		// flag为0表示写右上方矩阵，flag为1表示写游戏矩阵
 		if (flag == 0) {
-			gEntity.GameActivity.setNextBlockColor(fEntry.headSpot.x, fEntry.headSpot.y, color);
-			gEntity.GameActivity.setNextBlockColor(fEntry.secSpot.x, fEntry.secSpot.y, color);
-			gEntity.GameActivity.setNextBlockColor(fEntry.thirdSpot.x, fEntry.thirdSpot.y, color);
-			gEntity.GameActivity.setNextBlockColor(fEntry.fourthSpot.x, fEntry.fourthSpot.y, color);
+			gEntity.GameActivity.setNextBlockColor(fEntity.headSpot.x, fEntity.headSpot.y, color);
+			gEntity.GameActivity.setNextBlockColor(fEntity.secSpot.x, fEntity.secSpot.y, color);
+			gEntity.GameActivity.setNextBlockColor(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
+			gEntity.GameActivity.setNextBlockColor(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
 		}
 		if (flag == 1) {
-			if (fEntry.IsInArray()) {
-				gEntity.GameActivity.setBlockColorByCoordinates(fEntry.headSpot.x, fEntry.headSpot.y, color);
+			if (fEntity.headSpot.IsInArray()) {
+				gEntity.GameActivity.setBlockColorByCoordinates(fEntity.headSpot.x, fEntity.headSpot.y, color);
 			}
-			if (fEntry.IsInArray()) {
-				gEntity.GameActivity.setBlockColorByCoordinates(fEntry.secSpot.x, fEntry.secSpot.y, color);
+			if (fEntity.secSpot.IsInArray()) {
+				gEntity.GameActivity.setBlockColorByCoordinates(fEntity.secSpot.x, fEntity.secSpot.y, color);
 			}
-			if (fEntry.IsInArray()) {
-				gEntity.GameActivity.setBlockColorByCoordinates(fEntry.thirdSpot.x, fEntry.thirdSpot.y, color);
+			if (fEntity.thirdSpot.IsInArray()) {
+				gEntity.GameActivity.setBlockColorByCoordinates(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
 			}
-			if (fEntry.IsInArray()) {
-				gEntity.GameActivity.setBlockColorByCoordinates(fEntry.fourthSpot.x, fEntry.fourthSpot.y, color);
+			if (fEntity.fourthSpot.IsInArray()) {
+				gEntity.GameActivity.setBlockColorByCoordinates(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
 			}
 
 		}
 	}
 
-	public boolean IsEntryConflict(FallingEntity falltemp) {
+	public boolean IsEntityConflict(FallingEntity falltemp) {
 		if (falltemp.headSpot.IsInArray() && gEntity.GameArray[falltemp.headSpot.x][falltemp.headSpot.y] != 0) {
 			return true;
 		} else if (falltemp.secSpot.IsInArray() && gEntity.GameArray[falltemp.secSpot.x][falltemp.secSpot.y] != 0) {

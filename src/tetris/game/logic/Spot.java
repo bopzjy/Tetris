@@ -46,14 +46,14 @@ public class Spot {
 	}
 	
 	public void checkSpotInArray() {
-		inArray = (x>=0 && x<=GlobalConstants.NUMBER_OF_ROWS && y>=0 && y<=GlobalConstants.NUMBER_OF_COLUMNS);
+		inArray = (x>=0 && x<GlobalConstants.NUMBER_OF_ROWS && y>=0 && y<GlobalConstants.NUMBER_OF_COLUMNS);
 	}
 
 	public void checkSpotUpArray () {
-		upArray = (x <0 && y>=0 && y<=GlobalConstants.NUMBER_OF_COLUMNS);
+		upArray = (x <0 && y>=0 && y<GlobalConstants.NUMBER_OF_COLUMNS);
 	}
 	
 	public void checkSpotdownArray () {
-		downArray = (x>=GlobalConstants.NUMBER_OF_ROWS && y>=0 && y<=GlobalConstants.NUMBER_OF_COLUMNS );
+		downArray = (x>=GlobalConstants.NUMBER_OF_ROWS && y>=0 && y<GlobalConstants.NUMBER_OF_COLUMNS );
 	}
 }

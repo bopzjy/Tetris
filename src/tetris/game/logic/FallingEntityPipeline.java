@@ -10,20 +10,20 @@ public class FallingEntityPipeline {
 	Queue<FallingEntity> FEPipeline = null;
 
 	// 队列对应的游戏实例
-	GameEntity gEntry = null;
+	GameEntity gEntity = null;
 
-	public FallingEntityPipeline(GameEntity gEntry) {
+	public FallingEntityPipeline(GameEntity gEntity) {
 		FEPipeline = new LinkedList<FallingEntity>();
-		this.gEntry = gEntry;
+		this.gEntity = gEntity;
 	}
 
 	public FallingEntityPipeline() {
 		FEPipeline = new LinkedList<FallingEntity>();
-		gEntry = new GameEntity();
+		gEntity = new GameEntity();
 	}
 
 	public int getScore() {
-		return gEntry.getScore();
+		return gEntity.getScore();
 	}
 
 	public boolean FEOffer(int patternNum, Color color, int speedRank, Spot headspot,int directNum) {
@@ -42,11 +42,11 @@ public class FallingEntityPipeline {
 		return FEPipeline.size();
 	}
 
-	public void printFallingEntryPipeline() {
+	public void printFallingEntityPipeline() {
 		Queue<FallingEntity> FEPTemp = new LinkedList<FallingEntity>();
 		FallingEntity FETemp = FEPoll();
 		while (FETemp != null) {
-			FETemp.printFallingEntry();
+			FETemp.printFallingEntity();
 			FEPTemp.offer(FETemp);
 			FETemp = FEPoll();
 		}
@@ -54,15 +54,15 @@ public class FallingEntityPipeline {
 	}
 
 	public static void main(String args[]) throws InterruptedException {
-		//FallingEntry fe0 = new FallingEntry();
-		//FallingEntry fe1 = new FallingEntry(1, 2, 3);
-		// fe0.printFallingEntry();
-		// fe1.printFallingEntry();
-		//FallingEntryPipeline fep0 = new FallingEntryPipeline();
+		//FallingEntity fe0 = new FallingEntity();
+		//FallingEntity fe1 = new FallingEntity(1, 2, 3);
+		// fe0.printFallingEntity();
+		// fe1.printFallingEntity();
+		//FallingEntityPipeline fep0 = new FallingEntityPipeline();
 		// fep0.FEOffer(fe0);
 		// fep0.FEOffer(fe1);
 		// fep0.FEOffer(2, 3, 3);
-		// fep0.printFallingEntryPipeline();
+		// fep0.printFallingEntityPipeline();
 		//Thread Producer = new Thread(new FEPipelineProducer(fep0));
 		//Thread Consumer = new Thread(new FEPipelineConsumer(fep0));
 		//Producer.start();

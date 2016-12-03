@@ -96,7 +96,7 @@ public class RegisterDialog extends TranslucenceJPanel{
 		});
 	}
 	
-	public String getTextFieldValue(){
+	public String getName(){
 		return nameTextField.getText().trim();
 	}
 	

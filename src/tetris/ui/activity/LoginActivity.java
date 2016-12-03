@@ -3,6 +3,7 @@ package tetris.ui.activity;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.ObjectInputStream.GetField;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -39,12 +40,13 @@ public class LoginActivity extends Activity{
 			{0.312, 0.08}		// size
 	};
 	private double[][] passwd_shape = {
-			{0.52, 0.39},		// location
-			{0.362, 0.23}		// size
+			{0.48, 0.525},		// location
+			{0.312, 0.08}		// size
 	};
 	
-	private ArrowJpanel arrow;
-	private JTextField password, nameTextField;
+	public ArrowJpanel arrow;
+	private JTextField nameTextField;
+	private JPasswordField password;
 	private int arrow_state;// = 0;
 	private final int CHOOSE_1 = 0;
 	private final int CHOOSE_2 = 1;
@@ -165,5 +167,13 @@ public class LoginActivity extends Activity{
 				break;
 			}
 		}
+	}
+	
+	public String getName(){
+		return nameTextField.getText().trim();
+	}
+	
+	public String getPasswdVale(){
+		return password.getPassword().toString();		
 	}
 }

@@ -2,13 +2,17 @@ package tetris.game.logic;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 
+import tetris.common.Player;
 import tetris.net.ClientManager;
 import tetris.net.ServerManager;
+import tetris.net.User;
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.activity.LoginActivity;
+import tetris.ui.activity.MatchActivity;
 
 public class LoginAdapter extends KeyAdapter{
 	
@@ -29,12 +33,25 @@ public class LoginAdapter extends KeyAdapter{
 		case KeyEvent.VK_ENTER:
 			System.out.println("enter");
 			activityHolder = ActivityHolder.getInstance();
-			activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
-			switch (loginActivity.get) {
+			//activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
+			switch (loginActivity.arrow.getState()) {
 			case 1:
 				ServerManager sManager = ServerManager.getInstance();
-				sManager.login("haha",pwd);
-				activityHolder.turnToNextActivity(Constants.INDEX_MATCH_ACTIVITY);
+				try {
+					if(sManager.login(loginActivity.getName(),loginActivity.getPasswdVale())){
+						MatchActivity mActivity = (MatchActivity) activityHolder.getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
+						User [] users = sManager.getOnlinePlayers();
+						Player [] players = new Player[users.length];
+						for (int i=0;i<users.length;i++) {
+							players[i] = new Player(users[i].username,users[i].score);
+						}
+						mActivity.rivalDialog.initCandidatesList(players);
+						activityHolder.turnToNextActivity(Constants.INDEX_MATCH_ACTIVITY);
+					}
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 				
 			case 2:

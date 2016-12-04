@@ -7,9 +7,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import tetris.common.GlobalConstants;
+import tetris.game.logic.GameEntity;
 import tetris.utils.ParseMD5;
 
 public class ServerManager {
+	private static ServerManager instance = null;
 	String username="";
 	String password=null;
 	status state=status.offline;
@@ -33,7 +35,7 @@ public class ServerManager {
 	}
 	
 	//µÇÂ½£¬µÇÂ½³É¹¦·µ»Øtrue£¬µÇÂ¼Ê§°Ü»òÕßÖØ¸´µÇÂ½·µ»Øfalse
-	boolean login(String username,String password) throws RemoteException{
+	public boolean login(String username,String password) throws RemoteException{
 		boolean success=server.login(username,ParseMD5.parseStrToMd5U32(password), clientrmi);
 		if(!success)
 			return false;
@@ -98,4 +100,13 @@ public class ServerManager {
 		}
 		return false;
 	}
+	
+	
+	public static ServerManager getInstance() {
+		if (instance == null) {
+			instance = new ServerManager();
+		}
+		return instance;
+	}
+	
 }

@@ -6,6 +6,8 @@ import tetris.common.GlobalConstants;
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
+import tetris.ui.activity.LoginActivity;
+import tetris.ui.activity.MatchActivity;
 import tetris.ui.activity.SinglePlayer;
 
 public class GameEntity {
@@ -121,8 +123,13 @@ public class GameEntity {
 	
 	public static void main(String args[]) {
 		ActivityHolder ac  = ActivityHolder.getInstance();
-		SinglePlayer sp = (SinglePlayer) ac.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
-		GameEntity.getInstance().start();
+		//SinglePlayer sp = (SinglePlayer) ac.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
+		//LoginActivity sp2 = (LoginActivity) ac.turnToNextActivity(Constants.INDEX_LOGIN_ACTIVITY);
+		//ac.pushActivityByIndex(Constants.INDEX_LOGIN_ACTIVITY);
+		//GameEntity.getInstance().start();
+		MatchActivity la = new MatchActivity();
+		la.InitUI();
+		la.showRivalDialog();
 	}
 	
 }

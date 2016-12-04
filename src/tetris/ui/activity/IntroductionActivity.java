@@ -18,7 +18,6 @@ import tetris.utils.ImageProcesser;
 
 public class IntroductionActivity extends Activity{
 
-	private final int LAYOUT_BACKGROUND = 0;
 	private final int LAYOUT_LABEL = LAYOUT_BACKGROUND + 1;
 	
 	private final double LABLE_WidthOfWhole = 0.7;
@@ -28,6 +27,7 @@ public class IntroductionActivity extends Activity{
 	
 	public IntroductionActivity() {
 		// TODO Auto-generated constructor stub
+		super("resources\\image\\introduction_bg.jpg");
 		init();
 	}
 	
@@ -35,18 +35,6 @@ public class IntroductionActivity extends Activity{
 	protected void init() {
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
-		
-		ImageIcon bgImage = ImageProcesser.imageScale(new ImageIcon("resources\\image\\introduction_bg.jpg"),
-				mainContainer.getInterWidth(),
-				mainContainer.getInterHeight());
-		
-		jLayeredPane = new JLayeredPane();
-		JPanel bgPanel = new JPanel();
-		
-		bgPanel.setBounds(0, 0, mainContainer.getInterWidth(), mainContainer.getInterHeight());
-		bgPanel.add(new JLabel(bgImage));
-		bgPanel.setBorder(new EmptyBorder(-5, 0, -5, 0));
-		jLayeredPane.add(bgPanel, LAYOUT_BACKGROUND);
 		
 		JLabel jLabel = new JLabel();
 		JPanel intro = new JPanel();
@@ -60,12 +48,13 @@ public class IntroductionActivity extends Activity{
 		jLayeredPane.add(intro, new Integer(LAYOUT_LABEL));
 		
 		keyAdapter = new MAdapter();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
 		
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.validate();
+		
 	}
 	
+	public static void main(String[] args) {
+		new IntroductionActivity();
+	}
 	
 	@Override
 	public void RestoreUI() {
@@ -80,6 +69,7 @@ public class IntroductionActivity extends Activity{
 		
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
+		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.repaint();
 	}
 	

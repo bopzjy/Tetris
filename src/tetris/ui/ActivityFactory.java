@@ -2,12 +2,13 @@ package tetris.ui;
 
 import tetris.ui.activity.BeginActivity;
 import tetris.ui.activity.IntroductionActivity;
+import tetris.ui.activity.MatchActivity;
 import tetris.ui.activity.PlayerChooser;
 import tetris.ui.activity.RankLister;
 import tetris.ui.activity.SinglePlayer;
 
 public class ActivityFactory {
-	public static Activity produceActivity(int index){
+	private static Activity produceActivity(int index){
 		switch (index) {
 		case Constants.INDEX_BEGIN_ACTIVITY:
 			return new BeginActivity();
@@ -23,10 +24,20 @@ public class ActivityFactory {
 			
 		case Constants.INDEX_SINGLE_PLAYER:
 			return new SinglePlayer();
+			
+		case Constants.INDEX_MATCH_ACTIVITY:
+			return new MatchActivity();
 
 		default:
 			return null;
 		}
 
+	}
+	
+	public static void produceAllActivity(){
+		for(int i = Constants.INDEX_BEGIN_ACTIVITY; i<Constants.TOTAL_ACTIVITY; i++){
+			Activity activity = produceActivity(i);
+			ActivityHolder.getInstance().reserveActivity(activity, i);
+		}
 	}
 }

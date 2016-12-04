@@ -11,18 +11,22 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class DatabaseManager {
+	boolean isChanged=false;
 	ArrayList<User> data;
-	
+	Recorder recorder;
 	DatabaseManager(){
 		load();
+		recorder=new Recorder();
+		recorder.start();
 	}
-	
+	//把data写入文件
 	void save(){
 		try {
 			FileOutputStream fos=new FileOutputStream("data");
 			ObjectOutputStream out=new ObjectOutputStream(fos);
 			out.writeObject(data);
 			out.close();
+			isChanged=false;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -32,7 +36,7 @@ public class DatabaseManager {
 		}
 		
 	}
-
+	//从文件读取data
 	void load(){
 		data=new ArrayList<User>();
 		try {
@@ -62,7 +66,7 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 	}
-
+	//获取最高排名的用户
 	void setTopPlayers(final ArrayList<User> players){
 		players.clear();
 		Comparator<User> comparator=new Comparator<User>(){
@@ -77,19 +81,21 @@ public class DatabaseManager {
 			players.add(data.get(i));
 		}
 	}
-
-	void addUser(User user){
+	//向data数组增加新用户，不写入文件
+	boolean addUser(User user){
 		boolean nothave=true;
 		for(int i=0;i<data.size();i++){
 			if(user.username.equals(data.get(i).username)){
 				nothave=false;
-				break;
+				return false;
 			}
 		}
 		if(nothave)
 			data.add(user);
+		isChanged=true;
+		return true;
 	}
-	
+	//更新用户成绩
 	public int updateScore(String name,int score){
 		boolean nothave=true;
 		for(int i=0;i<data.size();i++){
@@ -106,7 +112,30 @@ public class DatabaseManager {
 			user.score=score;
 			data.add(user);
 		}
-		save();
+		isChanged=true;
 		return 0;
+	}
+	//检查是否有该用户
+	public int checkUser(User user){
+		for(int i=0;i<data.size();i++){
+			if(data.get(i).username.equals(user.username)&&data.get(i).password.equals(user.password))
+				return i;
+		}
+		return -1;
+	}
+	
+	class Recorder extends Thread{
+		public void run(){
+			while(true){
+				try {
+					sleep(1000);
+					if(isChanged)
+						save();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }

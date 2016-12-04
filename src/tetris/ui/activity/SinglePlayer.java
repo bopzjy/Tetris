@@ -128,7 +128,7 @@ public class SinglePlayer extends Activity{
 		
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.repaint();
+		mainContainer.validate();
 	}
 	
 	class MAdapter extends KeyAdapter{

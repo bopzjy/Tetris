@@ -24,9 +24,9 @@ public class CompeteActivity extends Activity{
 			{0.27, 0.77}	
 	};
 	
-	private PlayerIcon myHead, rivalHead;
-	private BlocksPanel myBlocks, rivalBlocks; 
-	private BlocksPanel nextPanel;
+	public PlayerIcon myHead, rivalHead;
+	public BlocksPanel myBlocks, rivalBlocks; 
+	public BlocksPanel nextPanel;
 	
 	
 	public CompeteActivity() {
@@ -83,6 +83,18 @@ public class CompeteActivity extends Activity{
 	public void setHead(Player[] players){
 		myHead.setName(players[0].getName());
 		rivalHead.setName(players[1].getName());
+	}
+	
+	public void setMyColor(int i, int j, Color color) {
+		myBlocks.setBlockColorByCoordinates(i, j, color);
+	}
+	
+	public void setRivalColor(int i, int j, Color color){
+		rivalBlocks.setBlockColorByCoordinates(i, j, color);
+	}
+	
+	public void setNextBlockColor(int i, int j, Color color) {
+		nextPanel.setBlockColorByCoordinates(i, j, color);
 	}
 	
 	public static void main(String[] args) {

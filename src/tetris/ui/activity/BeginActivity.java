@@ -36,9 +36,9 @@ public class BeginActivity extends Activity implements ChangeUI{
 			{0.30, 0.745}
 	};
 	
-	private final int CHOOSE_1 = 0;
-	private final int CHOOSE_2 = 1;
-	private final int CHOOSE_3 = 2;
+	private final int CHOOSE_1 = 1;
+	private final int CHOOSE_2 = 2;
+	private final int CHOOSE_3 = 3;
 	
 	public BeginActivity() {
 		super("resources\\image\\begin_bg.jpg");
@@ -55,7 +55,7 @@ public class BeginActivity extends Activity implements ChangeUI{
 		//MainContainer.getInstance().j
 		//MainContainer mainContainer = MainContainer.getInstance();
 		
-		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
+		arrow = new ArrowJpanel(arrow_shape, 3);
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 
 		keyAdapter = new MAdapter();
@@ -88,11 +88,8 @@ public class BeginActivity extends Activity implements ChangeUI{
 		mainContainer.repaint();*/
 		
 		MainContainer mainContainer = MainContainer.getInstance();
-		//mainContainer.setKeyBoardAdapter(keyAdapter);
+		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);	
-		System.out.println("heedada");
-		jLayeredPane.repaint();
-		mainContainer.repaint();
 		mainContainer.validate();
 		
 	}
@@ -107,7 +104,7 @@ public class BeginActivity extends Activity implements ChangeUI{
 				System.out.println("enter");
 				ActivityHolder activityHolder = ActivityHolder.getInstance();
 				activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
-				switch (arrow_state) {
+				switch (arrow.getState()) {
 				case CHOOSE_1:
 					activityHolder.turnToNextActivity(Constants.INDEX_PLAYER_CHOOSER);
 					break;

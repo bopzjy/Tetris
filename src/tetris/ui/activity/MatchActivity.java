@@ -32,8 +32,8 @@ public class MatchActivity extends Activity{
 	//private final int LAYOUT_BIG_HEAD = LAYOUT_DIALOGARROW + 1;
 	//private final int LAYOUT_SMALL_HEAD = LAYOUT_BIG_HEAD + 1;
 	
-	private RivalDialog rivalDialog;
-	private ArrowJpanel dialogArrow;
+	public RivalDialog rivalDialog;
+	public ArrowJpanel dialogArrow;
 	//private HeadPortrait big, small;
 	//private HeadPortrait rivalHead;
 	//private JLabel meLabel, rivalLabel;
@@ -159,4 +159,5 @@ public class MatchActivity extends Activity{
 	public void hideRival(){
 		rival.hide();
 	}
+	
 }

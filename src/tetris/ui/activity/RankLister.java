@@ -49,7 +49,7 @@ public class RankLister extends Activity{
 		
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.repaint();
+		mainContainer.validate();
 	}
 	
 	class MAdapter extends KeyAdapter{
@@ -60,7 +60,6 @@ public class RankLister extends Activity{
 			super.keyPressed(e);
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_ESCAPE:
-				System.out.println("esc");
 				activityHolder.turnToLastActivity();			
 				break;
 			default:

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import tetris.ui.Activity;
+import tetris.ui.ActivityFactory;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
@@ -27,8 +28,8 @@ public class PlayerChooser extends Activity{
 		{0.39, 0.608},
 		{0.39, 0.718}	
 	};
-	private final int CHOOSE_1 = 0;
-	private final int CHOOSE_2 = 1;
+	private final int CHOOSE_1 = 1;
+	private final int CHOOSE_2 = 2;
 	
 	public PlayerChooser() {
 		// TODO Auto-generated constructor stub
@@ -45,14 +46,11 @@ public class PlayerChooser extends Activity{
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 
 		keyAdapter = new MAdapter();
-		//
-		
-		//mainContainer.setLayeredPane(jLayeredPane);
-		//mainContainer.validate();
 	}
 	
 	public static void main(String[] args) {
-		new PlayerChooser();
+		ActivityFactory.produceAllActivity();
+		new PlayerChooser().InitUI();;
 	}
 	
 	@Override
@@ -72,7 +70,7 @@ public class PlayerChooser extends Activity{
 		
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.repaint();
+		mainContainer.validate();
 	}
 
 	
@@ -92,23 +90,25 @@ public class PlayerChooser extends Activity{
 				System.out.println("enter");
 				activityHolder = ActivityHolder.getInstance();
 				activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
-				switch (arrow_state) {
+				switch (arrow.getState()) {
 				case CHOOSE_1:
 					activityHolder.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
 					break;
-
+				
+				case CHOOSE_2:
+					activityHolder.turnToNextActivity(Constants.INDEX_LOGIN_ACTIVITY);
+					break;
+					
 				default:
 					break;
 				}
 				
 			case KeyEvent.VK_UP:
-				System.out.println("up");
 				arrow.lastState();
 				
 				break;
 
 			case KeyEvent.VK_DOWN:
-				System.out.println("down");
 				arrow.nextState();
 				break;
 				

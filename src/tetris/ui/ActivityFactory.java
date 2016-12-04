@@ -2,6 +2,7 @@ package tetris.ui;
 
 import tetris.ui.activity.BeginActivity;
 import tetris.ui.activity.IntroductionActivity;
+import tetris.ui.activity.LoginActivity;
 import tetris.ui.activity.MatchActivity;
 import tetris.ui.activity.PlayerChooser;
 import tetris.ui.activity.RankLister;
@@ -27,6 +28,9 @@ public class ActivityFactory {
 			
 		case Constants.INDEX_MATCH_ACTIVITY:
 			return new MatchActivity();
+			
+		case Constants.INDEX_LOGIN_ACTIVITY:
+			return new LoginActivity();
 
 		default:
 			return null;

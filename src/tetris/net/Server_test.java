@@ -25,5 +25,4 @@ public class Server_test {
 			e.printStackTrace();
 		}
 	}
-	
 }

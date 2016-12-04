@@ -15,12 +15,15 @@ public class Client_test2 {
 		servermanager=new ServerManager();
 		clientmanager=new ClientManager();
 		try {
-			servermanager.login("daming");
+			servermanager.register("daming","123456");
+			servermanager.login("daming","123456");
 			playerlist=servermanager.getOnlinePlayers();
 			clientmanager.set_RMI_URL(2222);
 			clientmanager.buildVM();
+			System.out.println(playerlist[0].url);
 			clientinterface=clientmanager.connect(playerlist[0].url);
 			System.out.println(clientinterface.test("daming"));
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

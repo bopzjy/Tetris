@@ -21,7 +21,7 @@ public class RivalDialog extends TranslucenceJPanel{
 	private static float TRANSPARENCY = 0.9f;
 	private static float HGAP_RATE = 0.035f;
 	private static double[] list_shape = {0.25,0.145};
-	private ArrowJpanel arrowJpanel;
+	public ArrowJpanel arrowJpanel;
 	/*private static double[][] arrow_shape = {
 		{0.3, 0.6},
 			

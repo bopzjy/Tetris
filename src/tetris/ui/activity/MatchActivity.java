@@ -19,6 +19,7 @@ import tetris.ui.component.InvitedDialog;
 import tetris.ui.component.PlayerIcon;
 import tetris.ui.component.RegisterDialog;
 import tetris.ui.component.RivalDialog;
+import tetris.ui.component.WaitDialog;
 import tetris.ui.single.MWidget;
 import tetris.utils.LoadFont;
 
@@ -29,11 +30,13 @@ public class MatchActivity extends Activity{
 	private final int LAYOUT_WIDGET = LAYOUT_ADDUSER + 1;
 	private final int LAYOUT_RIVALDIALOG = LAYOUT_WIDGET + 1;
 	private final int LAYOUT_DIALOGARROW = LAYOUT_RIVALDIALOG + 1;
+	private final int LAYOUT_WAIT = LAYOUT_DIALOGARROW + 1;
 	//private final int LAYOUT_BIG_HEAD = LAYOUT_DIALOGARROW + 1;
 	//private final int LAYOUT_SMALL_HEAD = LAYOUT_BIG_HEAD + 1;
 	
 	public RivalDialog rivalDialog;
 	public ArrowJpanel dialogArrow;
+	private WaitDialog waitDialog;
 	//private HeadPortrait big, small;
 	//private HeadPortrait rivalHead;
 	//private JLabel meLabel, rivalLabel;
@@ -102,6 +105,9 @@ public class MatchActivity extends Activity{
 		jLayeredPane.add(rivalDialog, new Integer(LAYOUT_RIVALDIALOG));
 		jLayeredPane.add(dialogArrow, new Integer(LAYOUT_DIALOGARROW));
 		
+		waitDialog = new WaitDialog(new double[][]{{0.1,0.30},{0.80,0.4}});
+		jLayeredPane.add(waitDialog, new Integer(LAYOUT_WAIT));
+		
 		//keyAdapter = new MAdapter();
 		//mainContainer.setKeyBoardAdapter(keyAdapter);
 		
@@ -160,4 +166,11 @@ public class MatchActivity extends Activity{
 		rival.hide();
 	}
 	
+	public void showWaitDialog(){
+		waitDialog.setVisible(true);
+	}
+	
+	public void hideWaitDialog(){
+		waitDialog.setVisible(false);
+	}
 }

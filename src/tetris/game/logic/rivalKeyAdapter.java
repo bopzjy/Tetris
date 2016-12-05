@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import javax.net.ssl.SSLEngineResult.Status;
 
 import tetris.common.Player;
+import tetris.net.ClientManager;
 import tetris.net.ServerManager;
 import tetris.net.User;
 import tetris.net.status;
@@ -31,7 +32,10 @@ public class rivalKeyAdapter extends KeyAdapter{
 			
 		case KeyEvent.VK_ENTER:
 			ServerManager sManager = ServerManager.getInstance();
-			sManager.setState(status.offline);
+			sManager.setState(status.battling);
+			ClientManager cManager = ClientManager.getInstance();
+			Player opponent = matchActivity.rivalDialog.getPlayer();
+			
 			break;
 
 		default:

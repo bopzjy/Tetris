@@ -19,7 +19,7 @@ public class ServerManager {
 	String clientrmi="rmi://localhost:"+String.valueOf(GlobalConstants.CLIENT_PORT)+"/ClientImpl";
 	ServerInterface server;
 	sendState sendstatethread;
-	
+	public User [] users = null;
 	ServerManager(){
 		connect();
 	}
@@ -63,7 +63,7 @@ public class ServerManager {
 	//获取在线玩家列表
 	public User[] getOnlinePlayers() throws RemoteException{
 		ArrayList<User> userarray=server.getOnlinePlayers();
-		User []users=new User[userarray.size()];
+		users=new User[userarray.size()];
 		for(int i=0;i<userarray.size();i++)
 			users[i]=userarray.get(i);
 		return users;

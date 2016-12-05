@@ -43,7 +43,7 @@ public class LoginAdapter extends KeyAdapter{
 						User [] users = sManager.getOnlinePlayers();
 						Player [] players = new Player[users.length];
 						for (int i=0;i<users.length;i++) {
-							players[i] = new Player(users[i].username,users[i].score);
+							players[i] = new Player(users[i].username,users[i].score,users[i].ipaddr);
 						}
 						mActivity.rivalDialog.initCandidatesList(players);
 						activityHolder.turnToNextActivity(Constants.INDEX_MATCH_ACTIVITY);

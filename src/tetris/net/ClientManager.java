@@ -16,6 +16,7 @@ public class ClientManager {
 	public int port=GlobalConstants.CLIENT_PORT;
 	public String url="rmi://localhost:"+GlobalConstants.CLIENT_PORT+"/ClientImpl";
 	Registry registry;
+	public  
 	public ClientManager(){
 		
 	}

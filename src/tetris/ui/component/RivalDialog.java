@@ -73,7 +73,7 @@ public class RivalDialog extends TranslucenceJPanel{
 		this.setVisible(false);
 	}
 	
-	void initCandidatesList(Player[] players){
+	public void initCandidatesList(Player[] players){
 		if(players.length<=0)
 			return;
 		

@@ -1,9 +1,12 @@
 package tetris.game.logic;
 
 import java.awt.Color;
+import java.rmi.RemoteException;
 import java.util.Random;
 
 import tetris.common.GlobalConstants;
+import tetris.net.ClientInterface;
+import tetris.net.ClientManager;
 
 public class OnlineMovingDown implements Runnable{
 	GameEntity gEntity;
@@ -53,7 +56,12 @@ public class OnlineMovingDown implements Runnable{
 			fEntityTemp.SpotCal();
 
 			paintBeforeNextEntity();
-			paintFallingEntity(fEntityTemp, fEntityTemp.color, 0);
+			try {
+				paintFallingEntity(fEntityTemp, fEntityTemp.color, 0);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			fEntity.speedRank = getRank();
 			while (true) {
@@ -65,8 +73,13 @@ public class OnlineMovingDown implements Runnable{
 					if (!conflictFlag && !downArrayFlag) {
 						paintFEntityInArray(fEntity, true);
 						paintFEntityInArray(falltemp, false);
-						paintFallingEntity(fEntity, Color.white, 1);
-						paintFallingEntity(falltemp, falltemp.color, 1);
+						try {
+							paintFallingEntity(fEntity, Color.white, 1);
+							paintFallingEntity(falltemp, falltemp.color, 1);
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}					
 						fEntity.moveDown();
 						try {
 							Thread.sleep(GameConstants.SPEED_RANK[fEntity.speedRank]);
@@ -96,13 +109,15 @@ public class OnlineMovingDown implements Runnable{
 		// TODO Auto-generated method stub
 		for(int i=0;i<4;i++) {
 			for (int j=0;j<5;j++) {
-				gEntity.GameActivity.setNextBlockColor(i, j, null);
+				gEntity.comActvity.setNextBlockColor(i, j, null);
 			}
 		}
 	}
 
 	public void GameOver() {
-		gEntity.GameActivity.showNameDialog();    
+		  ClientInterface cInter = ClientManager.getInstance().getInterface();
+		  cInter.youWin();
+		  InitUILogic.showRivalDiaolog();
 	}
 
 	public void checkFullRow(FallingEntity fEntity) {
@@ -114,33 +129,6 @@ public class OnlineMovingDown implements Runnable{
 				maxx--;
 			}
 		}
-//		int[] rowIndex = { fEntity.headSpot.x, fEntity.secSpot.x, fEntity.thirdSpot.x, fEntity.fourthSpot.x };
-//		boolean[] rowTag = { false, false, false, false };
-//		if (checkFullRowhandler(fEntity.headSpot)) {
-//			fullcount++;
-//			rowTag[0] = true;
-//		}
-//		if (checkFullRowhandler(fEntity.secSpot)) {
-//			fullcount++;
-//			rowTag[1] = true;
-//		}
-//		if (checkFullRowhandler(fEntity.thirdSpot)) {
-//			fullcount++;
-//			rowTag[2] = true;
-//		}
-//		if (checkFullRowhandler(fEntity.fourthSpot)) {
-//			fullcount++;
-//			rowTag[3] = true;
-//		}
-//
-//		if (fullcount != 0) {
-//			gEntity.upScore(fullcount * 10);
-//			gEntity.checkLevel();
-//			repaintArray(rowIndex, rowTag);
-//			repaintActivity(fEntity.lowestRow());
-//			gEntity.GameActivity.setScore(Integer.toString(gEntity.getScore()));
-//			gEntity.GameActivity.setLevel(Integer.toString(gEntity.getLevel()));
-//		}
 
 	}
 	
@@ -232,26 +220,31 @@ public class OnlineMovingDown implements Runnable{
 		}
 	}
 
-	public void paintFallingEntity(FallingEntity fEntity, Color color, int flag) {
+	public void paintFallingEntity(FallingEntity fEntity, Color color, int flag) throws RemoteException {
 		// flag为0表示写右上方矩阵，flag为1表示写游戏矩阵
 		if (flag == 0) {
-			gEntity.GameActivity.setNextBlockColor(fEntity.headSpot.x, fEntity.headSpot.y, color);
-			gEntity.GameActivity.setNextBlockColor(fEntity.secSpot.x, fEntity.secSpot.y, color);
-			gEntity.GameActivity.setNextBlockColor(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
-			gEntity.GameActivity.setNextBlockColor(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
+			gEntity.comActvity.setNextBlockColor(fEntity.headSpot.x, fEntity.headSpot.y, color);
+			gEntity.comActvity.setNextBlockColor(fEntity.secSpot.x, fEntity.secSpot.y, color);
+			gEntity.comActvity.setNextBlockColor(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
+			gEntity.comActvity.setNextBlockColor(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
 		}
 		if (flag == 1) {
+			ClientInterface cInter = ClientManager.getInstance().getInterface();
 			if (fEntity.headSpot.IsInArray()) {
-				gEntity.GameActivity.setBlockColorByCoordinates(fEntity.headSpot.x, fEntity.headSpot.y, color);
+				gEntity.comActvity.setMyColor(fEntity.headSpot.x, fEntity.headSpot.y, color);
+				cInter.setBlockColorByCoordinates(fEntity.headSpot.x, fEntity.headSpot.y, color);
 			}
 			if (fEntity.secSpot.IsInArray()) {
-				gEntity.GameActivity.setBlockColorByCoordinates(fEntity.secSpot.x, fEntity.secSpot.y, color);
+				gEntity.comActvity.setMyColor(fEntity.secSpot.x, fEntity.secSpot.y, color);
+				cInter.setBlockColorByCoordinates(fEntity.secSpot.x, fEntity.secSpot.y, color);
 			}
 			if (fEntity.thirdSpot.IsInArray()) {
-				gEntity.GameActivity.setBlockColorByCoordinates(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
+				gEntity.comActvity.setMyColor(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
+				cInter.setBlockColorByCoordinates(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
 			}
 			if (fEntity.fourthSpot.IsInArray()) {
-				gEntity.GameActivity.setBlockColorByCoordinates(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
+				gEntity.comActvity.setMyColor(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
+				cInter.setBlockColorByCoordinates(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
 			}
 
 		}

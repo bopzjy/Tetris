@@ -15,13 +15,19 @@ public class ClientManager {
 	private static ClientManager instance = null;
 	public int port=GlobalConstants.CLIENT_PORT;
 	public String url="rmi://localhost:"+GlobalConstants.CLIENT_PORT+"/ClientImpl";
-	Registry registry; 
+	Registry registry;
+	ClientInterface currentClientInterface = null;
 	public ClientManager(){
 		
 	}
 	public ClientInterface connect(String url) 
 			throws MalformedURLException, RemoteException, NotBoundException{
-		return (ClientInterface)Naming.lookup(url);
+		currentClientInterface = (ClientInterface)Naming.lookup(url);
+		return currentClientInterface;
+	}
+	
+	public ClientInterface getInterface () {
+		return currentClientInterface;
 	}
 	
 	public void buildVM(){

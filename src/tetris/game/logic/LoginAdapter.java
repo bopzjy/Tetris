@@ -39,15 +39,7 @@ public class LoginAdapter extends KeyAdapter{
 				ServerManager sManager = ServerManager.getInstance();
 				try {
 					if(sManager.login(loginActivity.getName(),loginActivity.getPasswdVale())){
-						MatchActivity mActivity = (MatchActivity) activityHolder.getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
-						User [] users = sManager.getOnlinePlayers();
-						Player [] players = new Player[users.length];
-						for (int i=0;i<users.length;i++) {
-							players[i] = new Player(users[i].username,users[i].score);
-						}
-						mActivity.rivalDialog.initCandidatesList(players);
-						activityHolder.turnToNextActivity(Constants.INDEX_MATCH_ACTIVITY);
-						mActivity.showRivalDialog();
+						InitUILogic.showRivalDiaolog();
 					}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
@@ -75,4 +67,6 @@ public class LoginAdapter extends KeyAdapter{
 			break;
 		}
 	}
+	
+	
 }

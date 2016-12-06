@@ -1,10 +1,15 @@
 package tetris.net;
 
+import java.awt.Color;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import tetris.game.logic.GameAdapter;
 import tetris.game.logic.GameEntity;
+import tetris.game.logic.InitUILogic;
+import tetris.ui.ActivityHolder;
+import tetris.ui.Constants;
+import tetris.ui.activity.MatchActivity;
 
 public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 
@@ -44,11 +49,25 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 			
 		return false;
 	}
+	
 
 	@Override
 	public boolean InitCheck() throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void setBlockColorByCoordinates(int i, int j, Color color) throws RemoteException {
+		// TODO Auto-generated method stub
+		GameEntity.getInstance().getcomActivity().setRivalColor(i, j, color);
+	}
+
+	@Override
+	public void youWin() throws RemoteException {
+		// TODO Auto-generated method stub
+		ServerManager.getInstance().server.updateScore(ServerManager.getInstance().username, ServerManager.getInstance().s)
+		InitUILogic.showRivalDiaolog();
 	}
 
 }

@@ -70,7 +70,6 @@ public class GameEntity {
 	public void start() {
 		GameActivity = (SinglePlayer) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_SINGLE_PLAYER);
 		MainContainer.getInstance().setKeyBoardAdapter(gAdapter);
-		GameActivity.InitUI();
 		score = 0;
 		GameActivity.setScore(Integer.toString(score));
 		level = 0;
@@ -169,11 +168,16 @@ public class GameEntity {
 	public GameAdapter getAdapter() {
 		return gAdapter;
 	}
+	
+	public CompeteActivity getcomActivity() {
+		return comActvity;
+	}
 
 	public static void main(String args[]) {
 		ActivityHolder ac = ActivityHolder.getInstance();
 		
 		SinglePlayer sp = new SinglePlayer();
+		//sp.InitUI();
 		ac.reserveActivity(sp, Constants.INDEX_SINGLE_PLAYER);
 		 //ac.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
 		// LoginActivity sp2 = (LoginActivity)

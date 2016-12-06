@@ -15,5 +15,4 @@ public class User implements Serializable{
 	public int rank=0;
 	public int timeleft=10;
 	public status state=status.offline;
-	public String ipaddr;
 }

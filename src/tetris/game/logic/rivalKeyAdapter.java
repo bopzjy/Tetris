@@ -50,7 +50,7 @@ public class rivalKeyAdapter extends KeyAdapter{
 			ClientManager cManager = ClientManager.getInstance();
 			User opponent = sManager.users[matchActivity.rivalDialog.arrowJpanel.getState()];
 			try {
-				ClientInterface clientInterface = cManager.connect(cManager.getURL(opponent.ipaddr));
+				ClientInterface clientInterface = cManager.connect(opponent.url);
 				GameEntity gEntity = GameEntity.getInstance();
 				gEntity.OnlineGameInit();
 				if(clientInterface.acceptBattle()) {

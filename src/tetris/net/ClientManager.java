@@ -54,10 +54,6 @@ public class ClientManager {
 		this.port=port;
 	}
 	
-	public String getURL(String ipaddr){
-		return "rmi://"+ "ipaddr"+":"+port+"/ClientImpl";
-	}
-	
 	public static ClientManager getInstance() {
 		if (instance == null) {
 			instance = new ClientManager();

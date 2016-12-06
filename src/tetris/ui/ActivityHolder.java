@@ -39,7 +39,6 @@ public class ActivityHolder {
 	}
 	
 	public void pushActivityByIndex(int index) {
-		
 		stack.push(resActivity[index]);
 	}
 	

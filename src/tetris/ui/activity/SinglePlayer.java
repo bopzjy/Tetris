@@ -92,7 +92,7 @@ public class SinglePlayer extends Activity{
 		setLevel("12345");
 		//System.out.println(levelPanel.getGameData());
 			
-		gameOverArrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
+		gameOverArrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1, MainContainer.getInstance());
 		gameOverDialog = new GameOverDialog(GlobalConstants.SINGLE_GAMEOVER_SHAPE, gameOverArrow);
 		gameOverArrow.setVisible(false);
 		jLayeredPane.add(gameOverDialog, new Integer(LAYOUT_GAMEOVER));

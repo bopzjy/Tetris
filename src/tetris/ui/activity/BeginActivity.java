@@ -28,12 +28,11 @@ public class BeginActivity extends Activity implements ChangeUI{
 	private final int LAYOUT_ARROW = LAYOUT_BACKGROUND + 1;
 	
 	private ArrowJpanel arrow;
-	private int arrow_state;// = 0;
 	private final double arrow_shape[][] = {
 			{0.045, 0.0559},
-			{0.30, 0.585},
-			{0.30, 0.665},
-			{0.30, 0.745}
+			{0.30, 0.57},
+			{0.30, 0.645},
+			{0.30, 0.725}
 	};
 	
 	private final int CHOOSE_1 = 1;
@@ -41,13 +40,8 @@ public class BeginActivity extends Activity implements ChangeUI{
 	private final int CHOOSE_3 = 3;
 	
 	public BeginActivity() {
-		super("resources\\image\\begin_bg.jpg");
-		
-		keyAdapter = null;
-		arrow_state = 0;
-		
-		init();
-		
+		super("resources\\image\\begin_bg.jpg");	
+		init();	
 	}
 
 	@Override
@@ -55,7 +49,7 @@ public class BeginActivity extends Activity implements ChangeUI{
 		//MainContainer.getInstance().j
 		//MainContainer mainContainer = MainContainer.getInstance();
 		
-		arrow = new ArrowJpanel(arrow_shape, 3);
+		arrow = new ArrowJpanel(arrow_shape, 3, MainContainer.getInstance());
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 
 		keyAdapter = new MAdapter();
@@ -69,12 +63,13 @@ public class BeginActivity extends Activity implements ChangeUI{
 
 	@Override
 	public void RestoreUI() {
-		MainContainer mainContainer = MainContainer.getInstance();
+		/*MainContainer mainContainer = MainContainer.getInstance();
 		
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.repaint();
-		//mainContainer.validate();
+		//mainContainer.repaint();
+		mainContainer.validate();*/
+		InitUI();
 		
 	}
 
@@ -87,10 +82,12 @@ public class BeginActivity extends Activity implements ChangeUI{
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.repaint();*/
 		
+		System.out.println("heedada");
 		MainContainer mainContainer = MainContainer.getInstance();
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);	
 		mainContainer.validate();
+		mainContainer.repaint();
 		
 	}
 	
@@ -106,6 +103,7 @@ public class BeginActivity extends Activity implements ChangeUI{
 				activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
 				switch (arrow.getState()) {
 				case CHOOSE_1:
+					System.out.println("abc");
 					activityHolder.turnToNextActivity(Constants.INDEX_PLAYER_CHOOSER);
 					break;
 					

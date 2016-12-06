@@ -1,8 +1,6 @@
-package tetris.ui.single;
+package tetris.ui;
 
 import javax.swing.JPanel;
-
-import tetris.ui.MainContainer;
 
 
 public class MWidget extends JPanel{

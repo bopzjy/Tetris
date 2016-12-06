@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 
 import tetris.common.Player;
 import tetris.game.logic.rivalKeyAdapter;
+import tetris.ui.MWidget;
 import tetris.ui.MainContainer;
-import tetris.ui.single.MWidget;
-import tetris.ui.single.TranslucenceJPanel;
+import tetris.ui.TranslucenceJPanel;
 import tetris.utils.ImageProcesser;
 
 public class RivalDialog extends TranslucenceJPanel{

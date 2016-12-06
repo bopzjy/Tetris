@@ -14,6 +14,7 @@ import tetris.common.GlobalConstants;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
+import tetris.ui.TranslucenceJPanel;
 import tetris.ui.component.ArrowJpanel;
 import tetris.utils.ImageProcesser;
 import tetris.utils.LoadFont;

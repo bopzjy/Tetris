@@ -43,7 +43,6 @@ public class LoadActivity extends Activity{
 	}
 	
 	public static void main(String[] args){
-		//System.out.println("nimei");
 		new LoadActivity();
 		
 	}

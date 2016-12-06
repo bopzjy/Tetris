@@ -7,6 +7,7 @@ import tetris.common.Player;
 import tetris.ui.Activity;
 import tetris.ui.MainContainer;
 import tetris.ui.component.InvitedDialog;
+import tetris.ui.component.OverDialog;
 import tetris.ui.component.PlayerIcon;
 import tetris.ui.single.BlocksPanel;
 import tetris.ui.single.GameOverDialog;
@@ -14,19 +15,12 @@ import tetris.ui.single.GameOverDialog;
 public class CompeteActivity extends Activity{
 	
 	private int LAYOUT_WIDGET = LAYOUT_BACKGROUND + 1;
-	
-	private static double[][] arrow_shape = {
-			{0.05, 0.0563},		
-			{0.27, 0.43},
-			{0.27, 0.515},
-			{0.27, 0.6},
-			{0.27, 0.685},
-			{0.27, 0.77}	
-	};
+	private int LAYOUT_OVERDIALOG = LAYOUT_WIDGET + 1;
 	
 	public PlayerIcon myHead, rivalHead;
 	public BlocksPanel myBlocks, rivalBlocks; 
 	public BlocksPanel nextPanel;
+	public OverDialog overDialog;
 	
 	
 	public CompeteActivity() {
@@ -57,11 +51,15 @@ public class CompeteActivity extends Activity{
 		
 		nextPanel = new BlocksPanel(new double[][]{{0.735, 0.248}, {0.125, 0.125}}, null, 4, 5, 2);
 		jLayeredPane.add(nextPanel, new Integer(LAYOUT_WIDGET));
+		
+		overDialog = new OverDialog(new double[][] {{0.11, 0.17},{0.752,  0.65}});
+		jLayeredPane.add(overDialog, new Integer(LAYOUT_OVERDIALOG));
+		overDialog.setVisible(true);
 		// Demo: print blocks
-		nextPanel.setBlockColorByCoordinates(1, 2, Color.green);
+		/*nextPanel.setBlockColorByCoordinates(1, 2, Color.green);
 		nextPanel.setBlockColorByCoordinates(2, 2, Color.green);
 		nextPanel.setBlockColorByCoordinates(3, 2, Color.green);
-		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);
+		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);*/
 		
 		
 	}
@@ -78,6 +76,7 @@ public class CompeteActivity extends Activity{
 		MainContainer mainContainer = MainContainer.getInstance();
 		mainContainer.setLayeredPane(jLayeredPane);		
 		mainContainer.validate();
+		mainContainer.repaint();
 	}
 	
 	public void setHead(Player[] players){

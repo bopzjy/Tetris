@@ -124,6 +124,10 @@ public class MainContainer extends JFrame{
 //		new MainContainer();
 //	}
 	
+/*	public int getInterWidth(){
+		return this.width;
+	}*/
+	
 	public int getInterWidth(){
 		return this.width;
 	}

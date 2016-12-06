@@ -1,4 +1,4 @@
-package tetris.ui.single;
+package tetris.ui;
 /*
  *重写这个类来实现半透明的JPanel 
  */
@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import tetris.utils.ImageProcesser;
+
 //import Logic.CastImage;
 
 public class TranslucenceJPanel extends MWidget {
@@ -17,6 +19,7 @@ public class TranslucenceJPanel extends MWidget {
 	
 	protected float transparency;
 	protected ImageIcon bgImage;
+	protected double[][] fshape;
 	
 	
 	public TranslucenceJPanel(double[][] shape){
@@ -24,11 +27,8 @@ public class TranslucenceJPanel extends MWidget {
 		this.setBorder(null);
 		this.setBackground(null);
 		this.setOpaque(false);
+		this.fshape = shape;
 
-	}
-	
-	public void setBgImage(ImageIcon bg){
-		this.bgImage = bg;
 	}
 	
 	public void setTransparent(float transparency) {
@@ -46,4 +46,10 @@ public class TranslucenceJPanel extends MWidget {
 		graphics2d.dispose();
 	}
 	
+	protected void setBackGroud(String path) {
+		MainContainer mainContainer = MainContainer.getInstance();
+		bgImage = ImageProcesser.imageScale(new ImageIcon(path),
+				(int)(mainContainer.getInterWidth() * fshape[1][0]),
+				(int)(mainContainer.getInterHeight() * fshape[1][1]));
+	}
 }

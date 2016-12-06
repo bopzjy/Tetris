@@ -70,6 +70,7 @@ public class IntroductionActivity extends Activity{
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.setKeyBoardAdapter(keyAdapter);
+		mainContainer.validate();
 		mainContainer.repaint();
 	}
 	

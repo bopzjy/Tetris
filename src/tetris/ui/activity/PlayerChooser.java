@@ -3,30 +3,22 @@ package tetris.ui.activity;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import tetris.ui.Activity;
 import tetris.ui.ActivityFactory;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
 import tetris.ui.component.ArrowJpanel;
-import tetris.utils.ImageProcesser;
 
 public class PlayerChooser extends Activity{
 	
 	private final int LAYOUT_ARROW = LAYOUT_BACKGROUND + 1;
 	
 	private ArrowJpanel arrow;
-	private int arrow_state;// = 0;
 	private final double arrow_shape[][] = {
 		{0.05, 0.0563},
-		{0.39, 0.608},
-		{0.39, 0.718}	
+		{0.39, 0.580},
+		{0.39, 0.690}	
 	};
 	private final int CHOOSE_1 = 1;
 	private final int CHOOSE_2 = 2;
@@ -42,7 +34,7 @@ public class PlayerChooser extends Activity{
 		// TODO Auto-generated method stub
 		//MainContainer mainContainer = MainContainer.getInstance();
 		
-		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1);
+		arrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1, MainContainer.getInstance());
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 
 		keyAdapter = new MAdapter();

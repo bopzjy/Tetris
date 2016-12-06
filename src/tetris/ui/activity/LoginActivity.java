@@ -63,8 +63,7 @@ public class LoginActivity extends Activity{
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
 		
-		arrow = new ArrowJpanel(arrow_shape, 2);
-		
+		arrow = new ArrowJpanel(arrow_shape, 2, mainContainer);
 		jLayeredPane.add(arrow, new Integer(LAYOUT_ARROW));
 		
 		registerDialog = new RegisterDialog(GlobalConstants.REGISTER_SHAPE);
@@ -126,6 +125,7 @@ public class LoginActivity extends Activity{
 		mainContainer.setKeyBoardAdapter(new LoginAdapter());
 		mainContainer.setLayeredPane(jLayeredPane);		
 		mainContainer.validate();
+		mainContainer.repaint();
 	}
 	
 	class MAdapter extends KeyAdapter{

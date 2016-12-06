@@ -3,7 +3,7 @@ package tetris.ui.component;
 import javax.swing.ImageIcon;
 
 import tetris.ui.MainContainer;
-import tetris.ui.single.TranslucenceJPanel;
+import tetris.ui.TranslucenceJPanel;
 import tetris.utils.ImageProcesser;
 
 public class WaitDialog extends TranslucenceJPanel{

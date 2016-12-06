@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import tetris.common.GlobalConstants;
+import tetris.ui.MWidget;
 import tetris.ui.MainContainer;
 import tetris.utils.LoadFont;
 

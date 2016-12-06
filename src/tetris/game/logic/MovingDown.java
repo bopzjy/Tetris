@@ -9,7 +9,7 @@ public class MovingDown implements Runnable {
 	GameEntity gEntity;
 	FallingEntityPipeline FEPLine = null;
 	FallingEntity currentFEntity = null;
-	Random ra1 = new Random(37);
+	Random ra1 = new Random();
 //	Random ra2 = new Random(37);
 //	Random ra3 = new Random(37);
 

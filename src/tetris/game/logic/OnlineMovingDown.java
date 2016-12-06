@@ -9,9 +9,7 @@ public class OnlineMovingDown implements Runnable{
 	GameEntity gEntity;
 	FallingEntityPipeline FEPLine = null;
 	FallingEntity currentFEntity = null;
-	Random ra1 = new Random(37);
-//	Random ra2 = new Random(37);
-//	Random ra3 = new Random(37);
+	Random ra1 = new Random();
 
 	public OnlineMovingDown(GameEntity gEntity) {
 		// TODO Auto-generated constructor stub

@@ -6,6 +6,7 @@ import tetris.common.GlobalConstants;
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
+import tetris.ui.MainContainer;
 import tetris.ui.activity.CompeteActivity;
 import tetris.ui.activity.LoginActivity;
 import tetris.ui.activity.MatchActivity;
@@ -37,16 +38,16 @@ public class GameEntity {
 		// TODO Auto-generated method stub
 		GameActivity = (SinglePlayer) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_SINGLE_PLAYER);
 		mdThread = new MovingDown(this);
-		onlinemdThread = new OnlineMovingDown(this);
+		//onlinemdThread = new OnlineMovingDown(this);
 		GameArray = new int[GlobalConstants.NUMBER_OF_ROWS][GlobalConstants.NUMBER_OF_COLUMNS];
 		score = 0;
 		gAdapter = new GameAdapter(this);
 		onlinegameAdapter = new OnlineGameAdapter(this);
-		comActvity = ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_COMPETE_ACTIVITY);
+		comActvity = (CompeteActivity) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_COMPETE_ACTIVITY);
 	}
 
 	public void OnlineGameInit() {
-		comActvity = ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_COMPETE_ACTIVITY);
+		comActvity = (CompeteActivity) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_COMPETE_ACTIVITY);
 		score = 0;
 		level = 0;
 		emptyArray();
@@ -68,6 +69,8 @@ public class GameEntity {
 
 	public void start() {
 		GameActivity = (SinglePlayer) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_SINGLE_PLAYER);
+		MainContainer.getInstance().setKeyBoardAdapter(gAdapter);
+		GameActivity.InitUI();
 		score = 0;
 		GameActivity.setScore(Integer.toString(score));
 		level = 0;
@@ -169,15 +172,17 @@ public class GameEntity {
 
 	public static void main(String args[]) {
 		ActivityHolder ac = ActivityHolder.getInstance();
-		// SinglePlayer sp = (SinglePlayer)
-		// ac.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
+		
+		SinglePlayer sp = new SinglePlayer();
+		ac.reserveActivity(sp, Constants.INDEX_SINGLE_PLAYER);
+		 //ac.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
 		// LoginActivity sp2 = (LoginActivity)
 		// ac.turnToNextActivity(Constants.INDEX_LOGIN_ACTIVITY);
 		// ac.pushActivityByIndex(Constants.INDEX_LOGIN_ACTIVITY);
-		// GameEntity.getInstance().start();
-		MatchActivity la = new MatchActivity();
-		la.InitUI();
-		la.showRivalDialog();
+		 GameEntity.getInstance().start();
+		//MatchActivity la = new MatchActivity();
+		//la.InitUI();
+		//la.showRivalDialog();
 	}
 
 }

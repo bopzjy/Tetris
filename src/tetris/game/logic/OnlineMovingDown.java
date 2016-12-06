@@ -5,7 +5,7 @@ import java.util.Random;
 
 import tetris.common.GlobalConstants;
 
-public class MovingDown implements Runnable {
+public class OnlineMovingDown implements Runnable{
 	GameEntity gEntity;
 	FallingEntityPipeline FEPLine = null;
 	FallingEntity currentFEntity = null;
@@ -13,7 +13,7 @@ public class MovingDown implements Runnable {
 //	Random ra2 = new Random(37);
 //	Random ra3 = new Random(37);
 
-	public MovingDown(GameEntity gEntity) {
+	public OnlineMovingDown(GameEntity gEntity) {
 		// TODO Auto-generated constructor stub
 		this.gEntity = gEntity;
 		FEPLine = new FallingEntityPipeline(this.gEntity);
@@ -157,55 +157,7 @@ public class MovingDown implements Runnable {
 		}
 	}
 
-//	public void repaintArray(int[] rowIndex, boolean[] rowTag) {
-//		for (int i = 0; i < GameConstants.NUMBER_OF_SPOT - 1; i++) {
-//			int temp = i;
-//			for (int j = i + 1; j < GameConstants.NUMBER_OF_SPOT; j++) {
-//				if (rowIndex[j] > rowIndex[temp]) {
-//					temp = j;
-//				}
-//			}
-//			if (temp != i) {
-//				int indexTemp = rowIndex[i];
-//				rowIndex[i] = rowIndex[temp];
-//				rowIndex[temp] = indexTemp;
-//				boolean tagTemp = rowTag[i];
-//				rowTag[i] = rowTag[temp];
-//				rowTag[temp] = tagTemp;
-//			}
-//		}
-//		int count = 0;
-//		for (int i = 0; i < GameConstants.NUMBER_OF_SPOT; i++) {
-//			if (i == 0 || (i != 0 && rowIndex[i] != rowIndex[i - 1])) {
-//				if (rowTag[i]) {
-//					count++;
-//				}
-//			}
-//		}
-//
-//		int rowNum = rowIndex[GameConstants.NUMBER_OF_SPOT - 1] - rowIndex[0] + 1;
-//		int rowWrite = rowNum - count;
-//		int bas = rowIndex[0];
-//		for (int i = 0; i < rowWrite; i++) {
-//			int j = 0;
-//			for (; j < GameConstants.NUMBER_OF_SPOT; j++) {
-//				if (j == 0 || (j != 0 && rowIndex[j] != rowIndex[j - 1])) {
-//					if (!rowTag[j]) {
-//						for (int k = 0; k < GlobalConstants.NUMBER_OF_COLUMNS; k++) {
-//							gEntity.GameArray[bas + i][k] = gEntity.GameArray[rowIndex[j]][k];
-//						}
-//					}
-//				}
-//			}
-//		}
-//
-//		for (int i = rowIndex[GameConstants.NUMBER_OF_SPOT - 1]; i >= 0; i--) {
-//			for (int j = 0; j < GlobalConstants.NUMBER_OF_COLUMNS; j++) {
-//				gEntity.GameArray[i + count][j] = gEntity.GameArray[i][j];
-//			}
-//		}
-//
-//	}
+
 
 	public void repaintActivity(int lowestx) {
 		for (int j = 0; j < GlobalConstants.NUMBER_OF_COLUMNS; j++) {
@@ -247,25 +199,7 @@ public class MovingDown implements Runnable {
 		}
 	}
 
-//	public boolean checkFullRowhandler(Spot s) {
-//		int x = s.x;
-//		boolean fullFlag = true;
-//		for (int y = 0; y < GlobalConstants.NUMBER_OF_COLUMNS; y++) {
-//			if (gEntity.GameArray[x][y] == 0) {
-//				fullFlag = false;
-//				break;
-//			}
-//		}
-//		if (fullFlag) {
-//			for (int y = 0; y < GlobalConstants.NUMBER_OF_COLUMNS; y++) {
-//				gEntity.GameArray[x][y] = 0;
-//				gEntity.GameActivity.setBlockColorByCoordinates(x, y, Color.white);
-//			}
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
+
 
 	public void paintFEntityInArray(FallingEntity fEntity, boolean nullFlag) {
 		// nullFlag为true时，表示置为白色，false表示写上颜色
@@ -385,156 +319,5 @@ public class MovingDown implements Runnable {
 		return -1;
 	}
 
-	public static Spot getInitialSpot(int patternNum, int directNum) {
-		Spot temp = null;
-		switch (patternNum) {
-		case 0:
-			temp = patternZeroInitial(directNum);
-			break;
-		case 1:
-			temp = patternOneInitial(directNum);
-			break;
-
-		case 2:
-			temp = patternTwoInitial(directNum);
-			break;
-		case 3:
-			temp = patternThreeInitial(directNum);
-			break;
-		case 4:
-			temp = patternFourInitial(directNum);
-			break;
-		case 5:
-			temp = patternFiveInitial(directNum);
-			break;
-		case 6:
-			temp = patternSixInitial(directNum);
-			break;
-
-		default:
-			temp = new Spot(-1, -1);
-			break;
-		}
-		return temp;
-	}
-
-	public static Spot patternZeroInitial(int directNum) {
-		Spot temp = null;
-		switch (directNum) {
-		case 0:
-			temp = new Spot(-1, 5);
-			break;
-		case 1:
-			temp = new Spot(-1, 4);
-			break;
-		default:
-			temp = new Spot(-2, -2);
-			break;
-		}
-		return temp;
-	}
-
-	public static Spot patternOneInitial(int directNum) {
-		Spot temp = null;
-		switch (directNum) {
-		case 0:
-			temp = new Spot(-1, 5);
-			break;
-		case 1:
-			temp = new Spot(-2, 5);
-			break;
-		case 2:
-			temp = new Spot(-2, 5);
-			break;
-		case 3:
-			temp = new Spot(-2, 6);
-			break;
-		default:
-			temp = new Spot(-2, -2);
-			break;
-		}
-		return temp;
-	}
-
-	public static Spot patternTwoInitial(int directNum) {
-		Spot temp = null;
-		switch (directNum) {
-		case 0:
-			temp = new Spot(-1, 5);
-			break;
-		case 1:
-			temp = new Spot(-2, 5);
-			break;
-		default:
-			temp = new Spot(-2, -2);
-			break;
-		}
-		return temp;
-	}
-
-	public static Spot patternThreeInitial(int directNum) {
-		Spot temp = null;
-		switch (directNum) {
-		case 0:
-			temp = new Spot(-1, 5);
-			break;
-		case 1:
-			temp = new Spot(-2, 5);
-			break;
-		default:
-			temp = new Spot(-2, -2);
-			break;
-		}
-		return temp;
-	}
-
-	public static Spot patternFourInitial(int directNum) {
-
-		return new Spot(-2, 5);
-	}
-
-	public static Spot patternFiveInitial(int directNum) {
-		Spot temp = null;
-		switch (directNum) {
-		case 0:
-			temp = new Spot(-2, 5);
-			break;
-		case 1:
-			temp = new Spot(-2, 5);
-			break;
-		case 2:
-			temp = new Spot(-2, 6);
-			break;
-		case 3:
-			temp = new Spot(-1, 5);
-			break;
-		default:
-			temp = new Spot(-2, -2);
-			break;
-		}
-		return temp;
-	}
-
-	public static Spot patternSixInitial(int directNum) {
-		Spot temp = null;
-		switch (directNum) {
-		case 0:
-			temp = new Spot(-2, 6);
-			break;
-		case 1:
-			temp = new Spot(-2, 5);
-			break;
-		case 2:
-			temp = new Spot(-2, 5);
-			break;
-		case 3:
-			temp = new Spot(-2, 5);
-			break;
-		default:
-			temp = new Spot(-2, -2);
-			break;
-		}
-		return temp;
-	}
 
 }

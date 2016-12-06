@@ -12,12 +12,12 @@ import tetris.utils.ParseMD5;
 
 public class ServerManager {
 	private static ServerManager instance = null;
-	String username="";
+	public String username="";
 	String password=null;
 	status state=status.offline;
 	String url="rmi://"+GlobalConstants.SERVER_HOST+":"+String.valueOf(GlobalConstants.SERVER_PORT)+"/ServerImpl";
 	String clientrmi="rmi://localhost:"+String.valueOf(GlobalConstants.CLIENT_PORT)+"/ClientImpl";
-	ServerInterface server;
+	public ServerInterface server;
 	sendState sendstatethread;
 	public User [] users = null;
 	ServerManager(){

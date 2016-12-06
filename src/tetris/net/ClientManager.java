@@ -15,8 +15,7 @@ public class ClientManager {
 	private static ClientManager instance = null;
 	public int port=GlobalConstants.CLIENT_PORT;
 	public String url="rmi://localhost:"+GlobalConstants.CLIENT_PORT+"/ClientImpl";
-	Registry registry;
-	public  
+	Registry registry; 
 	public ClientManager(){
 		
 	}
@@ -53,6 +52,10 @@ public class ClientManager {
 	public void set_RMI_URL(int port){
 		url="rmi://localhost:"+port+"/ClientImpl";
 		this.port=port;
+	}
+	
+	public String getURL(String ipaddr){
+		return "rmi://"+ "ipaddr"+":"+port+"/ClientImpl";
 	}
 	
 	public static ClientManager getInstance() {

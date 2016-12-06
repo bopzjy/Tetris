@@ -3,6 +3,9 @@ package tetris.net;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import tetris.game.logic.GameAdapter;
+import tetris.game.logic.GameEntity;
+
 public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 
 	/**
@@ -24,6 +27,28 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 	public String test(String str) throws RemoteException {
 		// TODO Auto-generated method stub
 		return "send from"+str;
+	}
+
+	@Override
+	public boolean acceptBattle() throws RemoteException {
+		// TODO Auto-generated method stub
+		ServerManager sManager = ServerManager.getInstance();
+		if(sManager.state == status.online) {
+			sManager.setState(status.battling);
+			sManager.server.setStatus(sManager.username, status.battling);
+			GameEntity gEntity = GameEntity.getInstance();
+			gEntity.OnlineGameInit();
+			gEntity.OnlineGameStart();
+			return true;
+		}
+			
+		return false;
+	}
+
+	@Override
+	public boolean InitCheck() throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -47,6 +47,7 @@ public class LoginAdapter extends KeyAdapter{
 						}
 						mActivity.rivalDialog.initCandidatesList(players);
 						activityHolder.turnToNextActivity(Constants.INDEX_MATCH_ACTIVITY);
+						mActivity.showRivalDialog();
 					}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block

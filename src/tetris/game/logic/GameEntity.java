@@ -26,10 +26,11 @@ public class GameEntity {
 	// ·ÖÊý¼ÇÂ¼
 	int score;
 	int level;
-
+    
 	GameAdapter gAdapter = null;
 	OnlineGameAdapter onlinegameAdapter = null;
-
+	public volatile boolean fastfall = false;
+	
 	public GameEntity() {
 		init();
 	}

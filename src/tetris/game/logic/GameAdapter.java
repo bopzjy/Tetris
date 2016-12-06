@@ -48,6 +48,10 @@ public class GameAdapter extends KeyAdapter{
 			rot.rotate();
 			break;
 			
+		case KeyEvent.VK_DOWN:
+			gEntity.fastfall = true;
+			break;
+			
 		default:
 			break;
 		}

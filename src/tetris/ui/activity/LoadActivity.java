@@ -56,7 +56,7 @@ public class LoadActivity extends Activity{
 	@Override
 	public void InitUI() {
 		// TODO Auto-generated method stub
-
+		
 	}
 	
 }

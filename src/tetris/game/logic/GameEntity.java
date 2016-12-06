@@ -22,7 +22,7 @@ public class GameEntity {
 	SinglePlayer GameActivity = null;
 	CompeteActivity comActvity = null;
 	MovingDown mdThread = null;
-	OnlineMovingDown onlinemdThread = null;
+	public OnlineMovingDown onlinemdThread = null;
 	// ·ÖÊý¼ÇÂ¼
 	int score;
 	int level;
@@ -56,7 +56,9 @@ public class GameEntity {
 	}
 
 	public void OnlineGameStart() {
-		ActivityHolder.getInstance().turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
+		MainContainer mainContainer = MainContainer.getInstance();
+		mainContainer.setKeyBoardAdapter(onlinegameAdapter);
+		ActivityHolder.getInstance().turnToNextActivity(Constants.INDEX_COMPETE_ACTIVITY);
 		onlinemdThread.start();
 	}
 
@@ -70,6 +72,7 @@ public class GameEntity {
 	public void start() {
 		GameActivity = (SinglePlayer) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_SINGLE_PLAYER);
 		MainContainer.getInstance().setKeyBoardAdapter(gAdapter);
+		//ActivityHolder.getInstance().turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
 		score = 0;
 		GameActivity.setScore(Integer.toString(score));
 		level = 0;
@@ -77,7 +80,7 @@ public class GameEntity {
 		emptyArray();
 		emptyGameNextArray(0);
 		emptyGameMainArray(0);
-		ActivityHolder.getInstance().turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
+		
 		mdThread.start();
 	}
 
@@ -176,9 +179,9 @@ public class GameEntity {
 	public static void main(String args[]) {
 		ActivityHolder ac = ActivityHolder.getInstance();
 		
-		SinglePlayer sp = new SinglePlayer();
+		//SinglePlayer sp = new SinglePlayer();
 		//sp.InitUI();
-		ac.reserveActivity(sp, Constants.INDEX_SINGLE_PLAYER);
+		//ac.reserveActivity(sp, Constants.INDEX_SINGLE_PLAYER);
 		 //ac.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
 		// LoginActivity sp2 = (LoginActivity)
 		// ac.turnToNextActivity(Constants.INDEX_LOGIN_ACTIVITY);

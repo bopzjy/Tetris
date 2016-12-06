@@ -16,6 +16,8 @@ public class GameConstants {
 	public static final int NUMBER_OF_COLOR = 21;
 	// 下落物预生成数
 	public static final int LENGTH_OF_FEPIPELINE = 20;
+    //网战胜出所得分数
+	public static final int YOU_WIN_SCORE = 10;
 	// 下落快和顔色的固定映射
 	public static final int[] PATTERN_COLOR = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	// 下落快和顔色的固定映射

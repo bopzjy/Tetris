@@ -12,6 +12,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 import tetris.common.Player;
+import tetris.game.logic.rivalKeyAdapter;
 import tetris.ui.MainContainer;
 import tetris.ui.single.MWidget;
 import tetris.ui.single.TranslucenceJPanel;
@@ -69,7 +70,7 @@ public class RivalDialog extends TranslucenceJPanel{
 		
 		this.setLayout(null);
 		this.add(candidatesJPanel);
-		this.addKeyListener(new MKeyAdapter());
+		this.addKeyListener(new rivalKeyAdapter());
 		this.setVisible(false);
 	}
 	

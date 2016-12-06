@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import tetris.game.logic.GameAdapter;
+import tetris.game.logic.GameConstants;
 import tetris.game.logic.GameEntity;
 import tetris.game.logic.InitUILogic;
 import tetris.ui.ActivityHolder;
@@ -66,7 +67,12 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 	@Override
 	public void youWin() throws RemoteException {
 		// TODO Auto-generated method stub
-		ServerManager.getInstance().server.updateScore(ServerManager.getInstance().username, ServerManager.getInstance().s)
+		GameEntity.getInstance().onlinemdThread.exit1 = true;
+		GameEntity.getInstance().onlinemdThread.exit2 = true;
+		ServerManager sManager = ServerManager.getInstance();
+		sManager.server.updateScore(sManager.username, GameConstants.YOU_WIN_SCORE);
+		sManager.setState(status.online);
+		sManager.server.setStatus(sManager.username, status.online);
 		InitUILogic.showRivalDiaolog();
 	}
 

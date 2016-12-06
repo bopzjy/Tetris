@@ -90,6 +90,7 @@ public class PlayerChooser extends Activity{
 				System.out.println("enter");
 				activityHolder = ActivityHolder.getInstance();
 				activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
+				activityHolder.pushActivityByIndex(Constants.INDEX_PLAYER_CHOOSER);
 				switch (arrow.getState()) {
 				case CHOOSE_1:
 					activityHolder.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);

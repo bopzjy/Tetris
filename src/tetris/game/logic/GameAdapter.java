@@ -4,6 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import tetris.ui.ActivityHolder;
+import tetris.ui.Constants;
 
 public class GameAdapter extends KeyAdapter{
 	public GameEntity gEntity = null;
@@ -21,6 +22,8 @@ public class GameAdapter extends KeyAdapter{
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
 			System.out.println("esc");
+			gEntity.mdThread.exit1 = true;
+			gEntity.mdThread.exit2 = true;
 			activityHolder.turnToLastActivity();			
 			break;
 			

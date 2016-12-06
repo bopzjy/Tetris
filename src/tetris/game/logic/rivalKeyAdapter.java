@@ -21,10 +21,25 @@ import tetris.ui.activity.MatchActivity;
 
 public class rivalKeyAdapter extends KeyAdapter{
 	public void keyPressed(KeyEvent e) {
+		ServerManager sManager = ServerManager.getInstance();
+		ClientManager cManager = ClientManager.getInstance();
 		ActivityHolder activityHolder = ActivityHolder.getInstance();
 		MatchActivity matchActivity = (MatchActivity) activityHolder.getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
 		super.keyPressed(e);
 		switch (e.getKeyCode()) {
+		case KeyEvent.VK_ESCAPE:
+			if(!cManager.isConnecting) {
+				System.out.println("esc");
+				try {
+					sManager.logout();
+				} catch (RemoteException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
+				activityHolder.turnToLastActivity();
+			}						
+			break;
+			
 		case KeyEvent.VK_UP:
 			System.out.println("hehedada");
 			matchActivity.rivalDialog.arrowJpanel.lastState();
@@ -35,9 +50,9 @@ public class rivalKeyAdapter extends KeyAdapter{
 			break;
 			
 		case KeyEvent.VK_ENTER:
+			cManager.isConnecting = true;
 			matchActivity.hideRivalDialog();
 			matchActivity.showWaitDialog();
-			ServerManager sManager = ServerManager.getInstance();
 			sManager.setState(status.battling);
 			try {
 				if(!sManager.server.setStatus(sManager.username,status.battling)){
@@ -47,7 +62,7 @@ public class rivalKeyAdapter extends KeyAdapter{
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
-			ClientManager cManager = ClientManager.getInstance();
+			
 			User opponent = sManager.users[matchActivity.rivalDialog.arrowJpanel.getState()];
 			try {
 				ClientInterface clientInterface = cManager.connect(opponent.url);
@@ -57,6 +72,7 @@ public class rivalKeyAdapter extends KeyAdapter{
 					matchActivity.hideWaitDialog();
 					//activityHolder.turnToNextActivity(Constants.INDEX_COMPETE_ACTIVITY);
 					gEntity.OnlineGameStart();
+					cManager.isConnecting = false;
 				}
 			} catch (MalformedURLException | RemoteException | NotBoundException e1) {
 				// TODO Auto-generated catch block

@@ -10,6 +10,8 @@ public class MovingDown implements Runnable {
 	FallingEntityPipeline FEPLine = null;
 	FallingEntity currentFEntity = null;
 	Random ra1 = new Random();
+	public volatile boolean exit1 = false;
+	public volatile boolean exit2 = false; 
 //	Random ra2 = new Random(37);
 //	Random ra3 = new Random(37);
 
@@ -24,13 +26,15 @@ public class MovingDown implements Runnable {
 	}
 	
 	public void start() {
+		exit1 = false;
+		exit2 = false;
 		new Thread(this).start();
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while (true) {
+		while (!exit1) {
 			boolean nullflag = true;
 			FallingEntity fEntity = null;
 			int lineSize = FEPLine.getFEPipelineSize();
@@ -58,7 +62,7 @@ public class MovingDown implements Runnable {
 			paintFallingEntity(fEntityTemp, fEntityTemp.color, 0);
 			
 			fEntity.speedRank = getRank();
-			while (true) {
+			while (!exit2) {
 				FallingEntity falltemp = new FallingEntity(fEntity);
 				if (falltemp.moveDown()) {
 					boolean conflictFlag = false;

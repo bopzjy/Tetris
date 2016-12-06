@@ -7,12 +7,16 @@ import java.util.Random;
 import tetris.common.GlobalConstants;
 import tetris.net.ClientInterface;
 import tetris.net.ClientManager;
+import tetris.net.ServerManager;
+import tetris.net.status;
 
 public class OnlineMovingDown implements Runnable{
 	GameEntity gEntity;
 	FallingEntityPipeline FEPLine = null;
 	FallingEntity currentFEntity = null;
 	Random ra1 = new Random();
+	public volatile boolean exit1 = false;
+	public volatile boolean exit2 = false; 
 
 	public OnlineMovingDown(GameEntity gEntity) {
 		// TODO Auto-generated constructor stub
@@ -25,13 +29,15 @@ public class OnlineMovingDown implements Runnable{
 	}
 	
 	public void start() {
+		exit1 = false;
+		exit2 = false;
 		new Thread(this).start();
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while (true) {
+		while (!exit1) {
 			boolean nullflag = true;
 			FallingEntity fEntity = null;
 			int lineSize = FEPLine.getFEPipelineSize();
@@ -64,7 +70,7 @@ public class OnlineMovingDown implements Runnable{
 			}
 			
 			fEntity.speedRank = getRank();
-			while (true) {
+			while (!exit2) {
 				FallingEntity falltemp = new FallingEntity(fEntity);
 				if (falltemp.moveDown()) {
 					boolean conflictFlag = false;
@@ -89,10 +95,20 @@ public class OnlineMovingDown implements Runnable{
 							e.printStackTrace();
 						}
 					} else if (fEntity.checkUpArray()) {
-						GameOver();
+						try {
+							GameOver();
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						return;
 					} else {
-						checkFullRow(fEntity);
+						try {
+							checkFullRow(fEntity);
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						//paintFallingEntity(fEntityTemp, Color.white, 0);
 						break;
 					}
@@ -114,13 +130,16 @@ public class OnlineMovingDown implements Runnable{
 		}
 	}
 
-	public void GameOver() {
+	public void GameOver() throws RemoteException {
 		  ClientInterface cInter = ClientManager.getInstance().getInterface();
 		  cInter.youWin();
+		  ServerManager sManager = ServerManager.getInstance();
+		  sManager.setState(status.online);
+		  sManager.server.setStatus(sManager.username, status.online);
 		  InitUILogic.showRivalDiaolog();
 	}
 
-	public void checkFullRow(FallingEntity fEntity) {
+	public void checkFullRow(FallingEntity fEntity) throws RemoteException {
 		int maxx = fEntity.getMaxX();
 		int minx = fEntity.getMinX();
 		int dist = maxx-minx +1;
@@ -145,9 +164,11 @@ public class OnlineMovingDown implements Runnable{
 
 
 
-	public void repaintActivity(int lowestx) {
+	public void repaintActivity(int lowestx) throws RemoteException {
+		ClientManager cManager = ClientManager.getInstance();
 		for (int j = 0; j < GlobalConstants.NUMBER_OF_COLUMNS; j++) {
-			gEntity.GameActivity.setBlockColorByCoordinates(lowestx, j, Color.white);
+			gEntity.comActvity.setMyColor(lowestx, j, Color.white);
+			cManager.getInterface().setBlockColorByCoordinates(lowestx, j, Color.white);
 		}
 		try {
 			Thread.sleep(100);
@@ -158,13 +179,14 @@ public class OnlineMovingDown implements Runnable{
 		for (int i = lowestx; i >= 0; i--) {	
 			for (int j = 0; j < GlobalConstants.NUMBER_OF_COLUMNS; j++) {
 				Color color = GameConstants.COLOR_SET[gEntity.GameArray[i][j]];
-				gEntity.GameActivity.setBlockColorByCoordinates(i, j, color);
+				gEntity.comActvity.setMyColor(i, j, color);
+				cManager.getInterface().setBlockColorByCoordinates(i, j, color);
 			}
 		}
 	}
 	
 	
-	public boolean checkFullRowhandler(int maxX) {
+	public boolean checkFullRowhandler(int maxX) throws RemoteException {
 		boolean fullFlag = true;
 		for (int y = 0; y < GlobalConstants.NUMBER_OF_COLUMNS; y++) {
 			if (gEntity.GameArray[maxX][y] == 0) {
@@ -175,8 +197,6 @@ public class OnlineMovingDown implements Runnable{
 		if (fullFlag) {
 			gEntity.upScore(10);
 			gEntity.checkLevel();
-			gEntity.GameActivity.setScore(Integer.toString(gEntity.getScore()));
-			gEntity.GameActivity.setLevel(Integer.toString(gEntity.getLevel()));
 			repaintArray(maxX);
 			repaintActivity(maxX);
 			return true;
@@ -292,7 +312,7 @@ public class OnlineMovingDown implements Runnable{
 			int direct = GameConstants.PATTERN_DIRECT[patternNum];
 			int directNum = ra1.nextInt(direct);
 			int speedRank = getRank();
-			Spot spotTemp = getInitialSpot(patternNum, directNum);
+			Spot spotTemp = MovingDown.getInitialSpot(patternNum, directNum);
 			// System.out.println(patternNum + " " + colorNum + " " +
 			// speedRank);
 			FEPLine.FEOffer(patternNum, color, speedRank, spotTemp, directNum);

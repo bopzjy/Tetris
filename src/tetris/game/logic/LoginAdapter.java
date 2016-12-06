@@ -33,6 +33,7 @@ public class LoginAdapter extends KeyAdapter{
 		case KeyEvent.VK_ENTER:
 			System.out.println("enter");
 			activityHolder = ActivityHolder.getInstance();
+			activityHolder.pushActivityByIndex(Constants.INDEX_LOGIN_ACTIVITY);
 			//activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
 			switch (loginActivity.arrow.getState()) {
 			case 1:

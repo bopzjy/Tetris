@@ -8,6 +8,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import javax.xml.bind.ValidationEvent;
+
 import tetris.common.GlobalConstants;
 import tetris.game.logic.GameEntity;
 
@@ -15,6 +17,7 @@ public class ClientManager {
 	private static ClientManager instance = null;
 	public int port=GlobalConstants.CLIENT_PORT;
 	public String url="rmi://localhost:"+GlobalConstants.CLIENT_PORT+"/ClientImpl";
+	public volatile boolean isConnecting = false;
 	Registry registry;
 	ClientInterface currentClientInterface = null;
 	public ClientManager(){

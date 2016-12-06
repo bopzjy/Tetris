@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import tetris.common.GlobalConstants;
+import tetris.game.logic.LoginAdapter;
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
@@ -122,7 +123,7 @@ public class LoginActivity extends Activity{
 	public void InitUI() {
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
+		mainContainer.setKeyBoardAdapter(new LoginAdapter());
 		mainContainer.setLayeredPane(jLayeredPane);		
 		mainContainer.validate();
 	}

@@ -11,7 +11,9 @@ import tetris.game.logic.GameAdapter;
 import tetris.game.logic.GameEntity;
 
 import tetris.ui.Activity;
+import tetris.ui.ActivityFactory;
 import tetris.ui.ActivityHolder;
+import tetris.ui.Constants;
 import tetris.ui.MainContainer;
 import tetris.ui.component.ArrowJpanel;
 import tetris.ui.single.BlocksPanel;
@@ -52,7 +54,7 @@ public class SinglePlayer extends Activity{
 		//gEntry = new GameEntry(this);
 		init();
 		//gameEntity.start();
-		GameEntity.getInstance();
+		
 	}
 	
 	@Override
@@ -109,7 +111,9 @@ public class SinglePlayer extends Activity{
 	}
 	
 	public static void main(String[] args) {
-		new SinglePlayer();
+		ActivityFactory.produceAllActivity();
+		((SinglePlayer) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_SINGLE_PLAYER)).InitUI();
+		//new SinglePlayer().InitUI();
 	}
 	
 	
@@ -129,6 +133,8 @@ public class SinglePlayer extends Activity{
 		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);
 		mainContainer.validate();
+		
+		GameEntity.getInstance().start();
 	}
 	
 	class MAdapter extends KeyAdapter{

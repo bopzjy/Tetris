@@ -1,5 +1,6 @@
 package tetris.net;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -21,6 +22,7 @@ public class ServerManager {
 	sendState sendstatethread;
 	public User [] users = null;
 	ServerManager(){
+		clientrmi="rmi://"+getLocalHostIP()+":"+String.valueOf(GlobalConstants.CLIENT_PORT)+"/ClientImpl";
 		connect();
 	}
 
@@ -101,7 +103,21 @@ public class ServerManager {
 		return false;
 	}
 	
-	
+    public static String getLocalHostIP() { 
+        String ip; 
+        try { 
+             /**返回本地主机。*/ 
+             InetAddress addr = InetAddress.getLocalHost(); 
+             /**返回 IP 地址字符串（以文本表现形式）*/ 
+             ip = addr.getHostAddress();  
+        } catch(Exception ex) { 
+            ip = ""; 
+        } 
+          
+        return ip; 
+   } 
+    
+
 	public static ServerManager getInstance() {
 		if (instance == null) {
 			instance = new ServerManager();

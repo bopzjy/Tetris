@@ -95,24 +95,28 @@ public class DatabaseManager {
 		isChanged=true;
 		return true;
 	}
-	//更新用户成绩
+	//更新用户成绩,用户存在就返回成绩更新后的总成绩，否则返回0
 	public int updateScore(String name,int score){
 		boolean nothave=true;
 		for(int i=0;i<data.size();i++){
 			if(data.get(i).equals(name)){
 				nothave=false;
-				if(data.get(i).score<score)
-					data.get(i).score=score;
-				break;
+				//if(data.get(i).score<score)
+					//data.get(i).score=score;
+				isChanged=true;
+				data.get(i).score+=score;
+				return data.get(i).score;
 			}
 		}
+		/*
 		if(nothave){
 			User user=new User();
 			user.username=name;
 			user.score=score;
 			data.add(user);
 		}
-		isChanged=true;
+		*/
+		//isChanged=true;
 		return 0;
 	}
 	//检查是否有该用户

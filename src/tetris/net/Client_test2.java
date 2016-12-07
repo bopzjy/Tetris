@@ -22,6 +22,7 @@ public class Client_test2 {
 			clientmanager.buildVM();
 			System.out.println(playerlist[0].url);
 			clientinterface=clientmanager.connect(playerlist[0].url);
+			clientinterface=clientmanager.connect(playerlist[0].url);
 			System.out.println(clientinterface.test("daming"));
 			
 		} catch (RemoteException e) {

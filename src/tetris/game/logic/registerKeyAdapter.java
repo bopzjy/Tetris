@@ -18,6 +18,7 @@ public class registerKeyAdapter extends KeyAdapter{
 		switch (e.getKeyCode()) {
 			
 		case KeyEvent.VK_ENTER:
+			System.out.println("lzl press enter");
 			ServerManager sManager = ServerManager.getInstance();
 			if(sManager.register(loginActivity.registerDialog.getName(), loginActivity.registerDialog.getPasswdVale())) {
 				loginActivity.hideRegisterDialog();

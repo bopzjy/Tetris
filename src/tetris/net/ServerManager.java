@@ -29,6 +29,7 @@ public class ServerManager {
 	public void connect(){
 		try {
 			server=(ServerInterface)Naming.lookup(url);
+			System.out.println(url);
 			server.test();
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block

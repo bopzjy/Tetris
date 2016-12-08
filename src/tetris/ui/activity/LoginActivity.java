@@ -89,7 +89,7 @@ public class LoginActivity extends Activity{
 		password.setBorder(null);
 		jLayeredPane.add(password, new Integer(LAYOUT_ARROW));
 		
-		keyAdapter = new MAdapter();
+		keyAdapter = new LoginAdapter();
 		//
 		
 		//mainContainer.getContentPane().add(jLayeredPane);		
@@ -122,7 +122,7 @@ public class LoginActivity extends Activity{
 	public void InitUI() {
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
-		mainContainer.setKeyBoardAdapter(new LoginAdapter());
+		mainContainer.setKeyBoardAdapter(keyAdapter);
 		mainContainer.setLayeredPane(jLayeredPane);		
 		mainContainer.validate();
 		mainContainer.repaint();

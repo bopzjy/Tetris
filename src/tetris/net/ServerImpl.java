@@ -107,7 +107,7 @@ public class ServerImpl extends UnicastRemoteObject implements ServerInterface{
 						i=0;
 					}
 				}
-				System.out.println("the online user is"+onlineuser.size());
+				//System.out.println("the online user is"+onlineuser.size());
 				try {
 					sleep(1000);
 				} catch (InterruptedException e) {

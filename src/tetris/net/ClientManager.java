@@ -23,6 +23,8 @@ public class ClientManager {
 	ClientInterface currentClientInterface = null;
 	public ClientManager(){
 		url="rmi://"+getLocalHostIP()+":"+port+"/ClientImpl";
+		set_RMI_URL(2222);
+		buildVM();
 	}
 	public ClientInterface connect(String url) 
 			throws MalformedURLException, RemoteException, NotBoundException{

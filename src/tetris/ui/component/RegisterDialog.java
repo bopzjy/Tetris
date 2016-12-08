@@ -12,6 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import tetris.common.GlobalConstants;
+import tetris.game.logic.registerKeyAdapter;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
@@ -71,9 +72,9 @@ public class RegisterDialog extends TranslucenceJPanel{
 		this.setVisible(false);
 		
 		/*
-		 * Demo: 通过nameTextField的keylistener，捕获回车，并作出相应的处理
+		 * Demo: 閫氳繃nameTextField鐨刱eylistener锛屾崟鑾峰洖杞︼紝骞朵綔鍑虹浉搴旂殑澶勭悊
 		 */
-		nameTextField.addKeyListener(new KeyAdapter() {
+		/*nameTextField.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) { 
 				// TODO Auto-generated method stub
 				ActivityHolder activityHolder = ActivityHolder.getInstance();
@@ -82,9 +83,9 @@ public class RegisterDialog extends TranslucenceJPanel{
 				switch (e.getKeyCode()) {
 					
 				case KeyEvent.VK_ENTER:
-					//隐藏name对话框
+					//闅愯棌name瀵硅瘽妗�
 					singlePlayer.hideNameDialog();
-					//回车意味着输入结束，进行下一步操作
+					//鍥炶溅鎰忓懗鐫�杈撳叆缁撴潫锛岃繘琛屼笅涓�姝ユ搷浣�
 					singlePlayer.getNameText();
 					// doSomething...
 					break;
@@ -93,7 +94,8 @@ public class RegisterDialog extends TranslucenceJPanel{
 					break;
 				}
 			}
-		});
+		});*/
+		nameTextField.addKeyListener(new registerKeyAdapter());
 	}
 	
 	public String getName(){

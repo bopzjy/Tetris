@@ -1,4 +1,4 @@
-package tetris.ui.single;
+package tetris.ui.dialog;
 
 
 import java.awt.Shape;

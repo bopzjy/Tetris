@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.ObjectInputStream.GetField;
 
+import javax.accessibility.AccessibleStreamable;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -15,7 +16,9 @@ import javax.swing.border.EmptyBorder;
 
 import tetris.common.GlobalConstants;
 import tetris.game.logic.LoginAdapter;
+import tetris.game.logic.registerKeyAdapter;
 import tetris.ui.Activity;
+import tetris.ui.ActivityFactory;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
@@ -23,7 +26,7 @@ import tetris.ui.activity.PlayerChooser.MAdapter;
 import tetris.utils.ImageProcesser;
 import tetris.utils.LoadFont;
 import tetris.ui.component.ArrowJpanel;
-import tetris.ui.component.RegisterDialog;
+import tetris.ui.dialog.RegisterDialog;
 
 public class LoginActivity extends Activity{
 	
@@ -32,8 +35,8 @@ public class LoginActivity extends Activity{
 
 	private final double arrow_shape[][] = {
 			{0.05, 0.0563},
-			{0.24, 0.66},
-			{0.48, 0.66}	
+			{0.23, 0.64},
+			{0.47, 0.64}	
 	};
 	
 	private double[][] name_shape = {
@@ -85,30 +88,26 @@ public class LoginActivity extends Activity{
 		password.setFont(new Font("time nwes", Font.PLAIN, GlobalConstants.FONT_SIZE));
 		password.setBounds((int)(mainContainer.getInterWidth() * passwd_shape[0][0]), (int)(mainContainer.getInterHeight() * passwd_shape[0][1]), 
 				(int)(mainContainer.getInterWidth() * passwd_shape[1][0]), (int)(mainContainer.getInterHeight() * passwd_shape[1][1]));
-		//password.setText("1234");
-		//System.out.println(String.valueOf(password.getPassword()));
+		password.setHorizontalAlignment(JPasswordField.CENTER);
 		password.setBorder(null);
 		jLayeredPane.add(password, new Integer(LAYOUT_ARROW));
 		
 		keyAdapter = new LoginAdapter();
-		//
 		
-		//mainContainer.getContentPane().add(jLayeredPane);		
-		//mainContainer.validate();
-		
-	}
-	
-	
-	public void setKeyListener() {
-		// TODO Auto-generated method stub
+		registerDialog.addKeyListener(new registerKeyAdapter());
 		
 	}
 	
 	public static void main(String[] args){
-		new LoginActivity().InitUI();
+		MainContainer mainContainer = MainContainer.getInstance();
 		
+		ActivityFactory.produceAllActivity();
+		LoginActivity loginActivity = (LoginActivity) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_LOGIN_ACTIVITY);
+		loginActivity.InitUI();
+		loginActivity.showRegisterDialog();
+		//loginActivity.test();
 	}
-
+	
 	@Override
 	public void RestoreUI() {
 		// TODO Auto-generated method stub
@@ -119,54 +118,10 @@ public class LoginActivity extends Activity{
 		mainContainer.repaint();
 	}
 
-	@Override
 	public void InitUI() {
-		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
-		mainContainer.setKeyBoardAdapter(keyAdapter);
-		mainContainer.setLayeredPane(jLayeredPane);		
-		mainContainer.validate();
-		mainContainer.repaint();
-	}
-	
-	class MAdapter extends KeyAdapter{
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-			ActivityHolder activityHolder = ActivityHolder.getInstance();
-			super.keyPressed(e);
-			switch (e.getKeyCode()) {
-			/*case KeyEvent.VK_ESCAPE:
-				System.out.println("esc");
-				activityHolder.turnToLastActivity();			
-				break;
-			
-			case KeyEvent.VK_ENTER:
-				System.out.println("enter");
-				activityHolder = ActivityHolder.getInstance();
-				activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
-				switch (arrow_state) {
-				case CHOOSE_1:
-					activityHolder.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
-					break;
-
-				default:
-					break;
-				}*/
-				
-			case KeyEvent.VK_LEFT:
-				arrow.lastState();
-				
-				break;
-
-			case KeyEvent.VK_RIGHT:
-				arrow.nextState();
-				break;
-				
-			default:
-				break;
-			}
-		}
+		
+		super.InitUI();
+		
 	}
 	
 	public String getName(){
@@ -177,12 +132,15 @@ public class LoginActivity extends Activity{
 		return String.valueOf(password.getPassword());		
 	}
 	
-	public void showRegisterDialog(){
-		registerDialog.requestFocusInWindow();
+	public void showRegisterDialog(){	
+		// 一定要可见了才能获取焦点
 		registerDialog.setVisible(true);
+		registerDialog.requestFocusInWindow();
+		MainContainer.getInstance().removeMouseAdapter();
 	}
 	
 	public void hideRegisterDialog(){
 		registerDialog.setVisible(false);
+		MainContainer.getInstance().setMouseAdapter();
 	}
 }

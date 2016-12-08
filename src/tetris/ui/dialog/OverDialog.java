@@ -1,7 +1,8 @@
-package tetris.ui.component;
+package tetris.ui.dialog;
 
 import tetris.common.Player;
 import tetris.ui.TranslucenceJPanel;
+import tetris.ui.component.HeadPortrait;
 
 public class OverDialog extends TranslucenceJPanel{
 	public HeadPortrait mHead, rivalHead;

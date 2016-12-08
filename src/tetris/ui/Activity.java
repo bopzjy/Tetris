@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import tetris.utils.ImageProcesser;
 
-public abstract class Activity implements ChangeUI {
+public abstract class Activity {//implements ChangeUI {
 	protected JLayeredPane jLayeredPane;
 	protected KeyAdapter  keyAdapter;
 
@@ -33,5 +33,18 @@ public abstract class Activity implements ChangeUI {
 		bgPanel.add(new JLabel(bgImage));
 		bgPanel.setBorder(new EmptyBorder(-5, 0, -5, 0));
 		jLayeredPane.add(bgPanel, new Integer(LAYOUT_BACKGROUND));
+	}
+	
+	public void InitUI() {	
+		
+		MainContainer mainContainer = MainContainer.getInstance();
+		mainContainer.setKeyBoardAdapter(keyAdapter);
+		mainContainer.setLayeredPane(jLayeredPane);		
+		mainContainer.validate();
+		mainContainer.repaint();
+	}
+	
+	public void RestoreUI() {
+		
 	}
 }

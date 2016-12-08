@@ -17,13 +17,12 @@ import javax.swing.border.EmptyBorder;
 
 import tetris.ui.Activity;
 import tetris.ui.ActivityHolder;
-import tetris.ui.ChangeUI;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
 import tetris.ui.component.ArrowJpanel;
 import tetris.utils.ImageProcesser;
 
-public class BeginActivity extends Activity implements ChangeUI{
+public class BeginActivity extends Activity{
 		
 	private final int LAYOUT_ARROW = LAYOUT_BACKGROUND + 1;
 	
@@ -74,14 +73,7 @@ public class BeginActivity extends Activity implements ChangeUI{
 	}
 
 	@Override
-	public void InitUI() {
-		// TODO Auto-generated method stub
-		/*MainContainer mainContainer = MainContainer.getInstance();
-		
-		mainContainer.setKeyBoardAdapter(keyAdapter);
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.repaint();*/
-		
+	public void InitUI() {	
 		System.out.println("heedada");
 		MainContainer mainContainer = MainContainer.getInstance();
 		mainContainer.setKeyBoardAdapter(keyAdapter);

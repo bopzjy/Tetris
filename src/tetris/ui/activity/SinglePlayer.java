@@ -16,10 +16,10 @@ import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
 import tetris.ui.component.ArrowJpanel;
-import tetris.ui.single.BlocksPanel;
-import tetris.ui.single.DataPanel;
-import tetris.ui.single.GameOverDialog;
-import tetris.ui.single.NameDialog;
+import tetris.ui.component.BlocksPanel;
+import tetris.ui.component.DataPanel;
+import tetris.ui.dialog.GameOverDialog;
+import tetris.ui.dialog.NameDialog;
 
 public class SinglePlayer extends Activity{
 	

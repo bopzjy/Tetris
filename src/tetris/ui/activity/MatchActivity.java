@@ -13,15 +13,13 @@ import tetris.common.Player;
 import tetris.ui.Activity;
 import tetris.ui.MWidget;
 import tetris.ui.MainContainer;
-import tetris.ui.activity.LoginActivity.MAdapter;
 import tetris.ui.component.ArrowJpanel;
 import tetris.ui.component.HeadPortrait;
-import tetris.ui.component.InvitedDialog;
 import tetris.ui.component.PlayerIcon;
-import tetris.ui.component.RegisterDialog;
-import tetris.ui.component.RivalDialog;
-import tetris.ui.component.WaitDialog;
-import tetris.utils.LoadFont;
+import tetris.ui.dialog.InvitedDialog;
+import tetris.ui.dialog.RivalDialog;
+import tetris.ui.dialog.WaitDialog;
+
 
 public class MatchActivity extends Activity{
 	
@@ -59,6 +57,7 @@ public class MatchActivity extends Activity{
 		// TODO Auto-generated method stub
 		
 		MainContainer mainContainer = MainContainer.getInstance();
+		mainContainer.setMouseAdapter();
 		
 		MWidget adduser = new MWidget(new double[][]{
 			{0.59, 0.51},
@@ -105,11 +104,6 @@ public class MatchActivity extends Activity{
 		
 		invitedDialog = new InvitedDialog(new double[][]{{0.05,0.30},{0.9,0.42}});
 		jLayeredPane.add(invitedDialog, new Integer(LAYOUT_WAIT));
-		
-		//hideRivalDialog();
-		//
-		//hideRival();
-		//showRival(new Player("abdsff", 100));
 		
 	}
 

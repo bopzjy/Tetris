@@ -1,4 +1,4 @@
-package tetris.ui.single;
+package tetris.ui.component;
 
 import java.awt.Color;
 import java.awt.GridLayout;

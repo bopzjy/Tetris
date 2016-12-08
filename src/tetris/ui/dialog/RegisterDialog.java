@@ -1,10 +1,12 @@
-package tetris.ui.component;
+package tetris.ui.dialog;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -70,30 +72,12 @@ public class RegisterDialog extends TranslucenceJPanel{
 
 		this.setVisible(false);
 		
-		/*
-		 * Demo: 通过nameTextField的keylistener，捕获回车，并作出相应的处理
-		 */
-		nameTextField.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) { 
-				// TODO Auto-generated method stub
-				ActivityHolder activityHolder = ActivityHolder.getInstance();
-				SinglePlayer singlePlayer = (SinglePlayer) activityHolder.getActivityByIndex(Constants.INDEX_SINGLE_PLAYER);
-				super.keyPressed(e);
-				switch (e.getKeyCode()) {
-					
-				case KeyEvent.VK_ENTER:
-					//隐藏name对话框
-					singlePlayer.hideNameDialog();
-					//回车意味着输入结束，进行下一步操作
-					singlePlayer.getNameText();
-					// doSomething...
-					break;
-					
-				default:
-					break;
-				}
+		this.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("mouse!!");
+				((RegisterDialog)e.getSource()).requestFocusInWindow();
 			}
-		});
+	    });
 	}
 	
 	public String getName(){

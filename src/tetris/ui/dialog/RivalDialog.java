@@ -1,4 +1,4 @@
-package tetris.ui.component;
+package tetris.ui.dialog;
 
 import java.awt.GridLayout;
 import java.awt.Label;
@@ -16,6 +16,8 @@ import tetris.game.logic.rivalKeyAdapter;
 import tetris.ui.MWidget;
 import tetris.ui.MainContainer;
 import tetris.ui.TranslucenceJPanel;
+import tetris.ui.component.ArrowJpanel;
+import tetris.ui.component.Rival4Dialog;
 import tetris.utils.ImageProcesser;
 
 public class RivalDialog extends TranslucenceJPanel{

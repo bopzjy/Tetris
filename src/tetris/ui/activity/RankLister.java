@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import tetris.ui.Activity;
+import tetris.ui.ActivityFactory;
 import tetris.ui.ActivityHolder;
+import tetris.ui.Constants;
 import tetris.ui.MainContainer;
 import tetris.ui.activity.PlayerChooser.MAdapter;
 import tetris.utils.ImageProcesser;
@@ -25,14 +27,9 @@ public class RankLister extends Activity{
 	
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
-		//MainContainer mainContainer = MainContainer.getInstance();
-			
+		MainContainer mainContainer = MainContainer.getInstance();
 		keyAdapter = new MAdapter();
-		
-		
-		//mainContainer.setLayeredPane(jLayeredPane);
-		//mainContainer.validate();
+
 	}
 	
 	
@@ -44,12 +41,7 @@ public class RankLister extends Activity{
 
 	@Override
 	public void InitUI() {
-		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
-		
-		mainContainer.setKeyBoardAdapter(keyAdapter);
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.validate();
+		super.InitUI();
 	}
 	
 	class MAdapter extends KeyAdapter{
@@ -69,6 +61,11 @@ public class RankLister extends Activity{
 	}
 	
 	public static void main(String[] args) {
-		new RankLister();
+		ActivityFactory.produceAllActivity();
+		RankLister rankLister = (RankLister) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_RANK_LISTER);
+		rankLister.InitUI();
+		
 	}
+	
+	
 }

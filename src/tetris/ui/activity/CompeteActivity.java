@@ -6,11 +6,11 @@ import tetris.common.GlobalConstants;
 import tetris.common.Player;
 import tetris.ui.Activity;
 import tetris.ui.MainContainer;
-import tetris.ui.component.InvitedDialog;
-import tetris.ui.component.OverDialog;
+import tetris.ui.component.BlocksPanel;
 import tetris.ui.component.PlayerIcon;
-import tetris.ui.single.BlocksPanel;
-import tetris.ui.single.GameOverDialog;
+import tetris.ui.dialog.GameOverDialog;
+import tetris.ui.dialog.InvitedDialog;
+import tetris.ui.dialog.OverDialog;
 
 public class CompeteActivity extends Activity{
 	

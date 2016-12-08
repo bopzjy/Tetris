@@ -1,4 +1,4 @@
-package tetris.ui.component;
+package tetris.ui.dialog;
 
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
@@ -10,7 +10,9 @@ import javax.swing.JLabel;
 import tetris.ui.MWidget;
 import tetris.ui.MainContainer;
 import tetris.ui.TranslucenceJPanel;
-import tetris.ui.component.RivalDialog.MKeyAdapter;
+import tetris.ui.component.ArrowJpanel;
+import tetris.ui.component.HeadPortrait;
+import tetris.ui.dialog.RivalDialog.MKeyAdapter;
 import tetris.utils.ImageProcesser;
 import tetris.utils.LoadFont;
 

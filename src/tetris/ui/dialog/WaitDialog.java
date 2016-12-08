@@ -1,4 +1,4 @@
-package tetris.ui.component;
+package tetris.ui.dialog;
 
 import javax.swing.ImageIcon;
 

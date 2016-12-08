@@ -31,16 +31,20 @@ public class LoginAdapter extends KeyAdapter{
 			break;
 		
 		case KeyEvent.VK_ENTER:
-			System.out.println("enter");
+			System.out.println("lzl press login enter");
 			activityHolder = ActivityHolder.getInstance();
 			activityHolder.pushActivityByIndex(Constants.INDEX_LOGIN_ACTIVITY);
 			//activityHolder.pushActivityByIndex(Constants.INDEX_BEGIN_ACTIVITY);
 			switch (loginActivity.arrow.getState()) {
 			case 1:
+				System.out.println("lzl press login enter1");
 				ServerManager sManager = ServerManager.getInstance();
 				try {
 					if(sManager.login(loginActivity.getName(),loginActivity.getPasswdVale())){
+						System.out.println("has logined");
 						InitUILogic.showRivalDiaolog();
+					} else {
+						System.out.println("login failed");
 					}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
@@ -49,10 +53,12 @@ public class LoginAdapter extends KeyAdapter{
 				break;
 				
 			case 2:
+				System.out.println("lzl press login2 enter");
 				loginActivity.showRegisterDialog();
 				break;
 
 			default:
+				System.out.println("lzl press login enter3");
 				break;
 			}
 			

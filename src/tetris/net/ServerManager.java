@@ -39,6 +39,7 @@ public class ServerManager {
 	
 	//µÇÂ½£¬µÇÂ½³É¹¦·µ»Øtrue£¬µÇÂ¼Ê§°Ü»òÕßÖØ¸´µÇÂ½·µ»Øfalse
 	public boolean login(String username,String password) throws RemoteException{
+		System.out.println("login:" + username + ":" + password);
 		boolean success=server.login(username,ParseMD5.parseStrToMd5U32(password), clientrmi);
 		if(!success)
 			return false;
@@ -95,6 +96,7 @@ public class ServerManager {
 	}
 	//ÏÈ×¢²á£¬ºóµÇÂ½
 	public boolean register(String username, String password){
+		System.out.println("register:" + username + ":" + password);
 		try {
 			return server.register(username, ParseMD5.parseStrToMd5U32(password));
 		} catch (RemoteException e) {

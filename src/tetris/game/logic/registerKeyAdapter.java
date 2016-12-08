@@ -21,6 +21,7 @@ public class registerKeyAdapter extends KeyAdapter{
 			System.out.println("lzl press enter");
 			ServerManager sManager = ServerManager.getInstance();
 			if(sManager.register(loginActivity.registerDialog.getName(), loginActivity.registerDialog.getPasswdVale())) {
+				System.out.println("register success");
 				loginActivity.hideRegisterDialog();
 			} else {
 				System.out.println("Register Failed!");

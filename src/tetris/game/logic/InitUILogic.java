@@ -20,6 +20,7 @@ public class InitUILogic {
 		}
 		mActivity.rivalDialog.initCandidatesList(players);
 		activityHolder.turnToNextActivity(Constants.INDEX_MATCH_ACTIVITY);
+		System.out.println("++++++++++++++++++++++++++++++++++++++++");
 		mActivity.showRivalDialog();
 	}
 }

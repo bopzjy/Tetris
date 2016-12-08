@@ -85,7 +85,8 @@ public class LoginActivity extends Activity{
 		password.setFont(new Font("time nwes", Font.PLAIN, GlobalConstants.FONT_SIZE));
 		password.setBounds((int)(mainContainer.getInterWidth() * passwd_shape[0][0]), (int)(mainContainer.getInterHeight() * passwd_shape[0][1]), 
 				(int)(mainContainer.getInterWidth() * passwd_shape[1][0]), (int)(mainContainer.getInterHeight() * passwd_shape[1][1]));
-		//password.setText("sdfsdfsaf");
+		//password.setText("1234");
+		//System.out.println(String.valueOf(password.getPassword()));
 		password.setBorder(null);
 		jLayeredPane.add(password, new Integer(LAYOUT_ARROW));
 		
@@ -173,7 +174,7 @@ public class LoginActivity extends Activity{
 	}
 	
 	public String getPasswdVale(){
-		return password.getPassword().toString();		
+		return String.valueOf(password.getPassword());		
 	}
 	
 	public void showRegisterDialog(){

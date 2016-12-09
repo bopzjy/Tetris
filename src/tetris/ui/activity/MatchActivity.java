@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import tetris.common.GlobalConstants;
 import tetris.common.Player;
 import tetris.ui.Activity;
+import tetris.ui.ActivityFactory;
+import tetris.ui.ActivityHolder;
+import tetris.ui.Constants;
 import tetris.ui.MWidget;
 import tetris.ui.MainContainer;
 import tetris.ui.component.ArrowJpanel;
@@ -41,10 +44,10 @@ public class MatchActivity extends Activity{
 	private static double[][] arrow_shape = {
 			{0.05, 0.0563},		
 			{0.27, 0.43},
-			{0.27, 0.515},
-			{0.27, 0.6},
-			{0.27, 0.685},
-			{0.27, 0.77}	
+			{0.27, 0.495},
+			{0.27, 0.58},
+			{0.27, 0.66},
+			{0.27, 0.74}	
 	};
 	public MatchActivity() {
 		// TODO Auto-generated constructor stub
@@ -105,26 +108,36 @@ public class MatchActivity extends Activity{
 		invitedDialog = new InvitedDialog(new double[][]{{0.05,0.30},{0.9,0.42}});
 		jLayeredPane.add(invitedDialog, new Integer(LAYOUT_WAIT));
 		
+			
 	}
 
-	@Override
-	public void RestoreUI() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void InitUI() {
-		
-		MainContainer mainContainer = MainContainer.getInstance();
-		mainContainer.setLayeredPane(jLayeredPane);		
-		mainContainer.validate();
-		//showRivalDialog();
-		showInvitedDialog("hehedada");
-	}
+	/*public void InitUI() {
+		super.InitUI();
+	}*/
 	
 	public static void main(String[] args) {
-		new MatchActivity().InitUI();
+		ActivityFactory.produceAllActivity();
+		MatchActivity matchActivity = (MatchActivity) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
+		matchActivity.InitUI();
+		
+		Player[] players = new Player[] {
+				new Player("abc", 100),	
+				new Player("1abc", 1200),
+				new Player("32abc", 1340),
+				new Player("abc3254", 1567),
+				new Player("345abc23", 1890)
+		};
+		matchActivity.rivalDialog.setCandidatesList(players);
+		
+		players = new Player[] {
+				new Player("abc", 100),	
+				new Player("1abc", 1200),
+				new Player("32abc", 1340),
+				
+		};
+		matchActivity.rivalDialog.setCandidatesList(players);
+		
+		matchActivity.showRivalDialog();
 	}
 	
 	public void showInvitedDialog(String rivalName){

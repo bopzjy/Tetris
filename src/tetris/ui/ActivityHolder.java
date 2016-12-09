@@ -15,10 +15,7 @@ public class ActivityHolder {
 	private ActivityHolder(){
 		stack = new Stack<Activity>();
 		
-		resActivity = new Activity[Constants.TOTAL_ACTIVITY];
-		//for (int i = 0; i<resActivity.length; i++)
-		//	resActivity[i] = ;
-		
+		resActivity = new Activity[Constants.TOTAL_ACTIVITY];	
 	}
 	
 	public static ActivityHolder getInstance() {
@@ -32,7 +29,7 @@ public class ActivityHolder {
 	public Activity turnToLastActivity(){
 		if (!stack.isEmpty()) {
 			Activity activity = stack.pop();
-			activity.RestoreUI();
+			activity.InitUI();
 			return activity;
 		}
 		return null;

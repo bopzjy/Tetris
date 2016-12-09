@@ -8,13 +8,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import tetris.ui.Activity;
+import tetris.ui.ActivityFactory;
 import tetris.ui.ActivityHolder;
+import tetris.ui.Constants;
 import tetris.ui.MainContainer;
 import tetris.ui.activity.PlayerChooser.MAdapter;
 import tetris.utils.ImageProcesser;
+import tetris.utils.LoadFont;
 
 public class IntroductionActivity extends Activity{
 
@@ -26,7 +30,6 @@ public class IntroductionActivity extends Activity{
 	private final double LABLE_YRelative = 0.35;
 	
 	public IntroductionActivity() {
-		// TODO Auto-generated constructor stub
 		super("resources\\image\\introduction_bg.jpg");
 		init();
 	}
@@ -36,15 +39,31 @@ public class IntroductionActivity extends Activity{
 		// TODO Auto-generated method stub
 		MainContainer mainContainer = MainContainer.getInstance();
 		
-		JLabel jLabel = new JLabel();
 		JPanel intro = new JPanel();
-		jLabel.setText("heheda");
-		intro.add(jLabel);
-		intro.setBackground(Color.red);
+		
+		//intro.setBackground(Color.red);
+		intro.setOpaque(false);
 		intro.setBounds((int)(LABLE_XRelative * mainContainer.getInterWidth()), 
 				(int)(LABLE_YRelative * mainContainer.getInterHeight()), 
 				(int)(LABLE_WidthOfWhole * mainContainer.getInterWidth()), 
 				(int)(LABLE_HeightOfWhole * mainContainer.getInterHeight()));
+		
+		JLabel jLabel = new JLabel("It's Introduction");
+		jLabel.setFont(LoadFont.loadDefaultFont());
+		jLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		jLabel.setVerticalAlignment(SwingConstants.CENTER);
+		jLabel.setText("<html>" 
+				+ "Introduction 1: ..........<br>"
+				+ "Introduction 2: ..........<br>"
+				+ "Introduction 3: ..........<br>"
+				+ "Introduction 4: ..........<br>"
+				+ "Introduction 5: ..........<br>"
+				+ "Introduction 6: ..........<br>"
+				+ "Introduction 7: ..........<br>"
+				+ "</html>");
+		jLabel.setBounds(0, 0, intro.getWidth(), intro.getWidth());
+		
+		intro.add(jLabel);
 		jLayeredPane.add(intro, new Integer(LAYOUT_LABEL));
 		
 		keyAdapter = new MAdapter();
@@ -53,25 +72,11 @@ public class IntroductionActivity extends Activity{
 	}
 	
 	public static void main(String[] args) {
-		new IntroductionActivity();
-	}
-	
-	@Override
-	public void RestoreUI() {
-		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void InitUI() {
-		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
-		
-		mainContainer.setKeyBoardAdapter(keyAdapter);
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.setKeyBoardAdapter(keyAdapter);
-		mainContainer.validate();
-		mainContainer.repaint();
+		ActivityFactory.produceAllActivity();
+		IntroductionActivity loginActivity = (IntroductionActivity) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_INTRODUCTION_ACTIVITY);
+		loginActivity.InitUI();
+		//loginActivity.showRegisterDialog();
 	}
 	
 	public void setKeyListener() {

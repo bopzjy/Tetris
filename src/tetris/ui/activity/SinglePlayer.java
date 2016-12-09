@@ -42,25 +42,15 @@ public class SinglePlayer extends Activity{
 			{0.05, 0.0563},
 			{0.215, 0.65},
 			{0.450, 0.65}
-			//{0.48, 0.66}	
 	};
 	
-	//private GameEntity gameEntity;
-	
-	
 	public SinglePlayer() {
-		// TODO Auto-generated constructor stub
 		super("resources\\image\\single_bg.jpg");
-		//gEntry = new GameEntry(this);
 		init();
-		//gameEntity.start();
-		
-	}
 	
-	@Override
-	protected void init() {
+	}
 
-		//MainContainer mainContainer = MainContainer.getInstance();
+	protected void init() {
 		
 		blocksPanel = new BlocksPanel(GlobalConstants.SINGLE_GAMEBLOCKS_SHAPE, GlobalConstants.BLOCKSPANEL_INIT_COLOR, 
 				GlobalConstants.NUMBER_OF_ROWS, GlobalConstants.NUMBER_OF_COLUMNS, 2);
@@ -82,88 +72,22 @@ public class SinglePlayer extends Activity{
 		
 		scorePanel = new DataPanel(GlobalConstants.SINGLE_SCORE_SHAPE);
 		jLayeredPane.add(scorePanel, new Integer(LAYOUT_SCOREPANEL));
-		//test demo
-		setScore("12345");
-		//System.out.println(scorePanel.getGameData());
 		
 		levelPanel = new DataPanel(GlobalConstants.SINGLE_LEVEL_SHAPE);
 		jLayeredPane.add(levelPanel, new Integer(LAYOUT_LEVELPANEL));
-		//test demo
-		setLevel("12345");
-		//System.out.println(levelPanel.getGameData());
 			
 		gameOverArrow = new ArrowJpanel(arrow_shape, arrow_shape.length - 1, MainContainer.getInstance());
 		gameOverDialog = new GameOverDialog(GlobalConstants.SINGLE_GAMEOVER_SHAPE, gameOverArrow);
 		gameOverArrow.setVisible(false);
 		jLayeredPane.add(gameOverDialog, new Integer(LAYOUT_GAMEOVER));
 		jLayeredPane.add(gameOverArrow, new Integer(LAYOUT_GAMEOVER_ARROW));
-	
-		keyAdapter = new MAdapter();
-		//
 		
-		//mainContainer.setLayeredPane(jLayeredPane);
-		//mainContainer.validate();
-		
-		//showGameOverDialog();
-		//hideGameOverDialog();
-
-		//showNameDialog();
 	}
 	
 	public static void main(String[] args) {
 		ActivityFactory.produceAllActivity();
 		((SinglePlayer) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_SINGLE_PLAYER)).InitUI();
 		//new SinglePlayer().InitUI();
-	}
-	
-	
-	@Override
-	public void RestoreUI() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void InitUI() {
-		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
-		
-		blocksPanel.clearPanel();
-		
-		mainContainer.setKeyBoardAdapter(keyAdapter);
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.validate();
-		
-		GameEntity.getInstance().start();
-	}
-	
-	class MAdapter extends KeyAdapter{
-		@Override
-		public void keyPressed(KeyEvent e) { 
-			// TODO Auto-generated method stub
-			ActivityHolder activityHolder = ActivityHolder.getInstance();
-			super.keyPressed(e);
-			switch (e.getKeyCode()) {
-			case KeyEvent.VK_ESCAPE:
-				System.out.println("esc");
-				activityHolder.turnToLastActivity();			
-				break;
-				
-			case KeyEvent.VK_Q:
-				//showNameDialog();
-				System.out.println("hoho");
-				//getNameText();
-				break;
-				
-			case KeyEvent.VK_ENTER:
-				getNameText();
-				hideNameDialog();
-				break;
-				
-			default:
-				break;
-			}
-		}
 	}
 	
 	class testAdapter extends KeyAdapter{
@@ -194,72 +118,58 @@ public class SinglePlayer extends Activity{
 	}
 
 	public void showNameDialog() {
-		// TODO Auto-generated method stub
 		nameDialog.setVisible(true);
 	}
 
 	public String getNameText() {
-		// TODO Auto-generated method stub
 		System.out.println(nameDialog.getTextFieldValue());
 		return nameDialog.getTextFieldValue();
-		//return null;
 	}
 
 	public int getLevel() {
-		// TODO Auto-generated method stub
 		return levelPanel.getGameData();
 	}
 
 	public int getScore() {
-		// TODO Auto-generated method stub
 		return scorePanel.getGameData();
 	}
 
 	public void hideNameDialog() {
-		// TODO Auto-generated method stub
 		nameDialog.setVisible(false);
 	}
 
 	public void setBlockColorByCoordinates(int i, int j, Color color) {
-		// TODO Auto-generated method stub
 		blocksPanel.setBlockColorByCoordinates(i, j, color);
 	}
 	
 	public void setNextBlockColor(int i, int j, Color color) {
-		// TODO Auto-generated method stub
 		nextPanel.setBlockColorByCoordinates(i, j, color);
 	}
 
 	public void showGameOverDialog() {
-		// TODO Auto-generated method stub
 		gameOverDialog.setVisible(true);
 		gameOverDialog.requestFocusInWindow();
 		gameOverArrow.setVisible(true);
 	}
 
 	public void hideGameOverDialog() {
-		// TODO Auto-generated method stub
 		gameOverDialog.setVisible(false);
 		gameOverArrow.setVisible(false);
 	}
 
 	public void setLevel(String text) {
-		// TODO Auto-generated method stub
 		levelPanel.setGameData(text);
 	}
 
 	public void setScore(String text) {
-		// TODO Auto-generated method stub
 		scorePanel.setGameData(text);
 	}
 
 	public void setLevelInDialog(String text) {
-		// TODO Auto-generated method stub
 		gameOverDialog.setLevelValue(text);
 	}
 
 	public void setScoreInDialog(String text) {
-		// TODO Auto-generated method stub
 		gameOverDialog.setScoreValue(text);
 	}
 }

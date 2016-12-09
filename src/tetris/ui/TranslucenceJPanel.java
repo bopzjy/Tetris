@@ -17,7 +17,7 @@ public class TranslucenceJPanel extends MWidget {
 	
 	//protected BufferedImage background;
 	
-	protected float transparency;
+	protected float transparency = 0.9f;
 	protected ImageIcon bgImage;
 	protected double[][] fshape;
 	
@@ -29,10 +29,6 @@ public class TranslucenceJPanel extends MWidget {
 		this.setOpaque(false);
 		this.fshape = shape;
 
-	}
-	
-	public void setTransparent(float transparency) {
-		this.transparency = transparency;
 	}
 	
 	@Override

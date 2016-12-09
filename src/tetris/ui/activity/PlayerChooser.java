@@ -44,28 +44,7 @@ public class PlayerChooser extends Activity{
 		ActivityFactory.produceAllActivity();
 		new PlayerChooser().InitUI();;
 	}
-	
-	@Override
-	public void RestoreUI() {
-		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
-		
-		mainContainer.setKeyBoardAdapter(keyAdapter);
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.repaint();
-	}
 
-	@Override
-	public void InitUI() {
-		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
-		
-		mainContainer.setKeyBoardAdapter(keyAdapter);
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.validate();
-	}
-
-	
 	class MAdapter extends KeyAdapter{
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -85,7 +64,8 @@ public class PlayerChooser extends Activity{
 				activityHolder.pushActivityByIndex(Constants.INDEX_PLAYER_CHOOSER);
 				switch (arrow.getState()) {
 				case CHOOSE_1:
-					activityHolder.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
+					SinglePlayer singlePlayer = (SinglePlayer)activityHolder.turnToNextActivity(Constants.INDEX_SINGLE_PLAYER);
+					//singlePlayer.startGame();
 					break;
 				
 				case CHOOSE_2:

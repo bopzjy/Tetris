@@ -14,8 +14,8 @@ import tetris.ui.dialog.OverDialog;
 
 public class CompeteActivity extends Activity{
 	
-	private int LAYOUT_WIDGET = LAYOUT_BACKGROUND + 1;
-	private int LAYOUT_OVERDIALOG = LAYOUT_WIDGET + 1;
+	private static final int LAYOUT_WIDGET = LAYOUT_BACKGROUND + 1;
+	private static final int LAYOUT_OVERDIALOG = LAYOUT_WIDGET + 1;
 	
 	public PlayerIcon myHead, rivalHead;
 	public BlocksPanel myBlocks, rivalBlocks; 
@@ -34,12 +34,10 @@ public class CompeteActivity extends Activity{
 		myHead = new PlayerIcon(new double[][]{{0.075, 0.085}, {0.625, 0.075}}, new double[][]{{0.515, 0.14}, {0.3, 0.1}}, mainContainer);
 		myHead.addedToContainer(jLayeredPane, LAYOUT_WIDGET);
 		myHead.setFontSize(25);
-		//myHead.setName("heheda");
 		
 		rivalHead = new PlayerIcon(new double[][]{{0.075, 0.085}, {0.795, 0.075}}, new double[][]{{0.685, 0.14}, {0.3, 0.1}}, mainContainer);
 		rivalHead.addedToContainer(jLayeredPane, LAYOUT_WIDGET);
 		rivalHead.setFontSize(25);
-		//rivalHead.setName("heheda");
 		
 		myBlocks = new BlocksPanel(new double[][]{{0.12, 0.080},{0.406, 0.843}}, GlobalConstants.BLOCKSPANEL_INIT_COLOR, 
 				GlobalConstants.NUMBER_OF_ROWS, GlobalConstants.NUMBER_OF_COLUMNS, 2);
@@ -62,21 +60,6 @@ public class CompeteActivity extends Activity{
 		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);*/
 		
 		
-	}
-	
-	@Override
-	public void RestoreUI() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void InitUI() {
-		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
-		mainContainer.setLayeredPane(jLayeredPane);		
-		mainContainer.validate();
-		mainContainer.repaint();
 	}
 	
 	public void setHead(Player[] players){

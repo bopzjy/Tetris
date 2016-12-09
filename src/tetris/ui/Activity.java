@@ -16,7 +16,7 @@ public abstract class Activity {//implements ChangeUI {
 
 	protected abstract void init();
 	
-	protected final int LAYOUT_BACKGROUND = 0;
+	protected static final int LAYOUT_BACKGROUND = 0;
 	
 	public Activity(String path) {
 	
@@ -44,7 +44,4 @@ public abstract class Activity {//implements ChangeUI {
 		mainContainer.repaint();
 	}
 	
-	public void RestoreUI() {
-		
-	}
 }

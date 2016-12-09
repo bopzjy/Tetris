@@ -1,18 +1,8 @@
 package tetris.ui.activity;
 
 import java.awt.Font;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.io.ObjectInputStream.GetField;
-
-import javax.accessibility.AccessibleStreamable;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import tetris.common.GlobalConstants;
 import tetris.game.logic.LoginAdapter;
@@ -22,8 +12,6 @@ import tetris.ui.ActivityFactory;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.MainContainer;
-import tetris.ui.activity.PlayerChooser.MAdapter;
-import tetris.utils.ImageProcesser;
 import tetris.utils.LoadFont;
 import tetris.ui.component.ArrowJpanel;
 import tetris.ui.dialog.RegisterDialog;
@@ -99,29 +87,11 @@ public class LoginActivity extends Activity{
 	}
 	
 	public static void main(String[] args){
-		MainContainer mainContainer = MainContainer.getInstance();
 		
 		ActivityFactory.produceAllActivity();
 		LoginActivity loginActivity = (LoginActivity) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_LOGIN_ACTIVITY);
 		loginActivity.InitUI();
 		loginActivity.showRegisterDialog();
-		//loginActivity.test();
-	}
-	
-	@Override
-	public void RestoreUI() {
-		// TODO Auto-generated method stub
-		MainContainer mainContainer = MainContainer.getInstance();
-		
-		mainContainer.setKeyBoardAdapter(keyAdapter);
-		mainContainer.setLayeredPane(jLayeredPane);
-		mainContainer.repaint();
-	}
-
-	public void InitUI() {
-		
-		super.InitUI();
-		
 	}
 	
 	public String getName(){

@@ -51,8 +51,6 @@ public class MainContainer extends JFrame{
 	    // 占比总是固定的
 	    height = (int) (screenSize.height * screenOfWhole);
 	    width = (int) (height * widthOfHeight);
-	    System.out.println(this.getContentPane().getSize());
-	    System.out.println(this.getSize());
 	    this.setSize(width + (this.getWidth() - this.getContentPane().getWidth()), 
 	    		height + (this.getHeight() - this.getContentPane().getHeight()));
 	    

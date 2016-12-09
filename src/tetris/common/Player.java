@@ -1,6 +1,6 @@
 package tetris.common;
 
-public class Player {
+public class Player implements Comparable<Player>{
 	private String name;
 	private int score;
 	
@@ -17,5 +17,14 @@ public class Player {
 	public int getScore(){
 		return score;
 	}
+
+	@Override
+	public int compareTo(Player player) {
+		//return this.score - player.getScore();
+		return player.getScore() - this.score;
+	}
 	
+	public void setScore(int score){
+		this.score = score;
+	}
 }

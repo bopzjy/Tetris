@@ -1,7 +1,5 @@
 package tetris.ui;
 
-import java.io.ObjectInputStream.GetField;
-import java.util.Iterator;
 import java.util.Stack;
 
 public class ActivityHolder {

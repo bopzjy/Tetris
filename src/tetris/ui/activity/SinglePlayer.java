@@ -59,13 +59,6 @@ public class SinglePlayer extends Activity{
 		
 		nextPanel = new BlocksPanel(GlobalConstants.SINGLE_NEXTPANEL_SHAPE, null, 4, 5, 2);
 		jLayeredPane.add(nextPanel, new Integer(LAYOUT_NEXTPANEL));
-		// Demo: print blocks
-		/*
-		nextPanel.setBlockColorByCoordinates(1, 2, Color.green);
-		nextPanel.setBlockColorByCoordinates(2, 2, Color.green);
-		nextPanel.setBlockColorByCoordinates(3, 2, Color.green);
-		nextPanel.setBlockColorByCoordinates(0, 2, Color.green);
-		*/
 		
 		nameDialog = new NameDialog(GlobalConstants.SINGLE_NAMEDIALOG_SHAPE);
 		jLayeredPane.add(nameDialog, new Integer(LAYOUT_NAMEDIALOG));

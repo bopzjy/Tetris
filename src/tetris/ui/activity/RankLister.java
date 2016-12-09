@@ -33,6 +33,7 @@ public class RankLister extends Activity{
 	private static final int MAX_ITEMS = 10;
 	
 	private MWidget listJPanel;
+	private MWidget ;
 	private MJLabel listItem[][];
 	
 	public RankLister() {

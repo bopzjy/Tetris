@@ -68,7 +68,7 @@ public class rivalKeyAdapter extends KeyAdapter{
 				ClientInterface clientInterface = cManager.connect(opponent.url);
 				GameEntity gEntity = GameEntity.getInstance();
 				gEntity.OnlineGameInit();
-				if(clientInterface.acceptBattle()) {
+				if(clientInterface.inviteBattle(sManager.username)) {
 					matchActivity.hideWaitDialog();
 					//activityHolder.turnToNextActivity(Constants.INDEX_COMPETE_ACTIVITY);
 					gEntity.OnlineGameStart();

@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import tetris.game.logic.invitedAdapter;
 import tetris.ui.MWidget;
 import tetris.ui.MainContainer;
 import tetris.ui.TranslucenceJPanel;
@@ -39,10 +40,14 @@ public class InvitedDialog extends TranslucenceJPanel{
 				(int)(this.getWidth() * 0.5), (int)(this.getHeight() * 0.5));
 		add(nameJLabel);
 		
-		this.addKeyListener(new MKeyAdapter());
+		this.addKeyListener(new invitedAdapter());
 		
 		this.setVisible(false);
 
+	}
+	
+	public ArrowJpanel getArrowJpanel () {
+		return  arrowJpanel;
 	}
 	
 	class MKeyAdapter extends KeyAdapter{

@@ -35,6 +35,8 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 		return "send from"+str;
 	}
 
+	
+	
 	@Override
 	public boolean acceptBattle() throws RemoteException {
 		// TODO Auto-generated method stub
@@ -74,6 +76,14 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 		sManager.setState(status.online);
 		sManager.server.setStatus(sManager.username, status.online);
 		InitUILogic.showRivalDiaolog();
+	}
+
+	@Override
+	public void inviteBattle(String rivalName) throws RemoteException {
+		// TODO Auto-generated method stub
+		ActivityHolder activityHolder = ActivityHolder.getInstance();
+		MatchActivity matchActivity = (MatchActivity) activityHolder.getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
+		matchActivity.showInvitedDialog(rivalName);
 	}
 
 }

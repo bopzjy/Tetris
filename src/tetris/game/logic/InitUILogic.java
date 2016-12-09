@@ -18,7 +18,7 @@ public class InitUILogic {
 		for (int i=0;i<users.length;i++) {
 			players[i] = new Player(users[i].username,users[i].score);
 		}
-		mActivity.rivalDialog.initCandidatesList(players);
+		mActivity.rivalDialog.setCandidatesList(players);
 		activityHolder.turnToNextActivity(Constants.INDEX_MATCH_ACTIVITY);
 		System.out.println("++++++++++++++++++++++++++++++++++++++++");
 		mActivity.showRivalDialog();

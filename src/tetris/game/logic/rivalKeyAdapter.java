@@ -63,7 +63,11 @@ public class rivalKeyAdapter extends KeyAdapter{
 				e2.printStackTrace();
 			}
 			
-			User opponent = sManager.users[matchActivity.rivalDialog.arrowJpanel.getState()];
+			User opponent = sManager.users[0];
+			System.out.println("show users!");
+			for (int i=0;i<ServerManager.getInstance().users.length;i++) {
+				System.out.println(ServerManager.getInstance().users[i].url);
+			}
 			try {
 				ClientInterface clientInterface = cManager.connect(opponent.url);
 				GameEntity gEntity = GameEntity.getInstance();

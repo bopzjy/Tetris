@@ -23,7 +23,8 @@ public class ClientManager {
 	ClientInterface currentClientInterface = null;
 	public ClientManager(){
 		url="rmi://"+getLocalHostIP()+":"+port+"/ClientImpl";
-		set_RMI_URL(2222);
+		System.out.println(url);
+		set_RMI_URL(1111);
 		buildVM();
 	}
 	public ClientInterface connect(String url) 

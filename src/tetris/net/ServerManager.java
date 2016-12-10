@@ -17,7 +17,7 @@ public class ServerManager {
 	String password=null;
 	public status state=status.offline;
 	String url="rmi://"+GlobalConstants.SERVER_HOST+":"+String.valueOf(GlobalConstants.SERVER_PORT)+"/ServerImpl";
-	String clientrmi="rmi://localhost:"+String.valueOf(GlobalConstants.CLIENT_PORT)+"/ClientImpl";
+	String clientrmi="rmi://219.223.198.130:"+String.valueOf(GlobalConstants.CLIENT_PORT)+"/ClientImpl";
 	public ServerInterface server;
 	sendState sendstatethread;
 	public User [] users = null;

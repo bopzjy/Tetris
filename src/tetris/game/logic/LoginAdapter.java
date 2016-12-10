@@ -39,6 +39,7 @@ public class LoginAdapter extends KeyAdapter{
 			case 1:
 				System.out.println("lzl press login enter1");
 				ServerManager sManager = ServerManager.getInstance();
+				ClientManager cManager = ClientManager.getInstance();
 				try {
 					if(sManager.login(loginActivity.getName(),loginActivity.getPasswdVale())){
 						System.out.println("has logined");

@@ -7,6 +7,7 @@ import tetris.common.Player;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.activity.SinglePlayer;
+import tetris.utils.LocalRank;
 
 public class NameAdapter extends KeyAdapter{
 	public void keyPressed(KeyEvent e) { 
@@ -19,7 +20,7 @@ public class NameAdapter extends KeyAdapter{
 			
 		case KeyEvent.VK_ENTER:
 			singlePlayer.hideNameDialog();
-			addPlayerRecord(new Player(singlePlayer.getNameText(),gEntity.getScore()));
+			LocalRank.addPlayerRecord(new Player(singlePlayer.getNameText(),gEntity.getScore()));
 			activityHolder.turnToLastActivity();
 			break;
 			

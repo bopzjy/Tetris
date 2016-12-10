@@ -68,12 +68,8 @@ public class rivalKeyAdapter extends KeyAdapter{
 				ClientInterface clientInterface = cManager.connect(opponent.url);
 				GameEntity gEntity = GameEntity.getInstance();
 				gEntity.OnlineGameInit();
-				if(clientInterface.inviteBattle(sManager.username)) {
-					matchActivity.hideWaitDialog();
-					//activityHolder.turnToNextActivity(Constants.INDEX_COMPETE_ACTIVITY);
-					gEntity.OnlineGameStart();
-					cManager.isConnecting = false;
-				}
+				GameEntity.getInstance().OnlineGameInit();
+				clientInterface.inviteBattle(sManager.username);
 			} catch (MalformedURLException | RemoteException | NotBoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

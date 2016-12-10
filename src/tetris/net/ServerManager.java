@@ -12,10 +12,10 @@ import tetris.game.logic.GameEntity;
 import tetris.utils.ParseMD5;
 
 public class ServerManager {
-	private static ServerManager instance = null;
+	private static ServerManager instance = new ServerManager();
 	public String username="";
 	String password=null;
-	status state=status.offline;
+	public status state=status.offline;
 	String url="rmi://"+GlobalConstants.SERVER_HOST+":"+String.valueOf(GlobalConstants.SERVER_PORT)+"/ServerImpl";
 	String clientrmi="rmi://localhost:"+String.valueOf(GlobalConstants.CLIENT_PORT)+"/ClientImpl";
 	public ServerInterface server;

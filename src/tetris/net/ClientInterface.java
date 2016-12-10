@@ -12,4 +12,6 @@ public interface ClientInterface extends Remote{
 	public void setBlockColorByCoordinates(int i,int j,Color color) throws RemoteException;
 	public void youWin() throws RemoteException;
 	public void inviteBattle(String rivalName) throws RemoteException;
+	public void inviteBattleACK() throws RemoteException;
+	public void rejectedBattle() throws RemoteException;
 }

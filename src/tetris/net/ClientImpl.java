@@ -83,7 +83,26 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 		// TODO Auto-generated method stub
 		ActivityHolder activityHolder = ActivityHolder.getInstance();
 		MatchActivity matchActivity = (MatchActivity) activityHolder.getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
+		matchActivity.hideRivalDialog();
 		matchActivity.showInvitedDialog(rivalName);
+	}
+
+	@Override
+	public void inviteBattleACK() throws RemoteException {
+		// TODO Auto-generated method stub
+		GameEntity.getInstance().OnlineGameStart();
+	}
+
+	@Override
+	public void rejectedBattle() throws RemoteException {
+		// TODO Auto-generated method stub
+		ServerManager sManager = ServerManager.getInstance();
+		sManager.setState(status.online);
+		sManager.server.setStatus(sManager.username, status.online);
+		ActivityHolder activityHolder = ActivityHolder.getInstance();
+		MatchActivity matchActivity = (MatchActivity) activityHolder.getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
+		matchActivity.hideWaitDialog();
+		InitUILogic.showRivalDiaolog();
 	}
 
 }

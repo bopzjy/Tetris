@@ -15,7 +15,7 @@ import tetris.common.GlobalConstants;
 import tetris.game.logic.GameEntity;
 
 public class ClientManager {
-	private static ClientManager instance = null;
+	private static ClientManager instance = new ClientManager();
 	public int port=GlobalConstants.CLIENT_PORT;
 	public String url;
 	public volatile boolean isConnecting = false;
@@ -67,9 +67,6 @@ public class ClientManager {
 	}
 	
 	public static ClientManager getInstance() {
-		if (instance == null) {
-			instance = new ClientManager();
-		}
 		return instance;
 	}
 	

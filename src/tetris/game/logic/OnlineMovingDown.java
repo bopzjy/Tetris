@@ -135,6 +135,7 @@ public class OnlineMovingDown implements Runnable {
 	}
 
 	public void GameOver() throws RemoteException {
+		OnlineFlash.getInstance().exit = true;
 		ClientInterface cInter = ClientManager.getInstance().getInterface();
 		cInter.youWin();
 		ServerManager sManager = ServerManager.getInstance();
@@ -239,7 +240,7 @@ public class OnlineMovingDown implements Runnable {
 		}
 	}
 
-	public void paintFallingEntity(FallingEntity fEntity, Color color, int flag) throws RemoteException {
+	public synchronized void paintFallingEntity(FallingEntity fEntity, Color color, int flag) throws RemoteException {
 		// flag为0表示写右上方矩阵，flag为1表示写游戏矩阵
 		if (flag == 0) {
 			gEntity.comActvity.setNextBlockColor(fEntity.headSpot.x, fEntity.headSpot.y, color);
@@ -251,20 +252,24 @@ public class OnlineMovingDown implements Runnable {
 			ClientInterface cInter = ClientManager.getInstance().getInterface();
 			if (fEntity.headSpot.IsInArray()) {
 				gEntity.comActvity.setMyColor(fEntity.headSpot.x, fEntity.headSpot.y, color);
-				cInter.setBlockColorByCoordinates(fEntity.headSpot.x, fEntity.headSpot.y, color);
+				OnlineFlash.getInstance().FlashBlock(fEntity.headSpot.x, fEntity.headSpot.y, color);
 			}
 			if (fEntity.secSpot.IsInArray()) {
 				gEntity.comActvity.setMyColor(fEntity.secSpot.x, fEntity.secSpot.y, color);
-				cInter.setBlockColorByCoordinates(fEntity.secSpot.x, fEntity.secSpot.y, color);
+				OnlineFlash.getInstance().FlashBlock(fEntity.secSpot.x, fEntity.secSpot.y, color);
 			}
 			if (fEntity.thirdSpot.IsInArray()) {
 				gEntity.comActvity.setMyColor(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
-				cInter.setBlockColorByCoordinates(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
+				OnlineFlash.getInstance().FlashBlock(fEntity.thirdSpot.x, fEntity.thirdSpot.y, color);
 			}
 			if (fEntity.fourthSpot.IsInArray()) {
 				gEntity.comActvity.setMyColor(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
-				cInter.setBlockColorByCoordinates(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
+				OnlineFlash.getInstance().FlashBlock(fEntity.fourthSpot.x, fEntity.fourthSpot.y, color);
 			}
+//			if (fEntity.headSpot.IsInArray()) {
+//				
+//				cInter.setBlockColorByCoordinates(fEntity.headSpot.x, fEntity.headSpot.y, color);
+//			}		
 
 		}
 	}

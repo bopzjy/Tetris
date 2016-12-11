@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import tetris.common.GlobalConstants;
 import tetris.common.Player;
+import tetris.game.logic.GameEntity;
 import tetris.ui.Activity;
 import tetris.ui.MainContainer;
 import tetris.ui.component.BlocksPanel;
@@ -50,9 +51,9 @@ public class CompeteActivity extends Activity{
 		nextPanel = new BlocksPanel(new double[][]{{0.735, 0.248}, {0.125, 0.125}}, null, 4, 5, 2);
 		jLayeredPane.add(nextPanel, new Integer(LAYOUT_WIDGET));
 		
-		overDialog = new OverDialog(new double[][] {{0.11, 0.17},{0.752,  0.65}});
-		jLayeredPane.add(overDialog, new Integer(LAYOUT_OVERDIALOG));
-		overDialog.setVisible(true);
+		//overDialog = new OverDialog(new double[][] {{0.11, 0.17},{0.752,  0.65}});
+		//jLayeredPane.add(overDialog, new Integer(LAYOUT_OVERDIALOG));
+		//overDialog.setVisible(true);
 		// Demo: print blocks
 		/*nextPanel.setBlockColorByCoordinates(1, 2, Color.green);
 		nextPanel.setBlockColorByCoordinates(2, 2, Color.green);

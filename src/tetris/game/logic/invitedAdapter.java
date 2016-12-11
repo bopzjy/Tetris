@@ -14,11 +14,12 @@ import tetris.ui.Constants;
 import tetris.ui.activity.MatchActivity;
 
 public class invitedAdapter extends KeyAdapter {
-	ActivityHolder activityHolder = ActivityHolder.getInstance();
-	MatchActivity matchActivity = (MatchActivity) activityHolder.getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
-	ClientManager cManager = ClientManager.getInstance();
+	
 
 	public void keyPressed(KeyEvent e) {
+		ActivityHolder activityHolder = ActivityHolder.getInstance();
+		MatchActivity matchActivity = (MatchActivity) activityHolder.getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
+		ClientManager cManager = ClientManager.getInstance();
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_LEFT:
 			matchActivity.invitedDialog.getArrowJpanel().lastState();
@@ -54,7 +55,6 @@ public class invitedAdapter extends KeyAdapter {
 				break;
 
 			case 2:
-				ClientManager cManager = ClientManager.getInstance();
 				try {
 					cManager.getInterface().rejectedBattle();
 				} catch (RemoteException e1) {

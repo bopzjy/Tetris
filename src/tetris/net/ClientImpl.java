@@ -1,6 +1,8 @@
 package tetris.net;
 
 import java.awt.Color;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -8,6 +10,7 @@ import tetris.game.logic.GameAdapter;
 import tetris.game.logic.GameConstants;
 import tetris.game.logic.GameEntity;
 import tetris.game.logic.InitUILogic;
+import tetris.game.logic.OnlineFlash;
 import tetris.ui.ActivityHolder;
 import tetris.ui.Constants;
 import tetris.ui.activity.MatchActivity;
@@ -71,6 +74,7 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 		// TODO Auto-generated method stub
 		GameEntity.getInstance().onlinemdThread.exit1 = true;
 		GameEntity.getInstance().onlinemdThread.exit2 = true;
+		OnlineFlash.getInstance().exit = true;
 		ServerManager sManager = ServerManager.getInstance();
 		sManager.server.updateScore(sManager.username, GameConstants.YOU_WIN_SCORE);
 		sManager.setState(status.online);
@@ -79,8 +83,14 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 	}
 
 	@Override
-	public void inviteBattle(String rivalName) throws RemoteException {
+	public void inviteBattle(String rivalName, String url) throws RemoteException {
 		// TODO Auto-generated method stub
+		try {
+			ClientManager.getInstance().connect(url);
+		} catch (MalformedURLException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ActivityHolder activityHolder = ActivityHolder.getInstance();
 		MatchActivity matchActivity = (MatchActivity) activityHolder.getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
 		matchActivity.hideRivalDialog();
@@ -90,7 +100,9 @@ public class ClientImpl extends UnicastRemoteObject implements ClientInterface{
 	@Override
 	public void inviteBattleACK() throws RemoteException {
 		// TODO Auto-generated method stub
+		System.out.println("101+++++++++++++++++++++++++++++++++++++++++++++");
 		GameEntity.getInstance().OnlineGameStart();
+		System.out.println("local has start");
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package tetris.game.logic;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.rmi.RemoteException;
 
 import tetris.ui.ActivityHolder;
 
@@ -16,8 +17,8 @@ public class OnlineGameAdapter extends KeyAdapter{
 		// TODO Auto-generated method stub
 		ActivityHolder activityHolder = ActivityHolder.getInstance();
 		super.keyPressed(e);
-		MovingRightOrLeft moveLF = new MovingRightOrLeft(gEntity);
-		Rotating rot = new Rotating(gEntity); 
+		OnlineMovingRightOrLeft moveLF = new OnlineMovingRightOrLeft(gEntity);
+		OnlineRotating rot = new OnlineRotating(gEntity); 
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_ESCAPE:
 			System.out.println("esc");
@@ -33,12 +34,23 @@ public class OnlineGameAdapter extends KeyAdapter{
 			gEntity.GameActivity.getNameText();
 			break;
 			
-		case KeyEvent.VK_LEFT:			
-			moveLF.MoveRightOrLeft(0);
+		case KeyEvent.VK_LEFT:
+			System.out.println("online left ++++++++++++++++++++++++++++++++++++");
+			try {
+				moveLF.OnlineMoveRightOrLeft(0);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			break;
 			
 		case KeyEvent.VK_RIGHT:			
-			moveLF.MoveRightOrLeft(1);
+			try {
+				moveLF.OnlineMoveRightOrLeft(1);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			break;
 		
 		case KeyEvent.VK_UP:

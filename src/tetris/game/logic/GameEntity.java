@@ -39,7 +39,7 @@ public class GameEntity {
 		// TODO Auto-generated method stub
 		GameActivity = (SinglePlayer) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_SINGLE_PLAYER);
 		mdThread = new MovingDown(this);
-		//onlinemdThread = new OnlineMovingDown(this);
+		onlinemdThread = new OnlineMovingDown(this);
 		GameArray = new int[GlobalConstants.NUMBER_OF_ROWS][GlobalConstants.NUMBER_OF_COLUMNS];
 		score = 0;
 		gAdapter = new GameAdapter(this);
@@ -58,8 +58,10 @@ public class GameEntity {
 
 	public void OnlineGameStart() {
 		MainContainer mainContainer = MainContainer.getInstance();
-		mainContainer.setKeyBoardAdapter(onlinegameAdapter);
+		CompeteActivity competeActivity = (CompeteActivity) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_COMPETE_ACTIVITY);
 		ActivityHolder.getInstance().turnToNextActivity(Constants.INDEX_COMPETE_ACTIVITY);
+		mainContainer.setKeyBoardAdapter(onlinegameAdapter);
+		OnlineFlash.getInstance().start();
 		onlinemdThread.start();
 	}
 

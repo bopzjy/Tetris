@@ -63,7 +63,7 @@ public class rivalKeyAdapter extends KeyAdapter{
 				e2.printStackTrace();
 			}
 			
-			User opponent = sManager.users[0];
+			User opponent = sManager.users[matchActivity.rivalDialog.arrowJpanel.getState()-1];
 			System.out.println("show users!");
 			for (int i=0;i<ServerManager.getInstance().users.length;i++) {
 				System.out.println(ServerManager.getInstance().users[i].url);
@@ -71,9 +71,10 @@ public class rivalKeyAdapter extends KeyAdapter{
 			try {
 				ClientInterface clientInterface = cManager.connect(opponent.url);
 				GameEntity gEntity = GameEntity.getInstance();
+				System.out.println("74++++++++++++++++++++++++++++++++++++");
 				gEntity.OnlineGameInit();
-				GameEntity.getInstance().OnlineGameInit();
-				clientInterface.inviteBattle(sManager.username);
+				System.out.println("local has init");
+				clientInterface.inviteBattle(sManager.username,sManager.clientrmi);
 			} catch (MalformedURLException | RemoteException | NotBoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

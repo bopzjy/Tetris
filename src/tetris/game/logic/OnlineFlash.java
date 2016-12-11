@@ -10,6 +10,7 @@ public class OnlineFlash implements Runnable{
 	private static OnlineFlash instance = new OnlineFlash();
 	public FlashPipeline fPipeline = null;
 	public volatile boolean exit = false;
+	public volatile int sign = 0;
 	
 	public static OnlineFlash getInstance() {
 		return instance;
@@ -18,17 +19,22 @@ public class OnlineFlash implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		fPipeline = new FlashPipeline();
+		sign =0;
 		exit = false;
+		FlashEntity fEntity =null;
 		while(!exit) {
-			while(fPipeline.getFEPipelineSize() !=0) {
-				FlashEntity fEntity = fPipeline.FEPoll();
-				try {
-					ClientManager.getInstance().getInterface().setBlockColorByCoordinates(fEntity.x, fEntity.y, fEntity.color);
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}			
-			}
+				fEntity = fPipeline.FEPoll();
+				if(fEntity != null) {
+					try {
+						ClientManager.getInstance().getInterface().setBlockColorByCoordinates(fEntity.x, fEntity.y, fEntity.color);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}	
+				}
+			
+						
+			
 		}
 		
 	}
@@ -37,7 +43,7 @@ public class OnlineFlash implements Runnable{
 		new Thread(this).start();
 	}
 	
-	public void FlashBlock(int x,int y,Color color) {		
+	public void FlashBlock(int x,int y,Color color) {
 			fPipeline.FEOffer(x, y, color);
 	}
 

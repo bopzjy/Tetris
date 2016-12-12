@@ -48,6 +48,11 @@ public class GameEntity {
 	}
 
 	public void OnlineGameInit() {
+		MatchActivity matchActivity = (MatchActivity) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_MATCH_ACTIVITY);
+		matchActivity.hideWaitDialog();
+		matchActivity.hideRivalDialog();
+		matchActivity.hideInvitedDialog();
+		matchActivity.hideRival();
 		comActvity = (CompeteActivity) ActivityHolder.getInstance().getActivityByIndex(Constants.INDEX_COMPETE_ACTIVITY);
 		score = 0;
 		level = 0;

@@ -11,9 +11,9 @@ public class GlobalConstants {
 	//public static final int CLIENT_PORT=1111;
 	public static int CLIENT_PORT=1111;
 	public static final int SERVER_PORT=9999;
+
 	public static final String SERVER_HOST="127.0.0.1";
 	//public static final String SERVER_HOST="219.223.195.15";
-	//public static Font F 
 	
 	// BlocksPanel
 	public static Color BLOCKSPANEL_INIT_COLOR = Color.white;

@@ -24,7 +24,7 @@ public class ClientManager {
 	public ClientManager(){
 		url="rmi://"+getLocalHostIP()+":"+port+"/ClientImpl";
 		System.out.println(url);
-		set_RMI_URL(1111);
+		set_RMI_URL(port);
 		buildVM();
 	}
 	public ClientInterface connect(String url) 
@@ -74,9 +74,9 @@ public class ClientManager {
     public static String getLocalHostIP() { 
         String ip; 
         try { 
-             /**·µ»Ø±¾µØÖ÷»ú¡£*/ 
+             /**ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/ 
              InetAddress addr = InetAddress.getLocalHost(); 
-             /**·µ»Ø IP µØÖ·×Ö·û´®£¨ÒÔÎÄ±¾±íÏÖÐÎÊ½£©*/ 
+             /**ï¿½ï¿½ï¿½ï¿½ IP ï¿½ï¿½Ö·ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½*/ 
              ip = addr.getHostAddress();  
         } catch(Exception ex) { 
             ip = ""; 

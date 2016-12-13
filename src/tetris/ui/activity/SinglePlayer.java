@@ -109,13 +109,6 @@ public class SinglePlayer extends Activity{
 			}
 		}
 	}
-	
-	@Override
-	public void InitUI() {
-		// TODO Auto-generated method stub
-		super.InitUI();
-		GameEntity.getInstance().start();
-	}
 
 	public void showNameDialog() {
 		nameDialog.setVisible(true);
@@ -171,5 +164,12 @@ public class SinglePlayer extends Activity{
 
 	public void setScoreInDialog(String text) {
 		gameOverDialog.setScoreValue(text);
+	}
+	
+	@Override
+	public void InitUI() {
+		// TODO Auto-generated method stub
+		super.InitUI();
+		GameEntity.getInstance().start();
 	}
 }

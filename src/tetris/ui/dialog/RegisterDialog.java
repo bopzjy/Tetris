@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import tetris.common.GlobalConstants;
 import tetris.ui.ActivityHolder;
@@ -29,7 +30,7 @@ public class RegisterDialog extends TranslucenceJPanel{
 			{0.362, 0.23}		// size
 	};
 	private double[][] passwd_shape = {
-			{0.52, 0.39},		// location
+			{0.50, 0.39},		// location
 			{0.362, 0.23}		// size
 	};
 	
@@ -66,6 +67,7 @@ public class RegisterDialog extends TranslucenceJPanel{
 		password.setFont(new Font("time nwes", Font.PLAIN, GlobalConstants.FONT_SIZE));
 		password.setBounds((int)(this.getWidth() * passwd_shape[0][0]), (int)(this.getHeight() * passwd_shape[0][1]), 
 				(int)(this.getWidth() * passwd_shape[1][0]), (int)(this.getHeight() * passwd_shape[1][1]));
+		password.setHorizontalAlignment(SwingConstants.CENTER);
 		//password.setText("sdfsdfsaf");
 		password.setBorder(null);
 		this.add(password);

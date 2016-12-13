@@ -138,6 +138,7 @@ public class MatchActivity extends Activity{
 		matchActivity.rivalDialog.setCandidatesList(players);
 		
 		matchActivity.showRivalDialog();
+		matchActivity.showInvitedDialog("abc");
 	}
 	
 	public void showInvitedDialog(String rivalName){
